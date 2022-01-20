@@ -20,9 +20,7 @@ public class ExampleSubsystem extends SubsystemBase {
 
   public ExampleSubsystem() {
 
-// this is where the new constructor code will actually go
-
-// add another change - this time see if it works
+// update comment to something new here - cb
 
   }
 
