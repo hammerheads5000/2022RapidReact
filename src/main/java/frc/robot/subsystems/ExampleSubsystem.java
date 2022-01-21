@@ -9,15 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
 
-// need to put our new Team 5000 subsystem code HERE
-
-
-
-// CODE FOR MECANUM DRIVE STARTS HERE
-
-
-
-// cb - agree we need some code here 1/17/22
+// placeholder
 
 
 
