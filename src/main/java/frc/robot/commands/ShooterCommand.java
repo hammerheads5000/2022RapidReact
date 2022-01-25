@@ -33,6 +33,7 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     sub_shooterSubsystem.m_stopSpinning();
+    sub_shooterSubsystem.m_zeroEncoder();
   }
 
   // Returns true when the command should end.
