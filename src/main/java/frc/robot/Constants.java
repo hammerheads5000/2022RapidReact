@@ -42,17 +42,6 @@ public final class Constants {
     public static int SHOOTER_LEFT_MOTOR_PORT = 21;
     public static int SHOOTER_RIGHT_MOTOR_PORT = 22;
 
-    //Encoder pins
-    public static int LEFT_FRONT_DRIVE_ENCODER_PIN_A = 0;
-    public static int LEFT_FRONT_DRIVE_ENCODER_PIN_B = 1;
-    public static int LEFT_BACK_DRIVE_ENCODER_PIN_A = 2;
-    public static int LEFT_BACK_DRIVE_ENCODER_PIN_B = 3;
-    public static int RIGHT_FRONT_DRIVE_ENCODER_PIN_A = 4;
-    public static int RIGHT_FRONT_DRIVE_ENCODER_PIN_B = 5;
-    public static int RIGHT_BACK_DRIVE_ENCODER_PIN_A = 6;
-    public static int RIGHT_BACK_DRIVE_ENCODER_PIN_B = 7;
-
-
     //Other drive constants
     public static double TURN_ADJUST = 0.4;
 
@@ -113,4 +102,8 @@ public final class Constants {
 	public static int SHOOTER_I_ZONE = 0;
 	public static double SHOOTER_PEAK_OUTPUT = 1.0;
     public static int SHOOTER_ERROR = 60;
+
+    public static double kS = 0.80192;
+    public static double kV = 0.09327;
+    public static double kA = 0.004018;
 }

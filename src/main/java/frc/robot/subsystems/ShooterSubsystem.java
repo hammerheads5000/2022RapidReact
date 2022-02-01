@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -35,9 +36,9 @@ public class ShooterSubsystem extends SubsystemBase {
     leftShooterMotor.setNeutralMode(NeutralMode.Coast);
     rightShooterMotor.setNeutralMode(NeutralMode.Coast);
 
-
-    double testF = 0.0;
-    double testP = 1.0;
+    SimpleMotorFeedforward feedForward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
+    double testF = feedForward.calculate(leftShooterMotor.getSelectedSensorVelocity());
+    double testP = 0.00048831;
     double testI = 0.0;
     double testD = 0.0;
     double testError = 100;
@@ -47,7 +48,7 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("D", testD);
     SmartDashboard.putNumber("Error", testError);
 
-
+    
 
     //left motor specific stuff
     leftShooterMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
@@ -101,7 +102,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     rpm = Constants.KP_FLYWHEEL * heading_error; //This will be in a formula later when we have run tests.
 
-    rpm = 5000;
+    rpm = 6380;
     SmartDashboard.putNumber("rpm", rpm);
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
     //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
