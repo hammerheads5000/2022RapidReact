@@ -27,12 +27,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private static TalonFX RIGHT_FRONT_DRIVE_MOTOR;
   private static TalonFX RIGHT_BACK_DRIVE_MOTOR;
 
-  //Encoders
-  public static Encoder LEFT_FRONT_DRIVE_ENCODER;
-  public static Encoder LEFT_BACK_DRIVE_ENCODER;
-  public static Encoder RIGHT_FRONT_DRIVE_ENCODER;
-  public static Encoder RIGHT_BACK_DRIVE_ENCODER;
- // public static MeadianPIDSource DRIVE_ENCODERS; don't know the import
 
 
   public DriveTrainSubsystem(){
@@ -41,13 +35,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
     LEFT_BACK_DRIVE_MOTOR = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
     RIGHT_FRONT_DRIVE_MOTOR = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
     RIGHT_BACK_DRIVE_MOTOR = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
-
-    //Encoders
-    LEFT_FRONT_DRIVE_ENCODER = new Encoder(Constants.LEFT_FRONT_DRIVE_ENCODER_PIN_A, Constants.LEFT_FRONT_DRIVE_ENCODER_PIN_B);
-    LEFT_BACK_DRIVE_ENCODER = new Encoder(Constants.LEFT_BACK_DRIVE_ENCODER_PIN_A, Constants.LEFT_BACK_DRIVE_ENCODER_PIN_B);
-    RIGHT_FRONT_DRIVE_ENCODER = new Encoder(Constants.RIGHT_FRONT_DRIVE_ENCODER_PIN_A, Constants.RIGHT_FRONT_DRIVE_ENCODER_PIN_B);
-    RIGHT_BACK_DRIVE_ENCODER = new Encoder(Constants.RIGHT_BACK_DRIVE_ENCODER_PIN_A, Constants.RIGHT_BACK_DRIVE_ENCODER_PIN_B);
-    //DRIVE_ENCODERS = new MedianPIDSource(LEFT_FRONT_DRIVE_ENCODER, LEFT_BACK_DRIVE_ENCODER, RIGHT_FRONT_DRIVE_ENCODER, RIGHT_BACK_DRIVE_ENCODER);
 
   }
   public static void setMecanumDrive(double translationAngle, double translationPower, double turnPower){
