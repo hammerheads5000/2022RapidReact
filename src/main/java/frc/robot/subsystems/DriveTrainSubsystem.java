@@ -22,20 +22,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   //adapted from Team 6624
 
   //Motors
-  private static TalonFX LEFT_FRONT_DRIVE_MOTOR;
-  private static TalonFX LEFT_BACK_DRIVE_MOTOR;
-  private static TalonFX RIGHT_FRONT_DRIVE_MOTOR;
-  private static TalonFX RIGHT_BACK_DRIVE_MOTOR;
+  private static TalonFX leftFrontDriveMotor = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
+  private static TalonFX leftBackDriveMotor = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
+  private static TalonFX rightFrontDriveMotor = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
+  private static TalonFX rightBackDriveMotor = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
 
-/*
+
 
   public DriveTrainSubsystem(){
-    //Motors
-    LEFT_FRONT_DRIVE_MOTOR = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
-    LEFT_BACK_DRIVE_MOTOR = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
-    RIGHT_FRONT_DRIVE_MOTOR = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
-    RIGHT_BACK_DRIVE_MOTOR = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
-
 
   }
   public static void setMecanumDrive(double translationAngle, double translationPower, double turnPower){
@@ -57,10 +51,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     }
 
     //set the motors, and divide them by turning Scale to make sure none of them go over the top, which would alter the translation angles
-    LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, (ADPower - turningScale) / turningScale);
-    LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, (BCPower - turningScale) / turningScale);
-    RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, (BCPower + turningScale) / turningScale);
-    RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, (ADPower + turningScale) / turningScale);
+    leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, (ADPower - turningScale) / turningScale);
+    leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, (BCPower - turningScale) / turningScale);
+    rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, (BCPower + turningScale) / turningScale);
+    rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, (ADPower + turningScale) / turningScale);
   }
-*/
+ 
 }
