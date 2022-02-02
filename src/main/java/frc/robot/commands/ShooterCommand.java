@@ -10,7 +10,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterCommand extends CommandBase {
 
-  private final ShooterSubsystem sub_shooterSubsystem;
+  private ShooterSubsystem sub_shooterSubsystem;
 
 
   /** Creates a new ShootCommand. */
@@ -32,6 +32,8 @@ public class ShooterCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    sub_shooterSubsystem.m_stopSpinning();
+    sub_shooterSubsystem.m_zeroEncoder();
   }
 
   // Returns true when the command should end.

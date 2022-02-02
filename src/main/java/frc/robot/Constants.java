@@ -27,10 +27,10 @@ public final class Constants {
     public static int IR_SENSOR_2_PORT = 9;
     
     //Motor Ports
-    public static int LEFT_FRONT_DRIVE_MOTOR_PORT = 0;
-    public static int LEFT_BACK_DRIVE_MOTOR_PORT = 1;
-    public static int RIGHT_FRONT_DRIVE_MOTOR_PORT = 2;
-    public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 3;
+    public static int LEFT_FRONT_DRIVE_MOTOR_PORT = 26;
+    public static int LEFT_BACK_DRIVE_MOTOR_PORT = 23;
+    public static int RIGHT_FRONT_DRIVE_MOTOR_PORT = 25;
+    public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 24;
 
     public static int LEFT_LIFT_MOTOR_PORT = 4;
     public static int RIGHT_LIFT_MOTOR_PORT = 5;
@@ -41,16 +41,6 @@ public final class Constants {
 
     public static int SHOOTER_LEFT_MOTOR_PORT = 21;
     public static int SHOOTER_RIGHT_MOTOR_PORT = 22;
-
-    //Encoder pins
-    public static int LEFT_FRONT_DRIVE_ENCODER_PIN_A = 0;
-    public static int LEFT_FRONT_DRIVE_ENCODER_PIN_B = 1;
-    public static int LEFT_BACK_DRIVE_ENCODER_PIN_A = 2;
-    public static int LEFT_BACK_DRIVE_ENCODER_PIN_B = 3;
-    public static int RIGHT_FRONT_DRIVE_ENCODER_PIN_A = 4;
-    public static int RIGHT_FRONT_DRIVE_ENCODER_PIN_B = 5;
-    public static int RIGHT_BACK_DRIVE_ENCODER_PIN_A = 6;
-    public static int RIGHT_BACK_DRIVE_ENCODER_PIN_B = 7;
 
     //Other drive constants
     public static double TURN_ADJUST = 0.4;
@@ -67,10 +57,9 @@ public final class Constants {
     public static double INTAKE_SPEED = 1.0;
     public static double OUTTAKE_SPEED = -1.0;
 
-    public static double SHOOTER_SPEED = 1.0;
+    public static double SHOOTER_SPEED = 0.6;
 
     public static double FEED_SERVO_SPEED = 1.0;
-    //(2048.0 / 600.0) * RPM; //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
 
 
     //Joystick Constants
@@ -78,7 +67,7 @@ public final class Constants {
     public static boolean INTERRUPTIBLE = true;
 
     //Drive Joystick Buttons
-    public static int LIFT_UP_BUTTON = 1;
+    public static int LIFT_UP_BUTTON = 7;
     public static int LIFT_DOWN_BUTTON = 2;
 
     public static int FEED_IN_BUTTON = 3;
@@ -87,12 +76,34 @@ public final class Constants {
     public static int INTAKE_BUTTON = 5;
     public static int OUTTAKE_BUTTON = 6;
 
-    public static int SHOOT_BUTTON = 7;
+    public static int AIM_BUTTON = 1;
     
     //Buttons Joystick Buttons
-    public static int AIM_BUTTON = 1;
+    public static int SHOOT_BUTTON = 1;
 
     //PID Constants
     public static double KP_DRIVE_AIM = 0.85;
     public static double MIN_COMMAND_DRIVE_AIM = 0.05;
+
+    public static double KP_FLYWHEEL = 0.85;
+
+    //PID shooter constants:
+    public static int PID_LOOP_IDX = 0;
+    public static int TIMEOUT_MS = 5;
+
+    public static boolean PHASE_SENSOR = true;
+    public static boolean INVERTED = true;
+
+
+    public static double SHOOTER_P = 2.3;
+	public static double SHOOTER_I = 0.00002;
+	public static double SHOOTER_D = 0.6;
+	public static double SHOOTER_F = 0.0;
+	public static int SHOOTER_I_ZONE = 0;
+	public static double SHOOTER_PEAK_OUTPUT = 1.0;
+    public static int SHOOTER_ERROR = 60;
+
+    public static double kS = 0.80192;
+    public static double kV = 0.09327;
+    public static double kA = 0.004018;
 }
