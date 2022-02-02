@@ -8,10 +8,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.*;
 
-
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -30,7 +27,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
 
   public DriveTrainSubsystem(){
-
+    leftFrontDriveMotor.setNeutralMode(NeutralMode.Brake);
+    leftBackDriveMotor.setNeutralMode(NeutralMode.Brake);
+    rightFrontDriveMotor.setNeutralMode(NeutralMode.Brake);
+    rightBackDriveMotor.setNeutralMode(NeutralMode.Brake);
   }
   public static void setMecanumDrive(double translationAngle, double translationPower, double turnPower){
     //A is front left, b is front right, c is back left, d is back right
@@ -47,14 +47,24 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     //adjust turn power scale correctly --- 1.0 is the max power of the motor.
     if (Math.abs(turningScale) < 1.0){
-      turningScale = 1.0;
+      leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
+      leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
+      rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
+      rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
+    }else{
+      leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, (ADPower - turningScale) / turningScale);
+      leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, (BCPower - turningScale) / turningScale);
+      rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, (BCPower + turningScale) / turningScale);
+      rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, (ADPower + turningScale) / turningScale);
     }
 
     //set the motors, and divide them by turning Scale to make sure none of them go over the top, which would alter the translation angles
+  /*
     leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, (ADPower - turningScale) / turningScale);
     leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, (BCPower - turningScale) / turningScale);
     rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, (BCPower + turningScale) / turningScale);
     rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, (ADPower + turningScale) / turningScale);
+    */
   }
  
 }

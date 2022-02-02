@@ -36,7 +36,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     SimpleMotorFeedforward feedForward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
     double testF = feedForward.calculate(leftShooterMotor.getSelectedSensorVelocity());
-    double testP = 0.00048831;
+    double testP = 1.0;
     double testI = 0.0;
     double testD = 0.0;
     double testError = 100;

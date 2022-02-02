@@ -27,10 +27,10 @@ public final class Constants {
     public static int IR_SENSOR_2_PORT = 9;
     
     //Motor Ports
-    public static int LEFT_FRONT_DRIVE_MOTOR_PORT = 0;
-    public static int LEFT_BACK_DRIVE_MOTOR_PORT = 1;
-    public static int RIGHT_FRONT_DRIVE_MOTOR_PORT = 2;
-    public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 3;
+    public static int LEFT_FRONT_DRIVE_MOTOR_PORT = 26;
+    public static int LEFT_BACK_DRIVE_MOTOR_PORT = 23;
+    public static int RIGHT_FRONT_DRIVE_MOTOR_PORT = 25;
+    public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 24;
 
     public static int LEFT_LIFT_MOTOR_PORT = 4;
     public static int RIGHT_LIFT_MOTOR_PORT = 5;
@@ -76,10 +76,10 @@ public final class Constants {
     public static int INTAKE_BUTTON = 5;
     public static int OUTTAKE_BUTTON = 6;
 
-    public static int SHOOT_BUTTON = 1;
+    public static int AIM_BUTTON = 1;
     
     //Buttons Joystick Buttons
-    public static int AIM_BUTTON = 1;
+    public static int SHOOT_BUTTON = 1;
 
     //PID Constants
     public static double KP_DRIVE_AIM = 0.85;
