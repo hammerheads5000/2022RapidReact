@@ -46,7 +46,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     turningScale = Math.max(turningScale, Math.max(Math.abs(BCPower + turnPower), Math.abs(BCPower - turnPower)));
 
     //adjust turn power scale correctly --- 1.0 is the max power of the motor.
-    if (Math.abs(turningScale) < 1.0){
+    //In order to stop the motors from doing wonky stuff we need to use just the power if we aren't trying to turn and use
+    //an equation if we are. This will likely need revision but it needs to be tested first.
+    //TODO: Test 
+    if (Math.abs(turningScale) <= 1.0){
       leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
       leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
       rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);

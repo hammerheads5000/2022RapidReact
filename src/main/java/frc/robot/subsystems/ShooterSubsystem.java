@@ -34,6 +34,7 @@ public class ShooterSubsystem extends SubsystemBase {
     leftShooterMotor.setNeutralMode(NeutralMode.Coast);
     rightShooterMotor.setNeutralMode(NeutralMode.Coast);
 
+    //TODO: Tune PID values
     SimpleMotorFeedforward feedForward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
     double testF = feedForward.calculate(leftShooterMotor.getSelectedSensorVelocity());
     double testP = 1.0;
