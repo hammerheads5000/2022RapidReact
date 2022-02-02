@@ -40,35 +40,24 @@ public class DriveTrainSubsystem extends SubsystemBase {
     double ADPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
     double BCPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
 
-    //check if turning power will interfere with normal translation
-    //check ADPower to see if trying to apply turnPower would put motor power over 1.0 or under -1.0
-    double turningScale = Math.max(Math.abs(ADPower + turnPower), Math.abs(ADPower - turnPower));
-    //check BCPower to see if trying to apply turnPower would put motor power over 1.0 or under -1.0
-    turningScale = Math.max(turningScale, Math.max(Math.abs(BCPower + turnPower), Math.abs(BCPower - turnPower)));
-
-    //adjust turn power scale correctly --- 1.0 is the max power of the motor.
-    //In order to stop the motors from doing wonky stuff we need to use just the power if we aren't trying to turn and use
-    //an equation if we are. This will likely need revision but it needs to be tested first.
-    //TODO: Test 
-    if (Math.abs(turningScale) <= 1.0){
+    double turningScale = turnPower;
+    //0.3 and 0.4 are deadband values
+    if (Math.abs(turnPower) <= 0.3){
+      if(Math.abs(translationAngle) < 0.4 && Math.abs(translationPower) < 0.4){
+        
+      }else{
       leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
       leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
       rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
       rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
+      }
     }else{
-      leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, (ADPower - turningScale) / turningScale);
-      leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, (BCPower - turningScale) / turningScale);
-      rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, (BCPower + turningScale) / turningScale);
-      rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, (ADPower + turningScale) / turningScale);
+      //5 is to slow down the motors because turning shouldn't feel like you're an F1 racer
+      leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
+      leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
+      rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
+      rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
     }
-
-    //set the motors, and divide them by turning Scale to make sure none of them go over the top, which would alter the translation angles
-  /*
-    leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, (ADPower - turningScale) / turningScale);
-    leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, (BCPower - turningScale) / turningScale);
-    rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, (BCPower + turningScale) / turningScale);
-    rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, (ADPower + turningScale) / turningScale);
-    */
   }
  
 }
