@@ -39,8 +39,8 @@ public final class Constants {
 
     public static int FEED_SERVO_PORT = 7;
 
-    public static int SHOOTER_LEFT_MOTOR_PORT = 21;
-    public static int SHOOTER_RIGHT_MOTOR_PORT = 22;
+    public static int SHOOTER_LEFT_MOTOR_PORT = 0;
+    public static int SHOOTER_RIGHT_MOTOR_PORT = 1;
 
     //Other drive constants
     public static double TURN_ADJUST = 0.4;
@@ -95,13 +95,10 @@ public final class Constants {
     public static boolean INVERTED = true;
 
 
-    public static double SHOOTER_P = 2.3;
-	public static double SHOOTER_I = 0.00002;
-	public static double SHOOTER_D = 0.6;
-	public static double SHOOTER_F = 0.0;
-	public static int SHOOTER_I_ZONE = 0;
-	public static double SHOOTER_PEAK_OUTPUT = 1.0;
     public static int SHOOTER_ERROR = 60;
+
+    public static Gains kGains = new Gains(1.0, 0.0, 0.0, 1.0,  0,  1.0);
+
 
     public static double kS = 0.80192;
     public static double kV = 0.09327;
