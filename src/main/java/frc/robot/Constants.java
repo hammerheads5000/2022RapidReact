@@ -45,11 +45,6 @@ public final class Constants {
     //Other drive constants
     public static double TURN_ADJUST = 0.4;
 
-
-    //Desired rpm (temporary)
-    public static double RPM = 6380.0;
-
-
     //Motor Speeds
     public static double LIFT_UP_SPEED = 1.0;
     public static double LIFT_DOWN_SPEED = -0.1;
@@ -91,9 +86,9 @@ public final class Constants {
     public static int PID_LOOP_IDX = 0;
     public static int TIMEOUT_MS = 5;
 
-    public static boolean PHASE_SENSOR = true;
+    public static boolean PHASE_SENSOR = false;
     public static boolean INVERTED = true;
-
+    public static double K_SENSOR_UNITS_PER_ROTATION = 2048.0;
 
     public static int SHOOTER_ERROR = 60;
 
