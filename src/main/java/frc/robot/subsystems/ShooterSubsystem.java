@@ -33,7 +33,7 @@ double testI;
 double testD;
 double testError;
 
-double rpm = 4500;
+double rpm = 6380;
 
 
 //limelight isn't currently doing anything
