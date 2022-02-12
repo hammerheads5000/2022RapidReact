@@ -2,6 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -23,7 +24,7 @@ public class ShooterSubsystem extends SubsystemBase {
  private static TalonFX rightShooterMotor = new TalonFX(Constants.SHOOTER_RIGHT_MOTOR_PORT);
 
 
-//(x units/100ms) = (rpm * 2048/600(units/100ms))
+//(x units/100ms) = (rpm * Constants.K_SENSOR_UNITS_PER_ROTATION/600(units/100ms))
 
 
 double testF;
@@ -32,8 +33,7 @@ double testI;
 double testD;
 double testError;
 
-
-double rpm = 5600;
+double rpm = 6380;
 
 
 //limelight isn't currently doing anything
@@ -52,12 +52,13 @@ double rpm = 5600;
     //So essentially it appears we will be putting the limelight part in the constructor? I'm not entirely sure how this is
     //going to work but we'll figure it out.
    
-    SimpleMotorFeedforward feedForward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
-    testF = feedForward.calculate(rpm);
+    //SimpleMotorFeedforward feedForward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
+    //testF = feedForward.calculate(rpm);
+    testF = Constants.kGains.kF;
     testP = Constants.kGains.kP;
     testI = Constants.kGains.kI;
     testD = Constants.kGains.kD;
-    testError = 0;
+    testError = 60;
 
 
     
@@ -69,8 +70,8 @@ double rpm = 5600;
 	  leftShooterMotor.configNominalOutputReverse(0, Constants.TIMEOUT_MS);
 		leftShooterMotor.configPeakOutputForward(Constants.kGains.kPeakOutput, Constants.TIMEOUT_MS);
 		leftShooterMotor.configPeakOutputReverse(-Constants.kGains.kPeakOutput, Constants.TIMEOUT_MS);
-
-		leftShooterMotor.configAllowableClosedloopError(Constants.PID_LOOP_IDX, (2048.0 / 600.0) * testError, Constants.TIMEOUT_MS);
+    
+		leftShooterMotor.configAllowableClosedloopError(Constants.PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * testError, Constants.TIMEOUT_MS);
 
 		leftShooterMotor.config_kF(Constants.PID_LOOP_IDX, testF, Constants.TIMEOUT_MS);  
     leftShooterMotor.config_kP(Constants.PID_LOOP_IDX, testP, Constants.TIMEOUT_MS);
@@ -87,7 +88,7 @@ double rpm = 5600;
 		rightShooterMotor.configPeakOutputForward(Constants.kGains.kPeakOutput, Constants.TIMEOUT_MS);
 		rightShooterMotor.configPeakOutputReverse(-Constants.kGains.kPeakOutput, Constants.TIMEOUT_MS);
 
-		rightShooterMotor.configAllowableClosedloopError(Constants.PID_LOOP_IDX, (2048.0 / 600.0) * testError, Constants.TIMEOUT_MS);
+		rightShooterMotor.configAllowableClosedloopError(Constants.PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * testError, Constants.TIMEOUT_MS);
 
 		rightShooterMotor.config_kF(Constants.PID_LOOP_IDX, testF, Constants.TIMEOUT_MS);  
     rightShooterMotor.config_kP(Constants.PID_LOOP_IDX, testP, Constants.TIMEOUT_MS);
@@ -115,13 +116,12 @@ double rpm = 5600;
     
     SmartDashboard.putNumber("rpm", rpm);
 
-    double motorSpeed = (2048.0 / 600.0) * rpm;
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * rpm;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
     //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
-   leftShooterMotor.set(TalonFXControlMode.Velocity, motorSpeed);
+   //leftShooterMotor.set(TalonFXControlMode.Velocity, motorSpeed);
    rightShooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
- //  leftShooterMotor.set(TalonFXControlMode.MotionMagic, motorSpeed);
-  // rightShooterMotor.set(TalonFXControlMode.MotionMagic, -motorSpeed);
+
 
    SmartDashboard.putNumber("F", testF);
    SmartDashboard.putNumber("P", testP);
@@ -129,11 +129,11 @@ double rpm = 5600;
    SmartDashboard.putNumber("D", testD);
    SmartDashboard.putNumber("Error", testError);
 
-   SmartDashboard.putNumber("RPM", ( (600.0 / 2048.0) * leftShooterMotor.getSelectedSensorVelocity()));
+   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * rightShooterMotor.getSelectedSensorVelocity()));
    String motorState;
-   if(leftShooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) > 0){
+   if(rightShooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) > 0){
      motorState = "forward";
-   }else if(leftShooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) == 0){
+   }else if(rightShooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) == 0){
      motorState = "stopped";
    }else{
      motorState = "reverse";
