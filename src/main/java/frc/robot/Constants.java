@@ -92,7 +92,9 @@ public final class Constants {
 
     public static int SHOOTER_ERROR = 60;
 
-    public static Gains kGains = new Gains(1.0, 0.0, 0.0, 1.0,  0,  1.0);
+
+    //PIDF - IZone - PeakOutput
+    public static Gains kGains = new Gains(0.18, 0.0, 0.1, 0.0468,  0,  1.0);
 
 
     public static double kS = 0.80192;

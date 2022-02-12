@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 
-//TODO: Add reverse function
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -34,8 +33,7 @@ double testI;
 double testD;
 double testError;
 
-
-double rpm = 5600;
+double rpm = 4500;
 
 
 //limelight isn't currently doing anything
@@ -54,12 +52,13 @@ double rpm = 5600;
     //So essentially it appears we will be putting the limelight part in the constructor? I'm not entirely sure how this is
     //going to work but we'll figure it out.
    
-    SimpleMotorFeedforward feedForward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
-    testF = feedForward.calculate(rpm);
+    //SimpleMotorFeedforward feedForward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
+    //testF = feedForward.calculate(rpm);
+    testF = Constants.kGains.kF;
     testP = Constants.kGains.kP;
     testI = Constants.kGains.kI;
     testD = Constants.kGains.kD;
-    testError = 0;
+    testError = 60;
 
 
     
@@ -120,10 +119,9 @@ double rpm = 5600;
     double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * rpm;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
     //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
-   leftShooterMotor.set(TalonFXControlMode.Velocity, motorSpeed);
+   //leftShooterMotor.set(TalonFXControlMode.Velocity, motorSpeed);
    rightShooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
-   //leftShooterMotor.set(TalonFXControlMode.PercentOutput, 0.65);
-   //rightShooterMotor.set(TalonFXControlMode.PercentOutput, -0.65);
+
 
    SmartDashboard.putNumber("F", testF);
    SmartDashboard.putNumber("P", testP);
@@ -131,11 +129,11 @@ double rpm = 5600;
    SmartDashboard.putNumber("D", testD);
    SmartDashboard.putNumber("Error", testError);
 
-   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftShooterMotor.getSelectedSensorVelocity()));
+   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * rightShooterMotor.getSelectedSensorVelocity()));
    String motorState;
-   if(leftShooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) > 0){
+   if(rightShooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) > 0){
      motorState = "forward";
-   }else if(leftShooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) == 0){
+   }else if(rightShooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) == 0){
      motorState = "stopped";
    }else{
      motorState = "reverse";
