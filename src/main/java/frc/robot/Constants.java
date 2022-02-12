@@ -32,12 +32,15 @@ public final class Constants {
     public static int RIGHT_FRONT_DRIVE_MOTOR_PORT = 25;
     public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 24;
 
-    public static int LEFT_LIFT_MOTOR_PORT = 4;
-    public static int RIGHT_LIFT_MOTOR_PORT = 5;
+    public static int LIFT_MOTOR_PORT = 4;
 
-    public static int INTAKE_MOTOR_PORT = 6;
+    public static int WHEEL_INTAKE_MOTOR_PORT = 5;
+    public static int LOWER_INTAKE_MOTOR_PORT = 6;
+    public static int INTAKE_UPPER_IR_PORT = 7;
+    public static int INTAKE_LOWER_IR_PORT = 8;
 
-    public static int FEED_SERVO_PORT = 7;
+    public static int FIRST_FEED_MOTOR_PORT = 9;
+    public static int SECOND_FEED_MOTOR_PORT = 10;
 
     public static int SHOOTER_LEFT_MOTOR_PORT = 0;
     public static int SHOOTER_RIGHT_MOTOR_PORT = 1;
@@ -51,15 +54,16 @@ public final class Constants {
 
 
     //Motor Speeds
-    public static double LIFT_UP_SPEED = 1.0;
+    public static double LIFT_UP_SPEED = 0.1;
     public static double LIFT_DOWN_SPEED = -0.1;
 
+    public static double INTAKE_LIFT_SPEED = 0.1;
     public static double INTAKE_SPEED = 1.0;
     public static double OUTTAKE_SPEED = -1.0;
 
     public static double SHOOTER_SPEED = 0.6;
 
-    public static double FEED_SERVO_SPEED = 1.0;
+    public static double FEED_MOTOR_SPEED = 50.0;
 
 
     //Joystick Constants
@@ -103,4 +107,8 @@ public final class Constants {
     public static double kS = 0.80192;
     public static double kV = 0.09327;
     public static double kA = 0.004018;
+
+    //Lift Constants
+    public static double LIFT_DISTANCE = 1000.0; //I don't know the actual distance it'll need to go up so I'm guessing it'll be a meter for now
+    public static double MOTOR_SHAFT_DIAMETER = 6.0;
 }
