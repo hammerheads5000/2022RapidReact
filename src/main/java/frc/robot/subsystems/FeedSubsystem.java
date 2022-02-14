@@ -4,6 +4,11 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,26 +20,30 @@ public class FeedSubsystem extends SubsystemBase {
   private final DigitalInput irSensor1;
   private final DigitalInput irSensor2;
 
-  Servo feedServo = new Servo(Constants.FEED_SERVO_PORT);
-
-  private static double intakeAngle = 90.0;
+  TalonSRX firstFeedMotor = new TalonSRX(Constants.FIRST_FEED_MOTOR_PORT);
+  TalonSRX secondFeedMotor = new TalonSRX(Constants.SECOND_FEED_MOTOR_PORT);
 
   public FeedSubsystem() {
     irSensor1 = new DigitalInput(Constants.IR_SENSOR_1_PORT);
-    irSensor2 = new DigitalInput(Constants.IR_SENSOR_2_PORT);}
+    irSensor2 = new DigitalInput(Constants.IR_SENSOR_2_PORT);
+    firstFeedMotor.setNeutralMode(NeutralMode.Coast);
+  }
 
-  public void m_feedIn(){
-    feedServo.setAngle(intakeAngle);
+  public void m_feedFirstBallIn(){
+    firstFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
   }
 
   public void m_feedInManual(){
-    feedServo.setAngle(intakeAngle);
+    firstFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
+    secondFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
   }
   public void m_feedOut(){
-    feedServo.setAngle(-intakeAngle);;
+    firstFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
+    secondFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
   }
   public void m_stopFeed(){
-    feedServo.set(0); //clearly this is to stop the servo
+    firstFeedMotor.set(TalonSRXControlMode.PercentOutput, 0); //I couldn't figure out how to get it to brake so I just did this
+    secondFeedMotor.set(TalonSRXControlMode.PercentOutput, 0);
   }
   public boolean m_getSensor1(){
     return irSensor1.get();

@@ -103,7 +103,7 @@ public class RobotContainer {
     
     //Lift buttons!
     JoystickButton b_liftUpButton = new JoystickButton(buttonsJoystick, Constants.LIFT_UP_BUTTON);
-    b_liftUpButton.whileHeld(cmd_liftUpCommand, Constants.NOT_INTERRUPTIBLE);
+    b_liftUpButton.whenPressed(cmd_liftUpCommand, Constants.INTERRUPTIBLE);
 
     JoystickButton b_liftDownButton = new JoystickButton(buttonsJoystick, Constants.LIFT_DOWN_BUTTON);
     b_liftDownButton.whileHeld(cmd_liftDownCommand, Constants.NOT_INTERRUPTIBLE);

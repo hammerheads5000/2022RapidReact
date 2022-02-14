@@ -36,8 +36,6 @@ double rpm = 6380;
   public ShooterSubsystem() {
     shooterMotor.setNeutralMode(NeutralMode.Coast);
 
-
-
     shooterMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
     shooterMotor.setSensorPhase(Constants.PHASE_SENSOR);
     shooterMotor.configNominalOutputForward(0, Constants.TIMEOUT_MS);

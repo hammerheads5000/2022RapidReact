@@ -7,24 +7,54 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class IntakeSubsystem extends SubsystemBase {
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-  private static TalonFX intakeMotor = new TalonFX(Constants.INTAKE_MOTOR_PORT);
+public class IntakeSubsystem extends SubsystemBase {
+  
+  private static CANSparkMax lowerMotor = new CANSparkMax(Constants.LOWER_INTAKE_MOTOR_PORT, MotorType.kBrushless);
+  private static CANSparkMax wheelMotor = new CANSparkMax(Constants.WHEEL_INTAKE_MOTOR_PORT, MotorType.kBrushless);
+  private static DigitalInput upIR = new DigitalInput(Constants.INTAKE_UPPER_IR_PORT);
+  private static DigitalInput downIR = new DigitalInput(Constants.INTAKE_LOWER_IR_PORT);  
+
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     // Use addRequirements() here to declare subsystem dependencies.
+    
+  }
+
+  public void m_lower(){
+    if (upIR.get()){
+      lowerMotor.set(Constants.INTAKE_LIFT_SPEED);
+    }
+  }
+
+  public void m_raise(){
+    if (downIR.get()){
+      lowerMotor.set(-Constants.INTAKE_LIFT_SPEED);
+    }  
   }
 
   public void m_intake() {
-    intakeMotor.set(TalonFXControlMode.PercentOutput, Constants.INTAKE_SPEED);
+    wheelMotor.set(Constants.INTAKE_SPEED);
   }
 
   public void m_outtake() {
-    intakeMotor.set(TalonFXControlMode.PercentOutput, Constants.OUTTAKE_SPEED);
+    wheelMotor.set(-Constants.INTAKE_SPEED);
+  }
+
+  public void periodic(){
+    
+    if (downIR.get())
+      lowerMotor.set(0);
+    if (upIR.get())
+      wheelMotor.set(0);
   }
 
 }
