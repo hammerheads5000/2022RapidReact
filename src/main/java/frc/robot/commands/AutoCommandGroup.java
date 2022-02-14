@@ -17,25 +17,49 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     
     /* Top Path
     addCommands(
-    
+      Turn x degrees,
+      Move forward approximately 3.9 feet,
+      Intake the ball,
+      Turn 180 degrees,
+      Shoot the ball,
+      Turn approximately 113.3 degrees,
+      Move forward approximately 18.9 feet
     );
     */
 
     /* Top-Middle Path
     addCommands(
-    
+      Turn x degrees,
+      Move forward approximately 6 feet,
+      Intake the ball,
+      Turn 180 degrees,
+      Shoot the ball,
+      Turn approximately 110.4 degrees,
+      Move forward approximately 11.7 feet
     );
     */
 
     /* Bottom-Middle Path
     addCommands(
-    
+      Turn x degrees,
+      Move forward approximately 3.9 feet,
+      Intake the ball,
+      Turn 180 degrees,
+      Shoot the ball,
+      Turn approximately 162.3 degrees,
+      Move forward approximately 11.7 feet
     );
     */
 
     /* Bottom Path
     addCommands(
-    
+      Turn x degrees,
+      Move forward approximately 3.6 feet,
+      Intake the ball,
+      Turn 180 degrees,
+      Shoot the ball,
+      Turn approximately  83.7 degrees,
+      Move forward approximately 18.1 feet
     );
     */
   }
