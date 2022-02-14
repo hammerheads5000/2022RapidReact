@@ -42,16 +42,10 @@ public final class Constants {
     public static int FIRST_FEED_MOTOR_PORT = 9;
     public static int SECOND_FEED_MOTOR_PORT = 10;
 
-    public static int SHOOTER_LEFT_MOTOR_PORT = 0;
-    public static int SHOOTER_RIGHT_MOTOR_PORT = 1;
+    public static int SHOOTER_MOTOR_PORT = 1;
 
     //Other drive constants
     public static double TURN_ADJUST = 0.4;
-
-
-    //Desired rpm (temporary)
-    public static double RPM = 6380.0;
-
 
     //Motor Speeds
     public static double LIFT_UP_SPEED = 0.1;
@@ -86,7 +80,7 @@ public final class Constants {
     public static int SHOOT_BUTTON = 1;
 
     //PID Constants
-    public static double KP_DRIVE_AIM = 0.85;
+    public static double KP_DRIVE_AIM = 0.15;
     public static double MIN_COMMAND_DRIVE_AIM = 0.05;
 
     public static double KP_FLYWHEEL = 0.85;
@@ -95,13 +89,15 @@ public final class Constants {
     public static int PID_LOOP_IDX = 0;
     public static int TIMEOUT_MS = 5;
 
-    public static boolean PHASE_SENSOR = true;
+    public static boolean PHASE_SENSOR = false;
     public static boolean INVERTED = true;
-
+    public static double K_SENSOR_UNITS_PER_ROTATION = 2048.0;
 
     public static int SHOOTER_ERROR = 60;
 
-    public static Gains kGains = new Gains(1.0, 0.0, 0.0, 1.0,  0,  1.0);
+
+    //PIDF - IZone - PeakOutput
+    public static Gains kGains = new Gains(0.18, 0.0, 0.09, 0.047,  0,  1.0);
 
 
     public static double kS = 0.80192;

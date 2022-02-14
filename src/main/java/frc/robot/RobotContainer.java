@@ -40,7 +40,6 @@ public class RobotContainer {
 
   private final AimSubsystem sub_aimSubsystem = new AimSubsystem();
   private final ShooterSubsystem sub_shooterSubsystem = new ShooterSubsystem();
-  private final FindRPMSubsystem sub_findRPMSubsystem = new FindRPMSubsystem();
 
   /*
   ---------------------------------------------------------Commands------------------------------------------------------------------------
@@ -64,7 +63,7 @@ public class RobotContainer {
 
   //Shooter commands
 
-  private final AimCommand cmd_aimCommand = new AimCommand(sub_aimSubsystem, sub_findRPMSubsystem);
+  private final AimCommand cmd_aimCommand = new AimCommand(sub_aimSubsystem);
   private final ShooterCommand cmd_shooterCommand = new ShooterCommand(sub_shooterSubsystem);
 
 
