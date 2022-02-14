@@ -45,9 +45,7 @@ double rpm = 5600;
     leftShooterMotor.setNeutralMode(NeutralMode.Coast);
     rightShooterMotor.setNeutralMode(NeutralMode.Coast);
 
-    //TODO: Tune PID values
    
-  //TODO: Create RPM Aim class to calculate needed rpm as separate aim button, then create object here to use a getter in the feedForward.calculate    
 
     //So essentially it appears we will be putting the limelight part in the constructor? I'm not entirely sure how this is
     //going to work but we'll figure it out.
