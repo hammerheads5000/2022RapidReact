@@ -15,22 +15,28 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     
-    /* Route Templete
+    /* Top Path
     addCommands(
-    Turn,
-    Fire,
-    Command
+    
     );
     */
 
-    /* Route Templete
+    /* Top-Middle Path
     addCommands(
-    Turn,
-    Fire,
-    Command
+    
     );
     */
 
+    /* Bottom-Middle Path
+    addCommands(
+    
+    );
+    */
 
+    /* Bottom Path
+    addCommands(
+    
+    );
+    */
   }
 }
