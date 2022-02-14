@@ -6,17 +6,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.AimSubsystem;
-import frc.robot.subsystems.FindRPMSubsystem;
 public class AimCommand extends CommandBase {
   /** Creates a new AimCommand. */
   private final AimSubsystem sub_aimSubsystem;
-  private final FindRPMSubsystem sub_findRPMSubsystem;
 
-  public AimCommand(AimSubsystem subsystem, FindRPMSubsystem subsystemTwo) {
+  public AimCommand(AimSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_aimSubsystem = subsystem;
-    sub_findRPMSubsystem = subsystemTwo;
-    addRequirements(sub_aimSubsystem, sub_findRPMSubsystem);
+    addRequirements(sub_aimSubsystem);
   }
 
   // Called when the command is initially scheduled.

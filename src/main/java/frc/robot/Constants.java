@@ -39,8 +39,7 @@ public final class Constants {
 
     public static int FEED_SERVO_PORT = 7;
 
-    public static int SHOOTER_LEFT_MOTOR_PORT = 0;
-    public static int SHOOTER_RIGHT_MOTOR_PORT = 1;
+    public static int SHOOTER_MOTOR_PORT = 1;
 
     //Other drive constants
     public static double TURN_ADJUST = 0.4;
@@ -77,7 +76,7 @@ public final class Constants {
     public static int SHOOT_BUTTON = 1;
 
     //PID Constants
-    public static double KP_DRIVE_AIM = 0.85;
+    public static double KP_DRIVE_AIM = 0.15;
     public static double MIN_COMMAND_DRIVE_AIM = 0.05;
 
     public static double KP_FLYWHEEL = 0.85;
