@@ -4,25 +4,28 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import java.lang.Math;
 
 public class LiftSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  private static TalonFX leftLiftMotor = new TalonFX(Constants.LEFT_LIFT_MOTOR_PORT);
-  private static TalonFX rightLiftMotor = new TalonFX(Constants.RIGHT_LIFT_MOTOR_PORT);
-  public LiftSubsystem() {}
+  private static TalonFX liftMotor = new TalonFX(Constants.LIFT_MOTOR_PORT);
+  public LiftSubsystem() {
+    liftMotor.setNeutralMode(NeutralMode.Brake);
+  }
 
   public void m_liftUp(){
-    leftLiftMotor.set(TalonFXControlMode.PercentOutput, Constants.LIFT_UP_SPEED);
-    rightLiftMotor.set(TalonFXControlMode.PercentOutput, Constants.LIFT_UP_SPEED);
+    //This finds the number of rotations required to reach the lift distance multiplied by the number of encoder things on the motor
+    double numberOfRotations = Constants.LIFT_DISTANCE / (Constants.MOTOR_SHAFT_DIAMETER * Math.PI);
+    liftMotor.setSelectedSensorPosition(numberOfRotations * 2048);
   }
 
   public void m_liftDown(){
-    leftLiftMotor.set(TalonFXControlMode.PercentOutput, Constants.LIFT_DOWN_SPEED);
-    rightLiftMotor.set(TalonFXControlMode.PercentOutput, Constants.LIFT_DOWN_SPEED);
+    liftMotor.set(TalonFXControlMode.PercentOutput, Constants.LIFT_DOWN_SPEED);
   }
+  
 }

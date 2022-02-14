@@ -30,15 +30,23 @@ public class FeedInCommand extends CommandBase {
     firstIRSensor = sub_feedSubsystem.m_getSensor1();
     secondIRSensor = sub_feedSubsystem.m_getSensor2();
 
-    if(firstIRSensor && secondIRSensor){
+    if (firstIRSensor && !secondIRSensor)
+      sub_feedSubsystem.m_feedFirstBallIn();
+    else if (!firstIRSensor && secondIRSensor)
       sub_feedSubsystem.m_stopFeed();
-    }else if(!firstIRSensor && secondIRSensor){
-      sub_feedSubsystem.m_feedIn();
-    }else if(firstIRSensor && !secondIRSensor){
+    else if (firstIRSensor && secondIRSensor)
       sub_feedSubsystem.m_stopFeed();
-    }else if(!firstIRSensor && !secondIRSensor){
+    else 
       sub_feedSubsystem.m_stopFeed();
-    }
+
+    /*
+      I could just do
+      else{
+        stopFeed();
+      }
+      but I'm worried someone is gonna think that it's wrong so I'm just leaving it here
+      to show that it isn't wrong I think
+    */
 
   }
 
