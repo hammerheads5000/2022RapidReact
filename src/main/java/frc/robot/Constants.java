@@ -55,9 +55,7 @@ public final class Constants {
     public static double INTAKE_SPEED = 1.0;
     public static double OUTTAKE_SPEED = -1.0;
 
-    public static double SHOOTER_SPEED = 0.6;
-
-    public static double FEED_MOTOR_SPEED = 50.0;
+    public static double FEED_MOTOR_SPEED = 1.0;
 
 
     //Joystick Constants
