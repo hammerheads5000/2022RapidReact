@@ -29,17 +29,14 @@ public class AutoCommandGroup extends SequentialCommandGroup {
 
     addRequirements(sub_autoDriveSubsystem, sub_feedSubsystem, sub_intakeSubsystem, sub_shooterSubsystem);
 
-
-
     /* Top Path
     addCommands(
       Turn x degrees,
       new ParallelDeadlineGroup
       (
         Move forward approximately 3.9 feet,
-        Intake the ball
+        new IntakeCommand(sub_intakeSubsystem)
       ),
-      Stop intake,
       Feed in the ball?,
       Turn 180 degrees,
       Shoot the ball,
@@ -56,9 +53,8 @@ public class AutoCommandGroup extends SequentialCommandGroup {
       new ParallelDeadlineGroup
       (
         Move forward approximately 6 feet,
-        Intake the ball
+        new IntakeCommand(sub_intakeSubsystem)
       ),
-      Stop intake,
       Feed the ball?,
       Turn 180 degrees,
       Shoot the ball,
@@ -75,9 +71,8 @@ public class AutoCommandGroup extends SequentialCommandGroup {
       new ParallelDeadlineGroup
       (
         Move forward approximately 3.9 feet,
-        Intake the ball
+        new IntakeCommand(sub_intakeSubsystem)
       ),
-      Stop intake,
       Feed the ball?,
       Turn 180 degrees,
       Shoot the ball,
@@ -94,9 +89,8 @@ public class AutoCommandGroup extends SequentialCommandGroup {
       new ParallelDeadlineGroup
       (
         Move forward approximately 3.6 feet,
-        Intake the ball
+        new IntakeCommand(sub_intakeSubsystem)
       ),
-      Stop intake,
       Feed the ball?,
       Turn 180 degrees,
       Shoot the ball,
