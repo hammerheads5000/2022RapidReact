@@ -86,6 +86,42 @@ double rpm = 6380;
     //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
 
     leftFrontDriveMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
+    rightFrontDriveMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
+   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));//going off of the left one right now but idk
+   
+   String motorState;
+   if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) > 0){//once again going just off the left but idk
+     motorState = "forward";
+   }else if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) == 0){
+     motorState = "stopped";
+   }else{
+     motorState = "reverse";
+   }
+
+   SmartDashboard.putString("Motor State", motorState);
+
+  }
+  
+  public void m_turn(boolean right)
+  {
+    double y = ty.getDouble(0.0);
+    double heading_error = -y;
+
+    //rpm = some funky equation
+    
+    SmartDashboard.putNumber("rpm", rpm);
+
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * rpm;
+    //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
+    //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
+    if (right){
+    leftFrontDriveMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
+    rightFrontDriveMotor.set(TalonFXControlMode.Velocity, motorSpeed);
+    }
+    else{
+    leftFrontDriveMotor.set(TalonFXControlMode.Velocity, motorSpeed);
+    rightFrontDriveMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
+    }
 
    SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));//going off of the left one right now but idk
    
@@ -101,6 +137,8 @@ double rpm = 6380;
    SmartDashboard.putString("Motor State", motorState);
 
   }
+  
+  
   public void m_stopSpinning()
   {
     leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, 0.0);
