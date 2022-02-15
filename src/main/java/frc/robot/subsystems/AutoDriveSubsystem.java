@@ -5,33 +5,37 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-/*
-package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+//package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
+import frc.robot.AutoConstants;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
- */
+
+
+
+ 
 
 
 public class AutoDriveSubsystem extends SubsystemBase {
   /** Creates a new AutoDriveSubsystem. */
-  /*private static TalonFX leftFrontDriveMotor = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
+  //(x units/100ms) = (rpm * Constants.K_SENSOR_UNITS_PER_ROTATION/600(units/100ms))
+
+
+  private static TalonFX leftFrontDriveMotor = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
   private static TalonFX leftBackDriveMotor = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
   private static TalonFX rightFrontDriveMotor = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
-  private static TalonFX rightBackDriveMotor = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);*/
+  private static TalonFX rightBackDriveMotor = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
 
-  /*
   
 double rpm = 6380;
 
@@ -39,26 +43,36 @@ double rpm = 6380;
 //limelight isn't currently doing anything
  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
  NetworkTableEntry ty = table.getEntry("ty");
-  */
+ //probably not gonna apply at all ^
+  
   public AutoDriveSubsystem() {
-    /*leftFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
-
-    leftFrontDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.AUTO_PID_LOOP_IDX, ConstAutoConstants_AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
+    leftFrontDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     leftFrontDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
     leftFrontDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
 		leftFrontDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
-		leftFrontDriveMotor.configPeakOutputForward(Constants.kGains.kPeakOutputShooter, AutoConstants.AUTO_TIMEOUT_MS);
-		leftFrontDriveMotor.configPeakOutputReverse(-Constants.kGains.kPeakOutputShooter, AutoConstants.AUTO_TIMEOUT_MS);
-
-		leftFrontDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * Constants.SHOOTER_ERROR, AutoConstants.AUTO_TIMEOUT_MS);
-
-		leftFrontDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, Constants.kGains.kFShooter, AutoConstants.AUTO_TIMEOUT_MS);  
-    leftFrontDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, Constants.kGains.kPShooter, AutoConstants.AUTO_TIMEOUT_MS);
-		leftFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, Constants.kGains.kIShooter, AutoConstants.AUTO_TIMEOUT_MS);
-    leftFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, Constants.kGains.kDShooter, AutoConstants.AUTO_TIMEOUT_MS);*/
-
+		leftFrontDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		leftFrontDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		leftFrontDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.AUTO_ERROR, AutoConstants.AUTO_TIMEOUT_MS);
+		leftFrontDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
+    leftFrontDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		leftFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
+    
+    rightFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rightFrontDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);//sensor might not be needed, also probably has to be changed anyway
+    rightFrontDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.AUTO_ERROR, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
+    rightFrontDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
   }
-  /*public void m_shoot()
+  public void m_drive()
   {
     double y = ty.getDouble(0.0);
     double heading_error = -y;
@@ -73,10 +87,10 @@ double rpm = 6380;
 
     leftFrontDriveMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
 
-   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));
+   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));//going off of the left one right now but idk
    
    String motorState;
-   if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) > 0){
+   if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) > 0){//once again going just off the left but idk
      motorState = "forward";
    }else if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) == 0){
      motorState = "stopped";
@@ -90,18 +104,20 @@ double rpm = 6380;
   public void m_stopSpinning()
   {
     leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, 0.0);
+    rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, 0.0);
   }
 
   public void m_zeroEncoder(){
     leftFrontDriveMotor.setSelectedSensorPosition(0);
+    rightFrontDriveMotor.setSelectedSensorPosition(0);//probably not needed
   }
 
   public double m_getPosition(){
-    return leftFrontDriveMotor.getSelectedSensorPosition();
+    return leftFrontDriveMotor.getSelectedSensorPosition();//just left, idk
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  }*/
+  }
 }

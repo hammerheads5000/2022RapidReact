@@ -8,5 +8,6 @@ package frc.robot;
 public class AutoConstants {
     public static int AUTO_PID_LOOP_IDX = 0;//change maybe
     public static int AUTO_TIMEOUT_MS = 5;//change maybe
-    public static Gains aGains = new Gains(0.18, 0.0, 0.09, 0.047,  0,  1.0);
+    public static AutoGains aGains = new AutoGains(0.0, 0.0, 0.0, 0.0,  0,  0.0);//all at 0 for now
+    public static int AUTO_ERROR = 60;//definitely will be changed
 }
