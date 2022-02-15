@@ -41,6 +41,10 @@ public class RobotContainer {
   private final AimSubsystem sub_aimSubsystem = new AimSubsystem();
   private final ShooterSubsystem sub_shooterSubsystem = new ShooterSubsystem();
 
+  //Auto subsystems
+
+  private final AutoDriveSubsystem sub_autoDriveSubsystem = new AutoDriveSubsystem();
+
   /*
   ---------------------------------------------------------Commands------------------------------------------------------------------------
   */
@@ -70,6 +74,7 @@ public class RobotContainer {
 
   //Auto commands
   private final AutoCommand cmd_autoCommand = new AutoCommand(sub_driveTrainSubsystem);
+  private final AutoDriveCommand cmd_autoDriveCommand = new AutoDriveCommand(sub_autoDriveSubsystem);
 
 
 
