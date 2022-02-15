@@ -37,10 +37,9 @@ public class AutoCommandGroup extends SequentialCommandGroup {
         Move forward approximately 3.9 feet,
         new IntakeCommand(sub_intakeSubsystem)
       ),
-      Feed in the ball?,
       Turn 180 degrees,
-      Shoot the ball,
-      Shoot the ball,
+      new ShooterCommand(sub_shootSubsystem),
+      new ShooterCommand(sub_shootSubsystem),
       Turn approximately 113.3 degrees,
       Move forward approximately 18.9 feet
     );
@@ -55,8 +54,8 @@ public class AutoCommandGroup extends SequentialCommandGroup {
         new IntakeCommand(sub_intakeSubsystem)
       ),
       Turn 180 degrees,
-      Shoot the ball,
-      Shoot the ball,
+      new ShooterCommand(sub_shootSubsystem),
+      new ShooterCommand(sub_shootSubsystem),
       Turn approximately 110.4 degrees,
       Move forward approximately 11.7 feet
     );
@@ -71,8 +70,8 @@ public class AutoCommandGroup extends SequentialCommandGroup {
         new IntakeCommand(sub_intakeSubsystem)
       ),
       Turn 180 degrees,
-      Shoot the ball,
-      Shoot the ball,
+      new ShooterCommand(sub_shootSubsystem),
+      new ShooterCommand(sub_shootSubsystem),
       Turn approximately 162.3 degrees,
       Move forward approximately 11.7 feet
     );
@@ -87,8 +86,8 @@ public class AutoCommandGroup extends SequentialCommandGroup {
         new IntakeCommand(sub_intakeSubsystem)
       ),
       Turn 180 degrees,
-      Shoot the ball,
-      Shoot the ball,
+      new ShooterCommand(sub_shootSubsystem),
+      new ShooterCommand(sub_shootSubsystem),
       Turn approximately  83.7 degrees,
       Move forward approximately 18.1 feet
     );
