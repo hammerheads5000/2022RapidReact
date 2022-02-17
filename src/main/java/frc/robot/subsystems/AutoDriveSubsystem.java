@@ -10,7 +10,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.AutoConstants;
@@ -46,6 +51,8 @@ double rpm = 6380;
  //probably not gonna apply at all ^
   
   public AutoDriveSubsystem() {
+    
+    
     leftFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
     leftFrontDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     leftFrontDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
@@ -72,11 +79,11 @@ double rpm = 6380;
 		rightFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
     rightFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
   }
-  public void m_drive()
+  public void m_drive(double distance)
   {
     double y = ty.getDouble(0.0);
     double heading_error = -y;
-
+    double setpoint = distance * 2048;
     //rpm = some funky equation
     
     SmartDashboard.putNumber("rpm", rpm);
@@ -85,8 +92,8 @@ double rpm = 6380;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
     //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
 
-    leftFrontDriveMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
-    rightFrontDriveMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
+    leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
    SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));//going off of the left one right now but idk
    
    String motorState;
@@ -102,11 +109,11 @@ double rpm = 6380;
 
   }
   
-  public void m_turn(boolean right)
+  public void m_turn(boolean right, double degrees)
   {
     double y = ty.getDouble(0.0);
     double heading_error = -y;
-
+    double setpoint = degrees;
     //rpm = some funky equation
     
     SmartDashboard.putNumber("rpm", rpm);
@@ -115,12 +122,12 @@ double rpm = 6380;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
     //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
     if (right){
-    leftFrontDriveMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
-    rightFrontDriveMotor.set(TalonFXControlMode.Velocity, motorSpeed);
+    leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    rightFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
     }
     else{
-    leftFrontDriveMotor.set(TalonFXControlMode.Velocity, motorSpeed);
-    rightFrontDriveMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
+    leftFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
+    rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     }
 
    SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));//going off of the left one right now but idk
