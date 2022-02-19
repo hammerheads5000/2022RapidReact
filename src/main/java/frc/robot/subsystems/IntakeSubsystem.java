@@ -29,18 +29,6 @@ public class IntakeSubsystem extends SubsystemBase {
     
   }
 
-  public void m_lower(){
-    if (upIR.get()){
-      lowerMotor.set(Constants.INTAKE_LIFT_SPEED);
-    }
-  }
-
-  public void m_raise(){
-    if (downIR.get()){
-      lowerMotor.set(-Constants.INTAKE_LIFT_SPEED);
-    }  
-  }
-
   public void m_intake() {
     wheelMotor.set(Constants.INTAKE_SPEED);
   }
@@ -50,11 +38,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void periodic(){
-    
-    if (downIR.get())
-      lowerMotor.set(0);
-    if (upIR.get())
-      wheelMotor.set(0);
-  }
 
+
+  }
 }
