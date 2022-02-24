@@ -80,8 +80,8 @@ public class RobotContainer {
     sub_shooterSubsystem
     );
 
-  private final AutoDriveCommand cmd_autoDriveCommand = new AutoDriveCommand(sub_autoDriveSubsystem);
-
+  /*private final AutoDriveCommand cmd_autoDriveCommand = new AutoDriveCommand(sub_autoDriveSubsystem);
+  private final AutoTurnCommand cmd_autoTurnCommand = new AutoTurnCommand(sub_autoDriveSubsystem);*/
   /*
   --------------------------------------------------------Joysticks-----------------------------------------------------------------------------
   */

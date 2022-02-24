@@ -42,7 +42,7 @@ public class AutoDriveSubsystem extends SubsystemBase {
   private static TalonFX rightBackDriveMotor = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
 
   
-double rpm = 6380;
+double rpm = 6380;//dont know we'll find that later
 
 
 //limelight isn't currently doing anything
@@ -86,9 +86,9 @@ double rpm = 6380;
     double setpoint = distance * 2048;
     //rpm = some funky equation
     
-    SmartDashboard.putNumber("rpm", rpm);
+    SmartDashboard.putNumber("rpm", AutoConstants.RPM_IN_AUTO);
 
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * rpm;
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.RPM_IN_AUTO;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
     //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
 
@@ -116,9 +116,9 @@ double rpm = 6380;
     double setpoint = degrees;
     //rpm = some funky equation
     
-    SmartDashboard.putNumber("rpm", rpm);
+    SmartDashboard.putNumber("rpm", AutoConstants.RPM_IN_AUTO);
 
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * rpm;
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.RPM_IN_AUTO;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
     //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
     if (right){

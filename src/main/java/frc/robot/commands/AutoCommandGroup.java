@@ -4,11 +4,13 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.AutoDriveSubsystem;
 import frc.robot.subsystems.FeedSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.AutoConstants;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -16,19 +18,84 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class AutoCommandGroup extends SequentialCommandGroup {
   /** Creates a new AutoCommandGroup. */
 
-  private final AutoDriveSubsystem sub_autoDriveSubsystem;
+  /*private final AutoDriveSubsystem sub_autoDriveSubsystem;
   private final FeedSubsystem sub_feedSubsystem;
   private final IntakeSubsystem sub_intakeSubsystem;
-  private final ShooterSubsystem sub_shooterSubsystem;
+  private final ShooterSubsystem sub_shooterSubsystem;*/
 
-  public AutoCommandGroup(AutoDriveSubsystem autoSub, FeedSubsystem feedSub, IntakeSubsystem intakeSub, ShooterSubsystem shootSub) {
-    sub_autoDriveSubsystem = autoSub;
+  
+  public AutoCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, FeedSubsystem sub_feedSubsystem, IntakeSubsystem sub_intakeSubsystem, ShooterSubsystem sub_shooterSubsystem) {
+    super(
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH_FIRST_TURN, false), 
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH),
+    new IntakeCommand(sub_intakeSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH_SECOND_TURN, false), 
+    new FeedInManualCommand(sub_feedSubsystem),
+    new ShooterCommand(sub_shooterSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH_THIRD_TURN, true),
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_TOP_PATH)  
+    );
+    /**
+    super(
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_FIRST_TURN, true), 
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH),
+    new IntakeCommand(sub_intakeSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_SECOND_TURN, false), 
+    new FeedInManualCommand(sub_feedSubsystem),
+    new ShooterCommand(sub_shooterSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_THIRD_TURN, false),
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_BOTTOM_PATH)  
+    );
+    super(
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_TOP_PATH_FIRST_TURN, false), 
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_TOP_PATH),
+    new IntakeCommand(sub_intakeSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_TOP_PATH_SECOND_TURN, false), 
+    new FeedInManualCommand(sub_feedSubsystem),
+    new ShooterCommand(sub_shooterSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_PATH_THIRD_TURN, false),
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_MIDDLE_PATH)  
+    );
+    super(
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_FIRST_TURN, true), 
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH),
+    new IntakeCommand(sub_intakeSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_SECOND_TURN, true), 
+    new FeedInManualCommand(sub_feedSubsystem),
+    new ShooterCommand(sub_shooterSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_PATH_THIRD_TURN, false),
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_MIDDLE_PATH)  
+    );
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
+
+
+    /*super(
+    
+     * public class SlalomCommandGroup extends SequentialCommandGroup {
+  
+  /** Creates a new SlalomCommandGroup. 
+  public SlalomCommandGroup(AutoDriveSub m_autoDrive, DrivetrainSub m_drivetrainSub) {
+    super(
+      new AutoDriveCommand(m_autoDrive, m_drivetrainSub, AutoConstants.SLALOM_FIRST_DISTANCE),
+     */
+    //addRequirements(sub_autoDriveSubsystem, sub_feedSubsystem, sub_intakeSubsystem, sub_shooterSubsystem);
+    
+    /*sub_autoDriveSubsystem = autoSub;
     sub_feedSubsystem = feedSub;
     sub_intakeSubsystem = intakeSub;
-    sub_shooterSubsystem = shootSub;
+    sub_shooterSubsystem = shootSub;*/
+    /*addRequirements(sub_autoDriveSubsystem, sub_feedSubsystem, sub_intakeSubsystem, sub_shooterSubsystem);
+    super(
+      new AutoDriveCommand();
 
-    addRequirements(sub_autoDriveSubsystem, sub_feedSubsystem, sub_intakeSubsystem, sub_shooterSubsystem);
 
+
+    );*/
     /* Top Path
     addCommands(
       Turn x degrees,
@@ -93,4 +160,5 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     );
     */
   }
+  
 }

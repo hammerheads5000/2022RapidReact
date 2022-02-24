@@ -8,14 +8,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.AutoDriveSubsystem;
 
-public class AutoDriveCommand extends CommandBase {
+public class AutoTurnCommand extends CommandBase {
   /** Creates a new AutoDriveCommand. */
   private AutoDriveSubsystem sub_autoDriveSubsystem;
-  double distance;
+  double angle;
+  boolean right;
 
-  public AutoDriveCommand(AutoDriveSubsystem subsystem, double distance) {
+  public AutoTurnCommand(AutoDriveSubsystem subsystem, double angle, boolean right) {
     sub_autoDriveSubsystem = subsystem;
-    this.distance = distance;
+    this.angle = angle;
+    this.right = right;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(sub_autoDriveSubsystem);
   }
@@ -27,7 +29,7 @@ public class AutoDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    sub_autoDriveSubsystem.m_drive(distance);
+    sub_autoDriveSubsystem.m_turn(right, angle);
     
   }
 
@@ -41,4 +43,3 @@ public class AutoDriveCommand extends CommandBase {
     return false;
   }
 }
-
