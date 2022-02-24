@@ -29,4 +29,6 @@ public class AutoConstants {
     public static double BOTTOM_PATH_SECOND_TURN = 972.288;//170.91 //972.288
     public static double BOTTOM_PATH_THIRD_TURN = 527.6444444;//92.75 //527.6444444 <---6 4s! Holy shit!
     public static int RPM_IN_AUTO = 6380;
+    public static boolean TURN_RIGHT = true;
+    public static boolean TURN_LEFT = false;
 }
