@@ -32,6 +32,7 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
     new FeedInManualCommand(sub_feedSubsystem),
     new ShooterCommand(sub_shooterSubsystem),
+    new ShooterCommand(sub_shooterSubsystem),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH_THIRD_TURN, AutoConstants.TURN_RIGHT),
     new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_TOP_PATH)  
     );
@@ -43,6 +44,7 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
     new FeedInManualCommand(sub_feedSubsystem),
     new ShooterCommand(sub_shooterSubsystem),
+    new ShooterCommand(sub_shooterSubsystem),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_THIRD_TURN, AutoConstants.TURN_LEFT),
     new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_BOTTOM_PATH)  
     );
@@ -53,6 +55,7 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_TOP_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
     new FeedInManualCommand(sub_feedSubsystem),
     new ShooterCommand(sub_shooterSubsystem),
+    new ShooterCommand(sub_shooterSubsystem),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_PATH_THIRD_TURN, AutoConstants.TURN_LEFT),
     new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_MIDDLE_PATH)  
     );
@@ -62,6 +65,7 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     new IntakeCommand(sub_intakeSubsystem),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_SECOND_TURN, AutoConstants.TURN_RIGHT), 
     new FeedInManualCommand(sub_feedSubsystem),
+    new ShooterCommand(sub_shooterSubsystem),
     new ShooterCommand(sub_shooterSubsystem),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_PATH_THIRD_TURN, AutoConstants.TURN_LEFT),
     new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_MIDDLE_PATH)  
