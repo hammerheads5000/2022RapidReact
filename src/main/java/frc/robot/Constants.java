@@ -51,7 +51,7 @@ public final class Constants {
     public static double LIFT_UP_SPEED = 0.1;
     public static double LIFT_DOWN_SPEED = -0.1;
 
-    public static double INTAKE_LIFT_SPEED = 0.1;
+    public static double INTAKE_LIFT_SPEED = 0.5;
     public static double INTAKE_SPEED = 1.0;
     public static double OUTTAKE_SPEED = -1.0;
 

@@ -25,11 +25,23 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     sub_intakeSubsystem.m_intake();
+    /*
+    if(sub_intakeSubsystem.m_getUpIR() || !sub_intakeSubsystem.m_getDownIR()){
+      sub_intakeSubsystem.m_lower();
+      sub_intakeSubsystem.m_intake();
+    }else{
+      sub_intakeSubsystem.m_turnOffLower();
+    }
+    */
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    /*
+    sub_intakeSubsystem.m_raise();
+    sub_intakeSubsystem.m_turnOffWheel();
+    */
   }
 
   // Returns true when the command should end.

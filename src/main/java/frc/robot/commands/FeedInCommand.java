@@ -27,6 +27,8 @@ public class FeedInCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {   
+   /*
+     commented out because the lack of physical ir sensors could cause safety issues
     firstIRSensor = sub_feedSubsystem.m_getSensor1();
     secondIRSensor = sub_feedSubsystem.m_getSensor2();
 
@@ -38,15 +40,9 @@ public class FeedInCommand extends CommandBase {
       sub_feedSubsystem.m_stopFeed();
     else 
       sub_feedSubsystem.m_stopFeed();
+*/
 
-    /*
-      I could just do
-      else{
-        stopFeed();
-      }
-      but I'm worried someone is gonna think that it's wrong so I'm just leaving it here
-      to show that it isn't wrong I think
-    */
+
 
   }
 
