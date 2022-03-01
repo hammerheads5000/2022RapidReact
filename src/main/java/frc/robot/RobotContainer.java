@@ -24,10 +24,6 @@ public class RobotContainer {
 
   private final DriveTrainSubsystem sub_driveTrainSubsystem = new DriveTrainSubsystem();
   
-  //Lift subsystems
-
-  private final LiftSubsystem sub_liftSubsystem = new LiftSubsystem();
-
   //Feed subsystems
 
   private final FeedSubsystem sub_feedSubsystem = new FeedSubsystem();
@@ -45,11 +41,6 @@ public class RobotContainer {
   /*
   ---------------------------------------------------------Commands------------------------------------------------------------------------
   */
-  
-  //Lift commands
-
-  private final LiftUpCommand cmd_liftUpCommand = new LiftUpCommand(sub_liftSubsystem);
-  private final LiftDownCommand cmd_liftDownCommand = new LiftDownCommand(sub_liftSubsystem);
 
 
   //Feed commands
@@ -101,14 +92,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
-    //Lift buttons!
-    JoystickButton b_liftUpButton = new JoystickButton(buttonsJoystick, Constants.LIFT_UP_BUTTON);
-    b_liftUpButton.whenPressed(cmd_liftUpCommand, Constants.INTERRUPTIBLE);
-
-    JoystickButton b_liftDownButton = new JoystickButton(buttonsJoystick, Constants.LIFT_DOWN_BUTTON);
-    b_liftDownButton.whileHeld(cmd_liftDownCommand, Constants.NOT_INTERRUPTIBLE);
-    
+ 
 
     //Feed buttons!
     JoystickButton b_feedInButton = new JoystickButton(buttonsJoystick, Constants.FEED_IN_BUTTON);
