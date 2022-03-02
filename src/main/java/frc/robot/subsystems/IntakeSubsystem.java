@@ -29,10 +29,9 @@ public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     // Use addRequirements() here to declare subsystem dependencies.
-   /*
-    lowerMotor.setIdleMode(IdleMode.kBrake);
-    wheelMotor.setIdleMode(IdleMode.kBrake);
+   
 
+    /*
     lowerMotor.setInverted(false); //change to constants once verified
     wheelMotor.setInverted(false);
 
@@ -44,7 +43,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void periodic(){
-    wheelMotor.setIdleMode(IdleMode.kBrake);
+    lowerMotor.setIdleMode(IdleMode.kBrake);
+    wheelMotor.setIdleMode(IdleMode.kCoast);
   }
   public void m_lower(){
    

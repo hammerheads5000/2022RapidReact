@@ -37,12 +37,12 @@ public class FeedSubsystem extends SubsystemBase {
   }
 
   public void m_feedInManual(){
-    firstFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
-    secondFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
-  }
-  public void m_feedOut(){
     firstFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
     secondFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
+  }
+  public void m_feedOut(){
+    firstFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
+    secondFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
   }
   public void m_stopFeed(){
     firstFeedMotor.set(TalonSRXControlMode.PercentOutput, 0); //I couldn't figure out how to get it to brake so I just did this

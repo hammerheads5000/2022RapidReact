@@ -40,7 +40,7 @@ public class IntakeCommand extends CommandBase {
   public void end(boolean interrupted) {
     
     //sub_intakeSubsystem.m_raise();
-    sub_intakeSubsystem.m_turnOffWheel();
+   // sub_intakeSubsystem.m_turnOffWheel();
     
   }
 

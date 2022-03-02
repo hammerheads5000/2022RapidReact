@@ -38,8 +38,8 @@ public final class Constants {
     public static int LOWER_INTAKE_MOTOR_PORT = 2;
 
 
-    public static int FIRST_FEED_MOTOR_PORT = 3;
-    public static int SECOND_FEED_MOTOR_PORT = 12;
+    public static int FIRST_FEED_MOTOR_PORT = 12;
+    public static int SECOND_FEED_MOTOR_PORT = 3;
 
     public static int SHOOTER_MOTOR_PORT = 1;
 
@@ -48,8 +48,8 @@ public final class Constants {
 
     //Motor Speeds
     public static double INTAKE_LIFT_SPEED = 0.5;
-    public static double INTAKE_SPEED = 1.0;
-    public static double OUTTAKE_SPEED = -1.0;
+    public static double INTAKE_SPEED = 0.8;
+    public static double OUTTAKE_SPEED = -0.8;
 
     public static double FEED_MOTOR_SPEED = 1.0;
 
