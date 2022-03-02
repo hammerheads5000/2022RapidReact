@@ -29,7 +29,9 @@ public class FeedInManualCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    sub_feedSubsystem.m_stopFeed();
+  }
 
   // Returns true when the command should end.
   @Override

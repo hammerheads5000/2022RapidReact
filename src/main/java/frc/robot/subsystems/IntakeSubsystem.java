@@ -29,6 +29,7 @@ public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     // Use addRequirements() here to declare subsystem dependencies.
+   /*
     lowerMotor.setIdleMode(IdleMode.kBrake);
     wheelMotor.setIdleMode(IdleMode.kBrake);
 
@@ -38,9 +39,13 @@ public class IntakeSubsystem extends SubsystemBase {
 
     lowerMotor.setOpenLoopRampRate(1); //1 is to be tested then made into a constant
     wheelMotor.setOpenLoopRampRate(1);
+    */
     //CANSparkMax might need to be run closed-loop which means PID integration
   }
 
+  public void periodic(){
+    wheelMotor.setIdleMode(IdleMode.kBrake);
+  }
   public void m_lower(){
    
     lowerMotor.set(Constants.INTAKE_LIFT_SPEED);

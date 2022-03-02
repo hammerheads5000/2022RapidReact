@@ -96,12 +96,12 @@ public class RobotContainer {
 
     //Feed buttons!
     JoystickButton b_feedInButton = new JoystickButton(buttonsJoystick, Constants.FEED_IN_BUTTON);
-    b_feedInButton.whenPressed(cmd_feedInManualCommand, Constants.INTERRUPTIBLE);
+    b_feedInButton.whenHeld(cmd_feedInManualCommand, Constants.INTERRUPTIBLE);
 
     JoystickButton b_feedOutButton = new JoystickButton(buttonsJoystick, Constants.FEED_OUT_BUTTON);
-    b_feedOutButton.whenPressed(cmd_feedOutCommand, Constants.NOT_INTERRUPTIBLE);
+    b_feedOutButton.whenHeld(cmd_feedOutCommand, Constants.NOT_INTERRUPTIBLE);
 
-
+//TODO: Move intake and feed buttons in constants file
     //Intake buttons!
     JoystickButton b_intakeButton = new JoystickButton(buttonsJoystick, Constants.INTAKE_BUTTON);
     b_intakeButton.whileHeld(cmd_intakeCommand, Constants.INTERRUPTIBLE);

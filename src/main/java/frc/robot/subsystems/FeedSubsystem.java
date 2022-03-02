@@ -20,8 +20,8 @@ public class FeedSubsystem extends SubsystemBase {
  // private final DigitalInput irSensor1;
   // private final DigitalInput irSensor2;
 
-  TalonSRX firstFeedMotor = new TalonSRX(Constants.FIRST_FEED_MOTOR_PORT);
-  TalonSRX secondFeedMotor = new TalonSRX(Constants.SECOND_FEED_MOTOR_PORT);
+  private static TalonSRX firstFeedMotor = new TalonSRX(Constants.FIRST_FEED_MOTOR_PORT);
+  private static TalonSRX secondFeedMotor = new TalonSRX(Constants.SECOND_FEED_MOTOR_PORT);
 
   public FeedSubsystem() {
    /*
