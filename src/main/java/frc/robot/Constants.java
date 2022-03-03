@@ -34,7 +34,7 @@ public final class Constants {
     public static int RIGHT_FRONT_DRIVE_MOTOR_PORT = 25;
     public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 24;
 
-    public static int WHEEL_INTAKE_MOTOR_PORT = 1;
+    public static int WHEEL_INTAKE_MOTOR_PORT = 15;
     public static int LOWER_INTAKE_MOTOR_PORT = 2;
 
 
@@ -47,7 +47,7 @@ public final class Constants {
     public static double TURN_ADJUST = 0.4;
 
     //Motor Speeds
-    public static double INTAKE_LIFT_SPEED = 0.5;
+    public static double INTAKE_LIFT_SPEED = 0.85;
     public static double INTAKE_SPEED = 0.8;
     public static double OUTTAKE_SPEED = -0.8;
 
@@ -59,19 +59,16 @@ public final class Constants {
     public static boolean INTERRUPTIBLE = true;
 
     //Drive Joystick Buttons
-    public static int LIFT_UP_BUTTON = 7;
-    public static int LIFT_DOWN_BUTTON = 2;
 
-    public static int FEED_IN_BUTTON = 3;
-    public static int FEED_OUT_BUTTON = 4;
+    public static int FEED_IN_BUTTON = 6;
+    public static int FEED_OUT_BUTTON = 7;
 
-    public static int INTAKE_BUTTON = 5;
-    public static int OUTTAKE_BUTTON = 6;
-
-    public static int AIM_BUTTON = 1;
+    public static int INTAKE_BUTTON = 1;
+    public static int OUTTAKE_BUTTON = 5;
     
     //Buttons Joystick Buttons
     public static int SHOOT_BUTTON = 1;
+    public static int AIM_BUTTON = 3;
 
     //PID Constants
     public static double KP_DRIVE_AIM = 0.15;

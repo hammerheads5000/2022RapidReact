@@ -52,6 +52,7 @@ public class RobotContainer {
   //Intake commands
   private final IntakeCommand cmd_intakeCommand = new IntakeCommand(sub_intakeSubsystem);
   private final OuttakeCommand cmd_outtakeCommand = new OuttakeCommand(sub_intakeSubsystem);
+  private final RaiseIntakeCommand cmd_raiseIntakeCommand = new RaiseIntakeCommand(sub_intakeSubsystem);
 
   //Shooter commands
 
@@ -103,17 +104,17 @@ public class RobotContainer {
 
 //TODO: Move intake and feed buttons in constants file
     //Intake buttons!
-    JoystickButton b_intakeButton = new JoystickButton(buttonsJoystick, Constants.INTAKE_BUTTON);
-    b_intakeButton.whileHeld(cmd_intakeCommand, Constants.NOT_INTERRUPTIBLE);
+    JoystickButton b_intakeButton = new JoystickButton(driveJoystick, Constants.INTAKE_BUTTON);
+    b_intakeButton.whileHeld(cmd_intakeCommand, Constants.INTERRUPTIBLE).whenInactive(cmd_raiseIntakeCommand, Constants.INTERRUPTIBLE);
 
-    JoystickButton b_outtakeButton = new JoystickButton(buttonsJoystick, Constants.OUTTAKE_BUTTON);
+    JoystickButton b_outtakeButton = new JoystickButton(driveJoystick, Constants.OUTTAKE_BUTTON);
     b_outtakeButton.whileHeld(cmd_outtakeCommand, Constants.NOT_INTERRUPTIBLE);
 
     //Shooter buttons!
     JoystickButton b_shootButton = new JoystickButton(buttonsJoystick, Constants.SHOOT_BUTTON);
     b_shootButton.whileHeld(cmd_shooterCommand, Constants.NOT_INTERRUPTIBLE);
 
-    JoystickButton b_aimButton = new JoystickButton(driveJoystick, Constants.AIM_BUTTON);
+    JoystickButton b_aimButton = new JoystickButton(buttonsJoystick, Constants.AIM_BUTTON);
     b_aimButton.whileHeld(cmd_aimCommand, Constants.INTERRUPTIBLE);
 
   }

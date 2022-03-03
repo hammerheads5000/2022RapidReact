@@ -29,22 +29,11 @@ public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     // Use addRequirements() here to declare subsystem dependencies.
-   
-
-    /*
-    lowerMotor.setInverted(false); //change to constants once verified
-    wheelMotor.setInverted(false);
-
-
-    lowerMotor.setOpenLoopRampRate(1); //1 is to be tested then made into a constant
-    wheelMotor.setOpenLoopRampRate(1);
-    */
-    //CANSparkMax might need to be run closed-loop which means PID integration
   }
 
   public void periodic(){
     lowerMotor.setIdleMode(IdleMode.kBrake);
-    wheelMotor.setIdleMode(IdleMode.kCoast);
+    wheelMotor.setIdleMode(IdleMode.kCoast); 
   }
   public void m_lower(){
    
@@ -58,8 +47,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void m_intake() {
-    wheelMotor.set(Constants.INTAKE_SPEED);
-    SmartDashboard.putNumber("Intake Wheel Speed", wheelMotor.get());
+   wheelMotor.set(Constants.INTAKE_SPEED);
   }
 
   public void m_outtake() {

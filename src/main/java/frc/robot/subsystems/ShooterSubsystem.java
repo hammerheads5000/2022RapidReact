@@ -25,7 +25,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
 //(x units/100ms) = (rpm * Constants.K_SENSOR_UNITS_PER_ROTATION/600(units/100ms))
 
-double rpm = 6380;
+double rpm = 4500;
 
 
 //limelight isn't currently doing anything

@@ -7,11 +7,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class IntakeCommand extends CommandBase {
-
+public class RaiseIntakeCommand extends CommandBase {
+  /** Creates a new RaiseIntakeCommand. */
   private IntakeSubsystem sub_intakeSubsystem;
-  /** Creates a new IntakeCommand. */
-  public IntakeCommand(IntakeSubsystem subsystem) {
+  public RaiseIntakeCommand(IntakeSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_intakeSubsystem = subsystem;
     addRequirements(sub_intakeSubsystem);
@@ -23,28 +22,23 @@ public class IntakeCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    sub_intakeSubsystem.m_intake();
-  /*
-    if(sub_intakeSubsystem.m_getUpIR()){
-      sub_intakeSubsystem.m_lower();
-      //sub_intakeSubsystem.m_intake();
-    }else{
-      sub_intakeSubsystem.m_turnOffLower();
-    }
-   */
+  public void execute(){
+   // sub_intakeSubsystem.m_raise();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {    
-    //sub_intakeSubsystem.m_turnOffWheel();
-    
+  public void end(boolean interrupted) {
+   // sub_intakeSubsystem.m_turnOffLower();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(sub_intakeSubsystem.m_getUpIR()){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

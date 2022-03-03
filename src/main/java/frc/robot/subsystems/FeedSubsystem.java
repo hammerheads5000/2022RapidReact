@@ -8,6 +8,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
@@ -22,7 +25,7 @@ public class FeedSubsystem extends SubsystemBase {
 
   private static TalonSRX firstFeedMotor = new TalonSRX(Constants.FIRST_FEED_MOTOR_PORT);
   private static TalonSRX secondFeedMotor = new TalonSRX(Constants.SECOND_FEED_MOTOR_PORT);
-
+  
   public FeedSubsystem() {
    /*
      commented out because the lack of physical ir sensors could cause safety issues
@@ -32,8 +35,15 @@ public class FeedSubsystem extends SubsystemBase {
     firstFeedMotor.setNeutralMode(NeutralMode.Coast);
   }
 
+
+
   public void m_feedFirstBallIn(){
-    firstFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
+    firstFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
+  }
+
+  public void m_secondMotor(){
+    secondFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
+
   }
 
   public void m_feedInManual(){
@@ -59,10 +69,5 @@ public class FeedSubsystem extends SubsystemBase {
     return irSensor2.get();
   }
 */
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
   
 }
