@@ -14,6 +14,10 @@ package frc.robot;
  */
 public final class Constants {
   
+    //TODO: Reorganize constants into system specific stuff (ie: drive system, feed system, etc.)
+
+    //timer constants
+    public static double BRAKE_TIME = 0.1;
     //Joystick constants
     public static int DRIVE_JOYSTICK_PORT = 0;
     public static int BUTTONS_JOYSTICK_PORT = 1;
@@ -47,7 +51,10 @@ public final class Constants {
     public static double TURN_ADJUST = 0.4;
 
     //Motor Speeds
-    public static double INTAKE_LIFT_SPEED = 0.85;
+    public static double INTAKE_LIFT_DOWN_SPEED = 0.15;
+    public static double INTAKE_LIFT_UP_SPEED = 1.0;
+    public static double BRAKE_SPEED = 0.10;
+
     public static double INTAKE_SPEED = 0.8;
     public static double OUTTAKE_SPEED = -0.8;
 

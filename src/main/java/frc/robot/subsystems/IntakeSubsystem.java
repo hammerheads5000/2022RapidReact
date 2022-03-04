@@ -37,12 +37,16 @@ public class IntakeSubsystem extends SubsystemBase {
   }
   public void m_lower(){
    
-    lowerMotor.set(Constants.INTAKE_LIFT_SPEED);
+    lowerMotor.set(Constants.INTAKE_LIFT_DOWN_SPEED);
+  }
+
+  public void m_brake(){
+    lowerMotor.set(-Constants.BRAKE_SPEED);
   }
 
   public void m_raise(){
     
-    lowerMotor.set(-Constants.INTAKE_LIFT_SPEED);
+    lowerMotor.set(-Constants.INTAKE_LIFT_UP_SPEED);
       
   }
 
