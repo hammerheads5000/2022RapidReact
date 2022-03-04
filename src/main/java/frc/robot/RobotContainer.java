@@ -84,6 +84,7 @@ public class RobotContainer {
       () -> -driveJoystick.getRawAxis(Constants.Z)));
 
       sub_feedSubsystem.setDefaultCommand(cmd_feedInCommand);
+      sub_intakeSubsystem.setDefaultCommand(cmd_raiseIntakeCommand);
   }
 
   /**
@@ -105,10 +106,10 @@ public class RobotContainer {
 //TODO: Move intake and feed buttons in constants file
     //Intake buttons!
     JoystickButton b_intakeButton = new JoystickButton(driveJoystick, Constants.INTAKE_BUTTON);
-    b_intakeButton.whileHeld(cmd_intakeCommand, Constants.INTERRUPTIBLE).whenInactive(cmd_raiseIntakeCommand, Constants.INTERRUPTIBLE);
+    b_intakeButton.whileHeld(cmd_intakeCommand, Constants.INTERRUPTIBLE);
 
     JoystickButton b_outtakeButton = new JoystickButton(driveJoystick, Constants.OUTTAKE_BUTTON);
-    b_outtakeButton.whileHeld(cmd_outtakeCommand, Constants.NOT_INTERRUPTIBLE);
+    b_outtakeButton.whenHeld(cmd_outtakeCommand, Constants.NOT_INTERRUPTIBLE);
 
     //Shooter buttons!
     JoystickButton b_shootButton = new JoystickButton(buttonsJoystick, Constants.SHOOT_BUTTON);

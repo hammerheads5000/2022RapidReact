@@ -4,8 +4,11 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,19 +24,21 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class IntakeSubsystem extends SubsystemBase {
   
   private static CANSparkMax lowerMotor = new CANSparkMax(Constants.LOWER_INTAKE_MOTOR_PORT, MotorType.kBrushless);
-  private static CANSparkMax wheelMotor = new CANSparkMax(Constants.WHEEL_INTAKE_MOTOR_PORT, MotorType.kBrushless);
-  
+
+  private static TalonFX wheelMotor = new TalonFX(Constants.WHEEL_INTAKE_MOTOR_PORT);
+
   private static DigitalInput upIR = new DigitalInput(Constants.INTAKE_UPPER_IR_PORT);
   private static DigitalInput downIR = new DigitalInput(Constants.INTAKE_LOWER_IR_PORT);  
 
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     // Use addRequirements() here to declare subsystem dependencies.
+    wheelMotor.setNeutralMode(NeutralMode.Coast);
   }
 
   public void periodic(){
     lowerMotor.setIdleMode(IdleMode.kBrake);
-    wheelMotor.setIdleMode(IdleMode.kCoast); 
+
   }
   public void m_lower(){
    
@@ -51,11 +56,11 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void m_intake() {
-   wheelMotor.set(Constants.INTAKE_SPEED);
+   wheelMotor.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED);
   }
 
   public void m_outtake() {
-    wheelMotor.set(-Constants.INTAKE_SPEED);
+    wheelMotor.set(ControlMode.PercentOutput, -Constants.INTAKE_SPEED);
   }
 
   public void m_turnOffLower(){
@@ -63,7 +68,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void m_turnOffWheel(){
-    wheelMotor.set(0);
+    wheelMotor.set(ControlMode.PercentOutput, 0);
   }
 
   public boolean m_getUpIR(){

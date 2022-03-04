@@ -13,10 +13,8 @@ public class IntakeCommand extends CommandBase {
 
   private IntakeSubsystem sub_intakeSubsystem;
   /** Creates a new IntakeCommand. */
-
   private final Timer timer = new Timer();
-  private double tempTimer;
-  
+
   public IntakeCommand(IntakeSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_intakeSubsystem = subsystem;
@@ -26,30 +24,28 @@ public class IntakeCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    //sub_intakeSubsystem.m_intake();
-  
+  public void execute() {    
     if(sub_intakeSubsystem.m_getUpIR()){
       sub_intakeSubsystem.m_lower();
-      timer.start();
-      tempTimer = timer.get();
-    }else if(sub_intakeSubsystem.m_getDownIR() && timer.get() >= tempTimer + Constants.BRAKE_TIME){
-      sub_intakeSubsystem.m_brake();
-    }else{
+    }else if(sub_intakeSubsystem.m_getDownIR() && timer.get() >= Constants.BRAKE_TIME){
       sub_intakeSubsystem.m_turnOffLower();
       //sub_intakeSubsystem.m_intake();
+    }else{
+      sub_intakeSubsystem.m_brake();
     }
+    
    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {    
-    //sub_intakeSubsystem.m_turnOffWheel();
+   // sub_intakeSubsystem.m_turnOffWheel();
     
   }
 
