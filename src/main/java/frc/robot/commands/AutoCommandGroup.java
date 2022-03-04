@@ -27,8 +27,10 @@ public class AutoCommandGroup extends SequentialCommandGroup {
   public AutoCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, FeedSubsystem sub_feedSubsystem, IntakeSubsystem sub_intakeSubsystem, ShooterSubsystem sub_shooterSubsystem) {
     super(
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH_FIRST_TURN, false), 
-    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH),
-    new IntakeCommand(sub_intakeSubsystem),
+    new ParallelDeadlineGroup(
+      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH),
+      new IntakeCommand(sub_intakeSubsystem)
+    ),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH_SECOND_TURN, false), 
     new FeedInManualCommand(sub_feedSubsystem),
     new ShooterCommand(sub_shooterSubsystem),
@@ -38,9 +40,11 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     );
     /**
     super(
-    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_FIRST_TURN, true), 
-    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH),
-    new IntakeCommand(sub_intakeSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_FIRST_TURN, true),
+    new ParallelDeadlineGroup( 
+      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH),
+      new IntakeCommand(sub_intakeSubsystem)
+    ),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_SECOND_TURN, false), 
     new FeedInManualCommand(sub_feedSubsystem),
     new ShooterCommand(sub_shooterSubsystem),
@@ -49,9 +53,11 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_BOTTOM_PATH)  
     );
     super(
-    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_TOP_PATH_FIRST_TURN, false), 
-    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_TOP_PATH),
-    new IntakeCommand(sub_intakeSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_TOP_PATH_FIRST_TURN, false),
+    new ParallelDeadlineGroup( 
+      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_TOP_PATH),
+      new IntakeCommand(sub_intakeSubsystem)
+    ),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_TOP_PATH_SECOND_TURN, false), 
     new FeedInManualCommand(sub_feedSubsystem),
     new ShooterCommand(sub_shooterSubsystem),
@@ -60,9 +66,11 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_MIDDLE_PATH)  
     );
     super(
-    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_FIRST_TURN, true), 
-    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH),
-    new IntakeCommand(sub_intakeSubsystem),
+    new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_FIRST_TURN, true),
+    new ParallelDeadlineGroup(  
+      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH),
+      new IntakeCommand(sub_intakeSubsystem)
+    ),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_SECOND_TURN, true), 
     new FeedInManualCommand(sub_feedSubsystem),
     new ShooterCommand(sub_shooterSubsystem),
