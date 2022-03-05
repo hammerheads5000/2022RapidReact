@@ -84,6 +84,8 @@ public class ShooterSubsystem extends SubsystemBase {
     xDisplacement += 10; //Distance between shooter and limelight
     xDisplacement /= 12.0; //To feet
     xDisplacement += 3; //Adding the radius of the hoop
+    xDisplacement = 15;
+
 
     SmartDashboard.putNumber("DISTANCE", xDisplacement);
     numerator = Constants.GRAVITY * xDisplacement * xDisplacement;

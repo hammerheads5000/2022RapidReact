@@ -27,7 +27,7 @@ public final class Constants {
         public static double SHOOTER_HEIGHT_OFF_GROUND = 17.625; //in
         public static double RELEASE_ANGLE = 70.0; //degrees from horizontal
         public static double THETA = Math.toRadians(RELEASE_ANGLE);
-        public static double SLIPPERINESS = 0.5;
+        public static double SLIPPERINESS = 0.4;
         public static double LIMELIGHT_HEIGHT_OFF_GROUND = 20.125; //in
         public static double GOAL_HEIGHT = 104; //in
         public static double LIMELIGHT_MOUNT_ANGLE = 35.0; // in degrees

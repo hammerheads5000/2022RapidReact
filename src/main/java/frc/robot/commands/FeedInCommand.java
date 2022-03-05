@@ -12,15 +12,13 @@ public class FeedInCommand extends CommandBase {
   /** Creates a new FeedInCommand. */
  
   private FeedSubsystem sub_feedSubsystem;
-  private IntakeSubsystem sub_intakeSubsystem;
   //first IR sensor is close to flywheel
   private boolean intakeSideIRSensor, shooterSideIRSensor;
   
-  public FeedInCommand(FeedSubsystem subsystem, IntakeSubsystem subsystem2) {
+  public FeedInCommand(FeedSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_feedSubsystem = subsystem;
-    sub_intakeSubsystem = subsystem2;
-    addRequirements(sub_feedSubsystem, sub_intakeSubsystem);
+    addRequirements(sub_feedSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -33,18 +31,18 @@ public class FeedInCommand extends CommandBase {
    
     //firstIRSensor = sub_feedSubsystem.m_getSensor1();
     shooterSideIRSensor = sub_feedSubsystem.m_getShooterSideIRSensor();
-
+/*
     
-    if(sub_intakeSubsystem.m_getRunning() && !shooterSideIRSensor){
+    if(!shooterSideIRSensor){
       sub_feedSubsystem.m_intakeSideFeedMotor();
-    }else if(shooterSideIRSensor && sub_intakeSubsystem.m_getRunning()){
+    }else if(shooterSideIRSensor){
       sub_feedSubsystem.m_intakeSideFeedMotor();
       sub_feedSubsystem.m_shooterSideFeedMotor();
 
     }else{
       sub_feedSubsystem.m_stopFeed();
     }
-    
+  */
   }
 
   // Called once the command ends or is interrupted.
