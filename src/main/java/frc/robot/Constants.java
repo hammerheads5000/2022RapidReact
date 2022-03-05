@@ -14,17 +14,35 @@ package frc.robot;
  */
 public final class Constants {
   
+    //TODO: Reorganize constants into system specific stuff (ie: drive system, feed system, etc.)
+
+    //Shooter Constants
+    public static double COMPRESSED_RADIUS = 3.5; //in
+    public static double FLYWHEEL_RADIUS = 2.0; //in
+    public static double CENTER_SHOOTER_Y = 16.4 / 12.0; //ft, a guess which should be verified
+    public static double HOOP_Y = 8.0 + 8.0/12.0; //ft
+    public static double Y_TRAVELED = HOOP_Y - CENTER_SHOOTER_Y;
+
+    public static double RELEASE_ANGLE = 75.0; //degrees from horizontal
+    public static double THETA = Math.toRadians(RELEASE_ANGLE);
+    public static double SLIPPERINESS = 0.5;
+
+
+
+
+    public static double BRAKE_TIME = 0.5;
     //Joystick constants
     public static int DRIVE_JOYSTICK_PORT = 0;
     public static int BUTTONS_JOYSTICK_PORT = 1;
     public static int X = 0;
     public static int Y = 1;
     public static int Z = 2;
-    public static int S = 3;
 
     //IR Sensors
-    public static int IR_SENSOR_1_PORT = 8;
-    public static int IR_SENSOR_2_PORT = 9;
+    public static int IR_SENSOR_1_PORT = 1;
+    public static int IR_SENSOR_2_PORT = 2;
+    public static int INTAKE_UPPER_IR_PORT = 7;
+    public static int INTAKE_LOWER_IR_PORT = 8;
     
     //Motor Ports
     public static int LEFT_FRONT_DRIVE_MOTOR_PORT = 26;
@@ -32,15 +50,12 @@ public final class Constants {
     public static int RIGHT_FRONT_DRIVE_MOTOR_PORT = 25;
     public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 24;
 
-    public static int LIFT_MOTOR_PORT = 4;
+    public static int WHEEL_INTAKE_MOTOR_PORT = 0;
+    public static int LOWER_INTAKE_MOTOR_PORT = 2;
 
-    public static int WHEEL_INTAKE_MOTOR_PORT = 5;
-    public static int LOWER_INTAKE_MOTOR_PORT = 6;
-    public static int INTAKE_UPPER_IR_PORT = 7;
-    public static int INTAKE_LOWER_IR_PORT = 8;
 
-    public static int FIRST_FEED_MOTOR_PORT = 9;
-    public static int SECOND_FEED_MOTOR_PORT = 10;
+    public static int FIRST_FEED_MOTOR_PORT = 12;
+    public static int SECOND_FEED_MOTOR_PORT = 3;
 
     public static int SHOOTER_MOTOR_PORT = 1;
 
@@ -48,12 +63,12 @@ public final class Constants {
     public static double TURN_ADJUST = 0.4;
 
     //Motor Speeds
-    public static double LIFT_UP_SPEED = 0.1;
-    public static double LIFT_DOWN_SPEED = -0.1;
+    public static double INTAKE_LIFT_DOWN_SPEED = 0.13;
+    public static double INTAKE_LIFT_UP_SPEED = 0.7;
+    public static double BRAKE_SPEED = 0.5;
 
-    public static double INTAKE_LIFT_SPEED = 0.1;
-    public static double INTAKE_SPEED = 1.0;
-    public static double OUTTAKE_SPEED = -1.0;
+    public static double INTAKE_SPEED = 0.8;
+    public static double OUTTAKE_SPEED = -0.8;
 
     public static double FEED_MOTOR_SPEED = 1.0;
 
@@ -63,19 +78,16 @@ public final class Constants {
     public static boolean INTERRUPTIBLE = true;
 
     //Drive Joystick Buttons
-    public static int LIFT_UP_BUTTON = 7;
-    public static int LIFT_DOWN_BUTTON = 2;
 
-    public static int FEED_IN_BUTTON = 3;
-    public static int FEED_OUT_BUTTON = 4;
+    public static int FEED_IN_BUTTON = 6;
+    public static int FEED_OUT_BUTTON = 7;
 
-    public static int INTAKE_BUTTON = 5;
-    public static int OUTTAKE_BUTTON = 6;
-
-    public static int AIM_BUTTON = 1;
+    public static int INTAKE_BUTTON = 1;
+    public static int OUTTAKE_BUTTON = 5;
     
     //Buttons Joystick Buttons
     public static int SHOOT_BUTTON = 1;
+    public static int AIM_BUTTON = 3;
 
     //PID Constants
     public static double KP_DRIVE_AIM = 0.15;
@@ -102,7 +114,4 @@ public final class Constants {
     public static double kV = 0.09327;
     public static double kA = 0.004018;
 
-    //Lift Constants
-    public static double LIFT_DISTANCE = 1000.0; //I don't know the actual distance it'll need to go up so I'm guessing it'll be a meter for now
-    public static double MOTOR_SHAFT_DIAMETER = 6.0;
 }

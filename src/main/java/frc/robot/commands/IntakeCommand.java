@@ -4,13 +4,17 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeCommand extends CommandBase {
 
   private IntakeSubsystem sub_intakeSubsystem;
   /** Creates a new IntakeCommand. */
+  private final Timer timer = new Timer();
+
   public IntakeCommand(IntakeSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_intakeSubsystem = subsystem;
@@ -19,19 +23,31 @@ public class IntakeCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    sub_intakeSubsystem.m_lower();
-    sub_intakeSubsystem.m_intake();
+  public void execute() {    
+
+    if(sub_intakeSubsystem.m_getUpIR()){
+      sub_intakeSubsystem.m_lower();
+    }else if(sub_intakeSubsystem.m_getDownIR() && timer.get() >= Constants.BRAKE_TIME){
+      sub_intakeSubsystem.m_turnOffLower();
+      sub_intakeSubsystem.m_intake();
+    }else{
+      sub_intakeSubsystem.m_brake();
+    }
+    
+   
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    sub_intakeSubsystem.m_raise();
+  public void end(boolean interrupted) {    
+    sub_intakeSubsystem.m_turnOffWheel();
+    
   }
 
   // Returns true when the command should end.
