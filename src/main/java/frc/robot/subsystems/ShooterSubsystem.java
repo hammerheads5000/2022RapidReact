@@ -21,15 +21,31 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
  private static TalonFX shooterMotor = new TalonFX(Constants.SHOOTER_MOTOR_PORT);
-
+ 
+ //Calculation stuff
+ private double numerator;
+ private double denominator;
+ private double frac;
+ private double circball;
+ private double circwheel;
+ private double Vi;
+ private final double GRAVITY = -32;
+ private double xDisplacement = 0;
+ private final double GOAL_HEIGHT = 104; //in
+ private final double LIMELIGHT_MOUNT_ANGLE = 0.0; //temp, in degrees
+ private double angleToGoal;
+ private final double LIMELIGHT_HEIGHT_OFF_GROUND = 30; //in
+ private double rpsball;
+ private double rps_ratio;
+ private double rpsflywheel;
+ private static double rpm = 0;
 
 //(x units/100ms) = (rpm * Constants.K_SENSOR_UNITS_PER_ROTATION/600(units/100ms))
-
-double rpm = 4500;
 
 
 //limelight isn't currently doing anything
  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+ NetworkTableEntry tx = table.getEntry("tx");
  NetworkTableEntry ty = table.getEntry("ty");
 
   /** Creates a new ShooterSubsystem. */
@@ -63,18 +79,39 @@ double rpm = 4500;
   public void m_TurnOffLimelight(){
     table.getEntry("ledMode").setNumber(1);  
   }
-  public void m_shoot()
-  {
-    double y = ty.getDouble(0.0);
-    double heading_error = -y;
 
-    //rpm = some funky equation
+  public void m_calculateRPM(){
+    angleToGoal = ty.getDouble(0);//the 0 is a constants
     
+    xDisplacement = (GOAL_HEIGHT - LIMELIGHT_HEIGHT_OFF_GROUND) / Math.tan(Math.toRadians(angleToGoal) + Math.toRadians(LIMELIGHT_MOUNT_ANGLE));
+  
+  
+    numerator = GRAVITY * xDisplacement * xDisplacement;
+    denominator = 2 * (LIMELIGHT_HEIGHT_OFF_GROUND - (xDisplacement * Math.tan(Constants.THETA))) * Math.pow(Math.cos(Constants.THETA), 2);
+    frac = numerator / denominator;
+    Vi = Math.sqrt(frac);
+
+    circball = (2 * Math.PI * Constants.COMPRESSED_RADIUS) / 12.0; //ft
+    circwheel = (2 * Math.PI * Constants.FLYWHEEL_RADIUS) /12.0; //ft
+
+    rpsball = Vi / circball; //rotations per second
+
+    rps_ratio = (circball / circwheel); //ratio of ball rpm to wheel rpm
+
+    rpsflywheel = rpsball * rps_ratio / Constants.SLIPPERINESS; //rotations per second
+
+    rpm = 60 * rpsflywheel;
+    
+
+  }
+
+
+  public void m_shoot()
+  {    
     SmartDashboard.putNumber("rpm", rpm);
 
     double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * rpm;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
-    //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
 
     shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
 

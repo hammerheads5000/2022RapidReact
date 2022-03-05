@@ -56,11 +56,11 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void m_intake() {
-   wheelMotor.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED);
+   wheelMotor.set(TalonFXControlMode.PercentOutput, Constants.INTAKE_SPEED);
   }
 
   public void m_outtake() {
-    wheelMotor.set(ControlMode.PercentOutput, -Constants.INTAKE_SPEED);
+    wheelMotor.set(TalonFXControlMode.PercentOutput, -Constants.INTAKE_SPEED);
   }
 
   public void m_turnOffLower(){
@@ -68,7 +68,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void m_turnOffWheel(){
-    wheelMotor.set(ControlMode.PercentOutput, 0);
+    wheelMotor.set(TalonFXControlMode.PercentOutput, 0);
   }
 
   public boolean m_getUpIR(){

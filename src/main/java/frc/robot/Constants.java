@@ -15,6 +15,21 @@ package frc.robot;
 public final class Constants {
   
     //TODO: Reorganize constants into system specific stuff (ie: drive system, feed system, etc.)
+
+    //Shooter Constants
+    public static double COMPRESSED_RADIUS = 3.5; //in
+    public static double FLYWHEEL_RADIUS = 2.0; //in
+    public static double CENTER_SHOOTER_Y = 16.4 / 12.0; //ft, a guess which should be verified
+    public static double HOOP_Y = 8.0 + 8.0/12.0; //ft
+    public static double Y_TRAVELED = HOOP_Y - CENTER_SHOOTER_Y;
+
+    public static double RELEASE_ANGLE = 75.0; //degrees from horizontal
+    public static double THETA = Math.toRadians(RELEASE_ANGLE);
+    public static double SLIPPERINESS = 0.5;
+
+
+
+
     public static double BRAKE_TIME = 0.5;
     //Joystick constants
     public static int DRIVE_JOYSTICK_PORT = 0;
@@ -35,7 +50,7 @@ public final class Constants {
     public static int RIGHT_FRONT_DRIVE_MOTOR_PORT = 25;
     public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 24;
 
-    public static int WHEEL_INTAKE_MOTOR_PORT = 22;
+    public static int WHEEL_INTAKE_MOTOR_PORT = 0;
     public static int LOWER_INTAKE_MOTOR_PORT = 2;
 
 
@@ -49,8 +64,8 @@ public final class Constants {
 
     //Motor Speeds
     public static double INTAKE_LIFT_DOWN_SPEED = 0.13;
-    public static double INTAKE_LIFT_UP_SPEED = 1.0;
-    public static double BRAKE_SPEED = 1.0;
+    public static double INTAKE_LIFT_UP_SPEED = 0.7;
+    public static double BRAKE_SPEED = 0.5;
 
     public static double INTAKE_SPEED = 0.8;
     public static double OUTTAKE_SPEED = -0.8;

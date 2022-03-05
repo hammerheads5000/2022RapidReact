@@ -30,11 +30,12 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {    
+
     if(sub_intakeSubsystem.m_getUpIR()){
       sub_intakeSubsystem.m_lower();
     }else if(sub_intakeSubsystem.m_getDownIR() && timer.get() >= Constants.BRAKE_TIME){
       sub_intakeSubsystem.m_turnOffLower();
-      //sub_intakeSubsystem.m_intake();
+      sub_intakeSubsystem.m_intake();
     }else{
       sub_intakeSubsystem.m_brake();
     }
@@ -45,7 +46,7 @@ public class IntakeCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {    
-   // sub_intakeSubsystem.m_turnOffWheel();
+    sub_intakeSubsystem.m_turnOffWheel();
     
   }
 

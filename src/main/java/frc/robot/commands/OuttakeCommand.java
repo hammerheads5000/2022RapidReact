@@ -23,7 +23,7 @@ public class OuttakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   // sub_intakeSubsystem.m_outtake();
+    sub_intakeSubsystem.m_outtake();
   }
 
   // Called once the command ends or is interrupted.
