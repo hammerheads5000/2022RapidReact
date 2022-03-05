@@ -30,6 +30,7 @@ public class IntakeSubsystem extends SubsystemBase {
   private static DigitalInput upIR = new DigitalInput(Constants.INTAKE_UPPER_IR_PORT);
   private static DigitalInput downIR = new DigitalInput(Constants.INTAKE_LOWER_IR_PORT);  
 
+  private static boolean running = false;
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -57,10 +58,12 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void m_intake() {
    wheelMotor.set(TalonFXControlMode.PercentOutput, Constants.INTAKE_SPEED);
+   running = true;
   }
 
   public void m_outtake() {
     wheelMotor.set(TalonFXControlMode.PercentOutput, -Constants.INTAKE_SPEED);
+    running = true;
   }
 
   public void m_turnOffLower(){
@@ -69,8 +72,12 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void m_turnOffWheel(){
     wheelMotor.set(TalonFXControlMode.PercentOutput, 0);
+    running = false;
   }
 
+  public boolean m_getRunning(){
+    return running;
+  }
   public boolean m_getUpIR(){
     return upIR.get();
   }

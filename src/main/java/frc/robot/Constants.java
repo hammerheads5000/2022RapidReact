@@ -22,11 +22,14 @@ public final class Constants {
     public static double CENTER_SHOOTER_Y = 16.4 / 12.0; //ft, a guess which should be verified
     public static double HOOP_Y = 8.0 + 8.0/12.0; //ft
     public static double Y_TRAVELED = HOOP_Y - CENTER_SHOOTER_Y;
-
-    public static double RELEASE_ANGLE = 75.0; //degrees from horizontal
+    public static double SHOOTER_HEIGHT_OFF_GROUND = 17.625; //in
+    public static double RELEASE_ANGLE = 70.0; //degrees from horizontal
     public static double THETA = Math.toRadians(RELEASE_ANGLE);
     public static double SLIPPERINESS = 0.5;
-
+    public static double LIMELIGHT_HEIGHT_OFF_GROUND = 20.125; //in
+    public static double GOAL_HEIGHT = 104; //in
+    public static double LIMELIGHT_MOUNT_ANGLE = 35.0; // in degrees
+    public static double GRAVITY = -32.174;
 
 
 
@@ -39,7 +42,7 @@ public final class Constants {
     public static int Z = 2;
 
     //IR Sensors
-    public static int IR_SENSOR_1_PORT = 1;
+    public static int IR_SENSOR_1_PORT = 0;
     public static int IR_SENSOR_2_PORT = 2;
     public static int INTAKE_UPPER_IR_PORT = 7;
     public static int INTAKE_LOWER_IR_PORT = 8;
@@ -67,8 +70,8 @@ public final class Constants {
     public static double INTAKE_LIFT_UP_SPEED = 0.7;
     public static double BRAKE_SPEED = 0.5;
 
-    public static double INTAKE_SPEED = 0.8;
-    public static double OUTTAKE_SPEED = -0.8;
+    public static double INTAKE_SPEED = 0.6;
+    public static double OUTTAKE_SPEED = -0.7;
 
     public static double FEED_MOTOR_SPEED = 1.0;
 

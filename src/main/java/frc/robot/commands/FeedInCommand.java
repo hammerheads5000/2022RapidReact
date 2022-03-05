@@ -6,18 +6,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FeedSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 public class FeedInCommand extends CommandBase {
   /** Creates a new FeedInCommand. */
  
   private FeedSubsystem sub_feedSubsystem;
+  private IntakeSubsystem sub_intakeSubsystem;
   //first IR sensor is close to flywheel
-  private boolean firstIRSensor, secondIRSensor;
+  private boolean intakeSideIRSensor, shooterSideIRSensor;
   
-  public FeedInCommand(FeedSubsystem subsystem) {
+  public FeedInCommand(FeedSubsystem subsystem, IntakeSubsystem subsystem2) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_feedSubsystem = subsystem;
-    addRequirements(sub_feedSubsystem);
+    sub_intakeSubsystem = subsystem2;
+    addRequirements(sub_feedSubsystem, sub_intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -27,23 +30,21 @@ public class FeedInCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {   
-   /*
-     commented out because the lack of physical ir sensors could cause safety issues
-    firstIRSensor = sub_feedSubsystem.m_getSensor1();
-    secondIRSensor = sub_feedSubsystem.m_getSensor2();
+   
+    //firstIRSensor = sub_feedSubsystem.m_getSensor1();
+    shooterSideIRSensor = sub_feedSubsystem.m_getShooterSideIRSensor();
 
-    if (firstIRSensor && !secondIRSensor)
-      sub_feedSubsystem.m_feedFirstBallIn();
-    else if (!firstIRSensor && secondIRSensor)
+    
+    if(sub_intakeSubsystem.m_getRunning() && shooterSideIRSensor){
+      sub_feedSubsystem.m_intakeSideFeedMotor();
+    }else if(!shooterSideIRSensor && sub_intakeSubsystem.m_getRunning()){
+      sub_feedSubsystem.m_intakeSideFeedMotor();
+      sub_feedSubsystem.m_shooterSideFeedMotor();
+
+    }else{
       sub_feedSubsystem.m_stopFeed();
-    else if (firstIRSensor && secondIRSensor)
-      sub_feedSubsystem.m_stopFeed();
-    else 
-      sub_feedSubsystem.m_stopFeed();
-*/
-
-
-
+    }
+    
   }
 
   // Called once the command ends or is interrupted.

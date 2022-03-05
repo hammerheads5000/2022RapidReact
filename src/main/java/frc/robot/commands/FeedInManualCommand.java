@@ -24,7 +24,7 @@ public class FeedInManualCommand extends CommandBase {
   @Override
   public void execute() {
     
-    sub_feedSubsystem.m_feedFirstBallIn();
+    sub_feedSubsystem.m_shooterSideFeedMotor();
   }
 
   // Called once the command ends or is interrupted.

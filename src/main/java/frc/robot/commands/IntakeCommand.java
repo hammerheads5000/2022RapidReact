@@ -7,18 +7,21 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.FeedSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeCommand extends CommandBase {
 
   private IntakeSubsystem sub_intakeSubsystem;
+  private FeedSubsystem sub_feedSubsystem;
   /** Creates a new IntakeCommand. */
   private final Timer timer = new Timer();
 
-  public IntakeCommand(IntakeSubsystem subsystem) {
+  public IntakeCommand(IntakeSubsystem subsystem, FeedSubsystem subsystem2) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_intakeSubsystem = subsystem;
-    addRequirements(sub_intakeSubsystem);
+    sub_feedSubsystem = subsystem2;
+    addRequirements(sub_intakeSubsystem, sub_feedSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -39,8 +42,9 @@ public class IntakeCommand extends CommandBase {
     }else{
       sub_intakeSubsystem.m_brake();
     }
+
+
     
-   
   }
 
   // Called once the command ends or is interrupted.

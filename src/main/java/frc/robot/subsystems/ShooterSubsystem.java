@@ -29,12 +29,8 @@ public class ShooterSubsystem extends SubsystemBase {
  private double circball;
  private double circwheel;
  private double Vi;
- private final double GRAVITY = -32;
  private double xDisplacement = 0;
- private final double GOAL_HEIGHT = 104; //in
- private final double LIMELIGHT_MOUNT_ANGLE = 0.0; //temp, in degrees
  private double angleToGoal;
- private final double LIMELIGHT_HEIGHT_OFF_GROUND = 30; //in
  private double rpsball;
  private double rps_ratio;
  private double rpsflywheel;
@@ -83,16 +79,22 @@ public class ShooterSubsystem extends SubsystemBase {
   public void m_calculateRPM(){
     angleToGoal = ty.getDouble(0);//the 0 is a constants
     
-    xDisplacement = (GOAL_HEIGHT - LIMELIGHT_HEIGHT_OFF_GROUND) / Math.tan(Math.toRadians(angleToGoal) + Math.toRadians(LIMELIGHT_MOUNT_ANGLE));
-  
-  
-    numerator = GRAVITY * xDisplacement * xDisplacement;
-    denominator = 2 * (LIMELIGHT_HEIGHT_OFF_GROUND - (xDisplacement * Math.tan(Constants.THETA))) * Math.pow(Math.cos(Constants.THETA), 2);
+    xDisplacement = (Constants.GOAL_HEIGHT - Constants.LIMELIGHT_HEIGHT_OFF_GROUND) / 
+        Math.tan(Math.toRadians(angleToGoal) + Math.toRadians(Constants.LIMELIGHT_MOUNT_ANGLE));
+    xDisplacement += 10; //Distance between shooter and limelight
+    xDisplacement /= 12.0; //To feet
+    xDisplacement += 3; //Adding the radius of the hoop
+
+    
+    numerator = Constants.GRAVITY * xDisplacement * xDisplacement;
+    denominator = 2.0 * (((Constants.GOAL_HEIGHT / 12.0) - (Constants.SHOOTER_HEIGHT_OFF_GROUND / 12.0)) - (xDisplacement * Math.tan(Constants.THETA))) 
+        * Math.pow(Math.cos(Constants.THETA), 2);
+    
     frac = numerator / denominator;
     Vi = Math.sqrt(frac);
 
-    circball = (2 * Math.PI * Constants.COMPRESSED_RADIUS) / 12.0; //ft
-    circwheel = (2 * Math.PI * Constants.FLYWHEEL_RADIUS) /12.0; //ft
+    circball = (2.0 * Math.PI * Constants.COMPRESSED_RADIUS) / 12.0; //ft
+    circwheel = (2.0 * Math.PI * Constants.FLYWHEEL_RADIUS) / 12.0; //ft
 
     rpsball = Vi / circball; //rotations per second
 
@@ -129,6 +131,8 @@ public class ShooterSubsystem extends SubsystemBase {
    SmartDashboard.putString("Motor State", motorState);
 
   }
+
+
   public void m_stopSpinning()
   {
     shooterMotor.set(TalonFXControlMode.PercentOutput, 0.0);
