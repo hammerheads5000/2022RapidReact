@@ -35,9 +35,9 @@ public class FeedInCommand extends CommandBase {
     shooterSideIRSensor = sub_feedSubsystem.m_getShooterSideIRSensor();
 
     
-    if(sub_intakeSubsystem.m_getRunning() && shooterSideIRSensor){
+    if(sub_intakeSubsystem.m_getRunning() && !shooterSideIRSensor){
       sub_feedSubsystem.m_intakeSideFeedMotor();
-    }else if(!shooterSideIRSensor && sub_intakeSubsystem.m_getRunning()){
+    }else if(shooterSideIRSensor && sub_intakeSubsystem.m_getRunning()){
       sub_feedSubsystem.m_intakeSideFeedMotor();
       sub_feedSubsystem.m_shooterSideFeedMotor();
 

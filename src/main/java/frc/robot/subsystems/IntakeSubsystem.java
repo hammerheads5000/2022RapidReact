@@ -35,11 +35,13 @@ public class IntakeSubsystem extends SubsystemBase {
   public IntakeSubsystem() {
     // Use addRequirements() here to declare subsystem dependencies.
     wheelMotor.setNeutralMode(NeutralMode.Coast);
+    lowerMotor.setIdleMode(IdleMode.kBrake);
   }
 
   public void periodic(){
-    lowerMotor.setIdleMode(IdleMode.kBrake);
-
+    SmartDashboard.putBoolean("Down IR", m_getDownIR());
+    SmartDashboard.putBoolean("Up IR", m_getUpIR());
+    SmartDashboard.putBoolean("Running", m_getRunning());
   }
   public void m_lower(){
    
@@ -53,7 +55,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public void m_raise(){
     
     lowerMotor.set(-Constants.INTAKE_LIFT_UP_SPEED);
-      
+      running = false;
   }
 
   public void m_intake() {

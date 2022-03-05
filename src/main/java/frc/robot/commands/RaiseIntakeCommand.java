@@ -24,7 +24,7 @@ public class RaiseIntakeCommand extends CommandBase {
   @Override
   public void execute(){
    
-    if(!sub_intakeSubsystem.m_getUpIR()){
+    if(sub_intakeSubsystem.m_getUpIR()){
       sub_intakeSubsystem.m_raise();
     }else{
       sub_intakeSubsystem.m_turnOffLower();

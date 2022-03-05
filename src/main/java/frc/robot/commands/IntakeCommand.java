@@ -34,9 +34,9 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {    
 
-    if(sub_intakeSubsystem.m_getUpIR()){
+    if(!sub_intakeSubsystem.m_getUpIR()){
       sub_intakeSubsystem.m_lower();
-    }else if(sub_intakeSubsystem.m_getDownIR() && timer.get() >= Constants.BRAKE_TIME){
+    }else if(!sub_intakeSubsystem.m_getDownIR() && timer.get() >= Constants.BRAKE_TIME){
       sub_intakeSubsystem.m_turnOffLower();
       sub_intakeSubsystem.m_intake();
     }else{

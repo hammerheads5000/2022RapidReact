@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -23,8 +24,8 @@ public class FeedSubsystem extends SubsystemBase {
   private final DigitalInput shooterSideIRSensor;
    //private final DigitalInput irSensor2;
 
-  private static TalonSRX shooterSideFeedMotor = new TalonSRX(Constants.FIRST_FEED_MOTOR_PORT);
-  private static TalonSRX intakeSideFeedMotor = new TalonSRX(Constants.SECOND_FEED_MOTOR_PORT);
+  private static TalonSRX shooterSideFeedMotor = new TalonSRX(Constants.SHOOTER_SIDE_FEED_MOTOR_PORT);
+  private static TalonSRX intakeSideFeedMotor = new TalonSRX(Constants.INTAKE_SIDE_FEED_MOTOR_PORT);
   
   public FeedSubsystem() {
    
@@ -35,7 +36,9 @@ public class FeedSubsystem extends SubsystemBase {
     intakeSideFeedMotor.setNeutralMode(NeutralMode.Coast);
 
   }
-
+  public void periodic(){
+    SmartDashboard.putBoolean("Shooter Side IR", m_getShooterSideIRSensor());
+  }
 
 
   public void m_shooterSideFeedMotor(){
