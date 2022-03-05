@@ -78,13 +78,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void m_calculateRPM(){
     angleToGoal = ty.getDouble(0);//the 0 is a constant
-    
+    SmartDashboard.putNumber("Angle To Goal", angleToGoal);
     xDisplacement = (Constants.GOAL_HEIGHT - Constants.LIMELIGHT_HEIGHT_OFF_GROUND) / 
         Math.tan(Math.toRadians(angleToGoal) + Math.toRadians(Constants.LIMELIGHT_MOUNT_ANGLE));
     xDisplacement += 10; //Distance between shooter and limelight
     xDisplacement /= 12.0; //To feet
     xDisplacement += 3; //Adding the radius of the hoop
-    xDisplacement = 15;
 
 
     SmartDashboard.putNumber("DISTANCE", xDisplacement);

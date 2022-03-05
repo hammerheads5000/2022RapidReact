@@ -45,12 +45,12 @@ public class RobotContainer {
 
   //Feed commands
   
-  private final FeedInCommand cmd_feedInCommand = new FeedInCommand(sub_feedSubsystem);
+ // private final FeedInCommand cmd_feedInCommand = new FeedInCommand(sub_feedSubsystem);
   private final FeedInManualCommand cmd_feedInManualCommand = new FeedInManualCommand(sub_feedSubsystem);
   private final FeedOutCommand cmd_feedOutCommand = new FeedOutCommand(sub_feedSubsystem);
 
   //Intake commands
-  private final IntakeCommand cmd_intakeCommand = new IntakeCommand(sub_intakeSubsystem);
+  private final IntakeCommand cmd_intakeCommand = new IntakeCommand(sub_intakeSubsystem, sub_feedSubsystem);
   private final OuttakeCommand cmd_outtakeCommand = new OuttakeCommand(sub_intakeSubsystem);
   private final RaiseIntakeCommand cmd_raiseIntakeCommand = new RaiseIntakeCommand(sub_intakeSubsystem);
 
@@ -83,7 +83,7 @@ public class RobotContainer {
       () -> -driveJoystick.getRawAxis(Constants.Y), 
       () -> -driveJoystick.getRawAxis(Constants.Z)));
 
-      sub_feedSubsystem.setDefaultCommand(cmd_feedInCommand);
+     // sub_feedSubsystem.setDefaultCommand(cmd_feedInCommand);
   }
 
   /**

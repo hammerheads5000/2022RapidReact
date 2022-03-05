@@ -14,12 +14,15 @@ public class IntakeCommand extends CommandBase {
 
   private IntakeSubsystem sub_intakeSubsystem;
   private FeedSubsystem sub_feedSubsystem;
+
+  private boolean shooterSideIRSensor;
   /** Creates a new IntakeCommand. */
 
-  public IntakeCommand(IntakeSubsystem subsystem) {
+  public IntakeCommand(IntakeSubsystem subsystem, FeedSubsystem subsystem2) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_intakeSubsystem = subsystem;
-    addRequirements(sub_intakeSubsystem);
+    sub_feedSubsystem = subsystem2;
+    addRequirements(sub_intakeSubsystem, sub_feedSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -29,6 +32,19 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {    
+
+    shooterSideIRSensor = sub_feedSubsystem.m_getShooterSideIRSensor();
+
+
+    if(!shooterSideIRSensor){
+      sub_feedSubsystem.m_intakeSideFeedMotor();
+    }else if(shooterSideIRSensor){
+      sub_feedSubsystem.m_intakeSideFeedMotor();
+      sub_feedSubsystem.m_shooterSideFeedMotor();
+
+    }else{
+      sub_feedSubsystem.m_stopFeed();
+    }
 
     if(!sub_intakeSubsystem.m_getUpIR()){
       sub_intakeSubsystem.m_lower();
@@ -47,6 +63,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {    
     sub_intakeSubsystem.m_turnOffWheel();
+    sub_feedSubsystem.m_stopFeed();
     
   }
 
