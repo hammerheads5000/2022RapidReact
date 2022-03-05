@@ -68,7 +68,7 @@ double rpm = 6380;//dont know we'll find that later
     
     rightFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
     rightFrontDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
-    rightFrontDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);//sensor might not be needed, also probably has to be changed anyway
+    rightFrontDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
     rightFrontDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
 		rightFrontDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
 		rightFrontDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
@@ -138,7 +138,7 @@ double rpm = 6380;//dont know we'll find that later
    }else if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) == 0){
      motorState = "stopped";
    }else{
-     motorState = "reverse";
+     motorState = "reverse"; 
    }
 
    SmartDashboard.putString("Motor State", motorState);
@@ -154,15 +154,21 @@ double rpm = 6380;//dont know we'll find that later
 
   public void m_zeroEncoder(){
     leftFrontDriveMotor.setSelectedSensorPosition(0);
-    rightFrontDriveMotor.setSelectedSensorPosition(0);//probably not needed
+    rightFrontDriveMotor.setSelectedSensorPosition(0);
   }
 
-  public double m_getPosition(){
-    return leftFrontDriveMotor.getSelectedSensorPosition();//just left, idk
+  public static double m_getLeftPosition(){
+    return leftFrontDriveMotor.getSelectedSensorPosition();
+  }
+
+  public static double m_getRightPosition(){
+    return rightFrontDriveMotor.getSelectedSensorPosition();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    /*leftFrontDriveMotor.setSelectedSensorPosition(leftFrontDriveMotor.getSelectedSensorPosition());
+    rightFrontDriveMotor.setSelectedSensorPosition(rightFrontDriveMotor.getSelectedSensorPosition());*/
   }
 }
