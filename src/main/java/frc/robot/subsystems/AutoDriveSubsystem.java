@@ -78,6 +78,32 @@ double rpm = 6380;//dont know we'll find that later
     rightFrontDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
 		rightFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
     rightFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
+  
+    leftBackDriveMotor.setNeutralMode(NeutralMode.Coast);
+    leftBackDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
+    leftBackDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
+		leftBackDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
+		leftBackDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+	  leftBackDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		leftBackDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.AUTO_ERROR, AutoConstants.AUTO_TIMEOUT_MS);
+		leftBackDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
+    leftBackDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		leftBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
+  
+    rightBackDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rightBackDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
+    rightBackDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.AUTO_ERROR, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
+    rightBackDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
   }
   public void m_drive(double distance)
   {
@@ -94,10 +120,12 @@ double rpm = 6380;//dont know we'll find that later
 
     leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
-   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));//going off of the left one right now but idk
+    leftBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    rightBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+   /*SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));//going off of the left one right now but idk
    
    String motorState;
-   if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) > 0){//once again going just off the left but idk
+   if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) > 0){
      motorState = "forward";
    }else if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) == 0){
      motorState = "stopped";
@@ -105,7 +133,7 @@ double rpm = 6380;//dont know we'll find that later
      motorState = "reverse";
    }
 
-   SmartDashboard.putString("Motor State", motorState);
+   SmartDashboard.putString("Motor State", motorState);*/
 
   }
   
@@ -124,13 +152,17 @@ double rpm = 6380;//dont know we'll find that later
     if (right){
     leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     rightFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
+    leftBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    rightBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
     }
     else{
     leftFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
     rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    leftBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
+    rightBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     }
 
-   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));
+   /*SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));
    
    String motorState;
    if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) > 0){
@@ -141,7 +173,7 @@ double rpm = 6380;//dont know we'll find that later
      motorState = "reverse"; 
    }
 
-   SmartDashboard.putString("Motor State", motorState);
+   SmartDashboard.putString("Motor State", motorState);*/
 
   }
   
@@ -150,19 +182,31 @@ double rpm = 6380;//dont know we'll find that later
   {
     leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, 0.0);
     rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, 0.0);
+    leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, 0.0);
+    rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, 0.0);
   }
 
   public void m_zeroEncoder(){
     leftFrontDriveMotor.setSelectedSensorPosition(0);
     rightFrontDriveMotor.setSelectedSensorPosition(0);
+    leftBackDriveMotor.setSelectedSensorPosition(0);
+    rightBackDriveMotor.setSelectedSensorPosition(0);
   }
 
-  public static double m_getLeftPosition(){
+  public static double m_getFrontLeftPosition(){
     return leftFrontDriveMotor.getSelectedSensorPosition();
   }
 
-  public static double m_getRightPosition(){
+  public static double m_getFrontRightPosition(){
     return rightFrontDriveMotor.getSelectedSensorPosition();
+  }
+
+  public static double m_getBackLeftPosition(){
+    return leftBackDriveMotor.getSelectedSensorPosition();
+  }
+
+  public static double m_getBackRightPosition(){
+    return rightBackDriveMotor.getSelectedSensorPosition();
   }
 
   @Override
