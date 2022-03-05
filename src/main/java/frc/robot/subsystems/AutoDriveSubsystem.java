@@ -130,10 +130,10 @@ double rpm = 6380;//dont know we'll find that later
     rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     }
 
-   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));//going off of the left one right now but idk
+   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));
    
    String motorState;
-   if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) > 0){//once again going just off the left but idk
+   if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) > 0){
      motorState = "forward";
    }else if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) == 0){
      motorState = "stopped";
@@ -168,7 +168,6 @@ double rpm = 6380;//dont know we'll find that later
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    /*leftFrontDriveMotor.setSelectedSensorPosition(leftFrontDriveMotor.getSelectedSensorPosition());
-    rightFrontDriveMotor.setSelectedSensorPosition(rightFrontDriveMotor.getSelectedSensorPosition());*/
+    
   }
 }
