@@ -56,7 +56,7 @@ public final class Constants {
 
     //Motor Speeds
         public static double INTAKE_LIFT_DOWN_SPEED = 0.15;
-        public static double INTAKE_LIFT_UP_SPEED = 0.6;
+        public static double INTAKE_LIFT_UP_SPEED = 0.4;
         public static double BRAKE_SPEED = 0.00000000001;
         public static double INTAKE_SPEED = 0.3;
         public static double OUTTAKE_SPEED = -0.7;
@@ -114,7 +114,7 @@ public final class Constants {
     //Motor Speeds
 
 
-    public static double FEED_MOTOR_SPEED = 1.0;
+    public static double FEED_MOTOR_SPEED = 0.7;
 
 
     //Joystick Constants

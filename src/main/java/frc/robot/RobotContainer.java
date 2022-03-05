@@ -51,7 +51,6 @@ public class RobotContainer {
 
   //Intake commands
   private final IntakeCommand cmd_intakeCommand = new IntakeCommand(sub_intakeSubsystem, sub_feedSubsystem);
-  private final OuttakeCommand cmd_outtakeCommand = new OuttakeCommand(sub_intakeSubsystem);
   private final RaiseIntakeCommand cmd_raiseIntakeCommand = new RaiseIntakeCommand(sub_intakeSubsystem);
 
   //Shooter commands
@@ -106,9 +105,6 @@ public class RobotContainer {
     JoystickButton b_intakeButton = new JoystickButton(driveJoystick, Constants.INTAKE_BUTTON);
     b_intakeButton.whenHeld(cmd_intakeCommand, Constants.NOT_INTERRUPTIBLE);
     b_intakeButton.whenInactive(cmd_raiseIntakeCommand, Constants.INTERRUPTIBLE);
-
-    JoystickButton b_outtakeButton = new JoystickButton(driveJoystick, Constants.OUTTAKE_BUTTON);
-    b_outtakeButton.whenHeld(cmd_outtakeCommand, Constants.NOT_INTERRUPTIBLE);
 
     //Shooter buttons!
     JoystickButton b_shootButton = new JoystickButton(buttonsJoystick, Constants.SHOOT_BUTTON);
