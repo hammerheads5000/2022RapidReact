@@ -35,7 +35,6 @@ public class RobotContainer {
   
   //Shooter subsystems
 
-  private final AimSubsystem sub_aimSubsystem = new AimSubsystem();
   private final ShooterSubsystem sub_shooterSubsystem = new ShooterSubsystem();
 
   /*
@@ -55,7 +54,6 @@ public class RobotContainer {
 
   //Shooter commands
 
-  private final AimCommand cmd_aimCommand = new AimCommand(sub_aimSubsystem);
   private final ShooterCommand cmd_shooterCommand = new ShooterCommand(sub_shooterSubsystem);
 
 
@@ -110,8 +108,6 @@ public class RobotContainer {
     JoystickButton b_shootButton = new JoystickButton(buttonsJoystick, Constants.SHOOT_BUTTON);
     b_shootButton.whileHeld(cmd_shooterCommand, Constants.NOT_INTERRUPTIBLE);
 
-    JoystickButton b_aimButton = new JoystickButton(buttonsJoystick, Constants.AIM_BUTTON);
-    b_aimButton.whileHeld(cmd_aimCommand, Constants.INTERRUPTIBLE);
 
   }
 

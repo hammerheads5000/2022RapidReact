@@ -8,6 +8,7 @@
 package frc.robot.commands;
  
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import java.util.function.DoubleSupplier;
  
@@ -30,7 +31,9 @@ public class DriveCommand extends CommandBase {
   public void execute() {
     double angle = Math.atan2(m_forward.getAsDouble(), m_sideways.getAsDouble());
     double magnitude = Math.hypot(m_sideways.getAsDouble(), m_forward.getAsDouble());
+    magnitude = Math.pow(magnitude, Constants.DRIVE_SENSITIVITY_CONSTANT);
     
+
     DriveTrainSubsystem.setMecanumDrive(angle, magnitude, m_rotation.getAsDouble());
   }
 }

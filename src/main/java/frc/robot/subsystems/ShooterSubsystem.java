@@ -36,6 +36,13 @@ public class ShooterSubsystem extends SubsystemBase {
  private double rpsflywheel;
  private static double rpm = 0;
 
+
+ private static TalonFX LEFT_FRONT_DRIVE_MOTOR = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
+ private static TalonFX LEFT_BACK_DRIVE_MOTOR = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
+ private static TalonFX RIGHT_FRONT_DRIVE_MOTOR = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
+ private static TalonFX RIGHT_BACK_DRIVE_MOTOR = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
+
+
 //(x units/100ms) = (rpm * Constants.K_SENSOR_UNITS_PER_ROTATION/600(units/100ms))
 
 
@@ -85,8 +92,6 @@ public class ShooterSubsystem extends SubsystemBase {
     xDisplacement /= 12.0; //To feet
     xDisplacement += 3; //Adding the radius of the hoop
 
-    xDisplacement = 25;
-
     SmartDashboard.putNumber("DISTANCE", xDisplacement);
     numerator = Constants.GRAVITY * xDisplacement * xDisplacement;
     denominator = 2.0 * (((Constants.GOAL_HEIGHT / 12.0) - (Constants.SHOOTER_HEIGHT_OFF_GROUND / 12.0)) - (xDisplacement * Math.tan(Constants.THETA))) 
@@ -94,21 +99,34 @@ public class ShooterSubsystem extends SubsystemBase {
     
     frac = numerator / denominator;
     Vi = Math.sqrt(frac);
-
     circball = (2.0 * Math.PI * Constants.COMPRESSED_RADIUS) / 12.0; //ft
     circwheel = (2.0 * Math.PI * Constants.FLYWHEEL_RADIUS) / 12.0; //ft
-
     rpsball = Vi / circball; //rotations per second
-
     rps_ratio = (circball / circwheel); //ratio of ball rpm to wheel rpm
-
     rpsflywheel = rpsball * rps_ratio / Constants.SLIPPERINESS; //rotations per second
-
     rpm = 60 * rpsflywheel;
-    
-
   }
 
+  public void m_aim(){
+    double headingError = tx.getDouble(0.0); //-27 to 27
+    double steeringAdjust = Math.abs(headingError) / 27.0; //27 is the max angular displacement
+
+    SmartDashboard.putNumber("Steering Adjust", steeringAdjust);
+    SmartDashboard.putNumber("Limelight x", headingError);
+
+    if (headingError > 5.0) 
+    {
+      steeringAdjust = Constants.KP_DRIVE_AIM*headingError - Constants.MIN_COMMAND_DRIVE_AIM;
+    }
+    else if (headingError < 5.0)
+    {
+      steeringAdjust = Constants.KP_DRIVE_AIM*headingError + Constants.MIN_COMMAND_DRIVE_AIM;
+    }
+    LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, -steeringAdjust);
+    LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
+    RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
+    RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, -steeringAdjust);
+  }
 
   public void m_shoot()
   {    
