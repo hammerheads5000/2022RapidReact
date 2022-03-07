@@ -14,7 +14,6 @@ package frc.robot;
  */
 public final class Constants {
   
-    //TODO: Reorganize constants into system specific stuff (ie: drive system, feed system, etc.)
 /*
 --------------------------------------------------Shooter Constants-------------------------------------------------------------------
 */
@@ -79,68 +78,62 @@ public final class Constants {
     public static int SHOOTER_SIDE_FEED_MOTOR_PORT = 3;
     public static int INTAKE_SIDE_FEED_MOTOR_PORT = 12;
 
+    //Motor speed
+        public static double FEED_MOTOR_SPEED = 0.7;
+
     //IR Sensors
         public static int IR_SENSOR_1_PORT = 0;
         public static int IR_SENSOR_2_PORT = 2;
 
 
-
- 
-    //Joystick constants
-    public static int DRIVE_JOYSTICK_PORT = 0;
-    public static int BUTTONS_JOYSTICK_PORT = 1;
-    public static int X = 0;
-    public static int Y = 1;
-    public static int Z = 2;
-
-
-
-
-    
+/*
+----------------------------------------------------------Drive Constants-------------------------------------------------------------
+*/
     //Motor Ports
-    public static int LEFT_FRONT_DRIVE_MOTOR_PORT = 26;
-    public static int LEFT_BACK_DRIVE_MOTOR_PORT = 23;
-    public static int RIGHT_FRONT_DRIVE_MOTOR_PORT = 25;
-    public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 24;
-
-    public static double DRIVE_SENSITIVITY_CONSTANT = 2;
-
-
-
-
-
-    //Other drive constants
-    public static double TURN_ADJUST = 0.4;
-
-    //Motor Speeds
-
-
-    public static double FEED_MOTOR_SPEED = 0.7;
-
-
-    //Joystick Constants
-    public static boolean NOT_INTERRUPTIBLE = false;
-    public static boolean INTERRUPTIBLE = true;
-
-    //Drive Joystick Buttons
-
-    public static int INTAKE_BUTTON = 1;
-    public static int OUTTAKE_BUTTON = 2;
-    
-    //Buttons Joystick Buttons
-
-    public static int SHOOT_BUTTON = 1;
-    public static int AIM_BUTTON = 2;
-
-    public static int FEED_IN_BUTTON = 3;
-    public static int FEED_OUT_BUTTON = 5;
+        public static int LEFT_FRONT_DRIVE_MOTOR_PORT = 26;
+        public static int LEFT_BACK_DRIVE_MOTOR_PORT = 23;
+        public static int RIGHT_FRONT_DRIVE_MOTOR_PORT = 25;
+        public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 24;
+ 
+    //Drive related constants
+        public static double DRIVE_SENSITIVITY_CONSTANT = 2;
+        public static double TURN_ADJUST = 0.4;
 
     //PID Constants
-    public static double KP_DRIVE_AIM = 0.15;
-    public static double MIN_COMMAND_DRIVE_AIM = 0.05;
+        public static double KP_DRIVE_AIM = 0.15;
+        public static double MIN_COMMAND_DRIVE_AIM = 0.05;
 
 
-    //PID shooter constants:
+
+
+/*
+---------------------------------------------------------Joystick Constants
+*/
+
+    //Joystick constants
+        public static int DRIVE_JOYSTICK_PORT = 0;
+        public static int BUTTONS_JOYSTICK_PORT = 1;
+        public static int X = 0;
+        public static int Y = 1;
+        public static int Z = 2;
+        public static boolean NOT_INTERRUPTIBLE = false;
+        public static boolean INTERRUPTIBLE = true;
+
+    //Drive Joystick Buttons
+        public static int INTAKE_BUTTON = 1;
+        public static int OUTTAKE_BUTTON = 2;
+    
+    //Buttons Joystick Buttons
+        public static int SHOOT_BUTTON = 1;
+        public static int AIM_BUTTON = 2;
+        public static int FEED_IN_BUTTON = 3;
+        public static int FEED_OUT_BUTTON = 5;
+
+
+/*
+--------------------------------------------------------PID Constants-----------------------------------------------------------------------
+*/
+
     public static int PID_LOOP_IDX = 0;
     public static int TIMEOUT_MS = 5;
 
