@@ -5,15 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class LiftDownCommand extends CommandBase {
-  /** Creates a new LiftDownCommand. */
-  private LiftSubsystem sub_liftSubsystem;
-  public LiftDownCommand(LiftSubsystem subsystem) {
+public class RaiseIntakeCommand extends CommandBase {
+  /** Creates a new RaiseIntakeCommand. */
+  private IntakeSubsystem sub_intakeSubsystem;
+  public RaiseIntakeCommand(IntakeSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    sub_liftSubsystem = subsystem;
-    addRequirements(sub_liftSubsystem);
+    sub_intakeSubsystem = subsystem;
+    addRequirements(sub_intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -22,13 +22,22 @@ public class LiftDownCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    sub_liftSubsystem.m_liftDown();
+  public void execute(){
+   
+    if(sub_intakeSubsystem.m_getUpIR()){
+      sub_intakeSubsystem.m_raise();
+    }else{
+      sub_intakeSubsystem.m_turnOffLower();
+    }
+    
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+
+  }
 
   // Returns true when the command should end.
   @Override
