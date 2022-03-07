@@ -107,4 +107,5 @@ public final class Constants {
     //Lift Constants
     public static double LIFT_DISTANCE = 1000.0; //I don't know the actual distance it'll need to go up so I'm guessing it'll be a meter for now
     public static double MOTOR_SHAFT_DIAMETER = 6.0;
+    
 }
