@@ -28,9 +28,7 @@ public class FeedSubsystem extends SubsystemBase {
   private static TalonSRX intakeSideFeedMotor = new TalonSRX(Constants.INTAKE_SIDE_FEED_MOTOR_PORT);
   
   public FeedSubsystem() {
-   
     shooterSideIRSensor = new DigitalInput(Constants.IR_SENSOR_1_PORT);
-  //  irSensor2 = new DigitalInput(Constants.IR_SENSOR_2_PORT);
     
     shooterSideFeedMotor.setNeutralMode(NeutralMode.Coast);    
     intakeSideFeedMotor.setNeutralMode(NeutralMode.Coast);
@@ -47,19 +45,20 @@ public class FeedSubsystem extends SubsystemBase {
 
   public void m_intakeSideFeedMotor(){
     intakeSideFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
-
   }
 
   public void m_feedInManual(){
     shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
     intakeSideFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
   }
+
   public void m_feedOut(){
     shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
     intakeSideFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
   }
+
   public void m_stopFeed(){
-    shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, 0); //I couldn't figure out how to get it to brake so I just did this
+    shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, 0); 
     intakeSideFeedMotor.set(TalonSRXControlMode.PercentOutput, 0);
   }
   
@@ -67,10 +66,4 @@ public class FeedSubsystem extends SubsystemBase {
   public boolean m_getShooterSideIRSensor(){
     return shooterSideIRSensor.get();
   }
-/*
-  public boolean m_getSensor2(){
-    return irSensor2.get();
-  }
-*/
-  
 }
