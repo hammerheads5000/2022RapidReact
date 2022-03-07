@@ -23,11 +23,14 @@ public class RaiseIntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    if(sub_intakeSubsystem.m_getDownIR() && !sub_intakeSubsystem.m_getUpIR()){
+   
+    if(sub_intakeSubsystem.m_getUpIR()){
       sub_intakeSubsystem.m_raise();
     }else{
       sub_intakeSubsystem.m_turnOffLower();
     }
+    
+    
   }
 
   // Called once the command ends or is interrupted.
