@@ -26,10 +26,8 @@ public class RaiseIntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    if(!sub_intakeSubsystem.m_getDownIR()){
+    if(sub_intakeSubsystem.m_getUpIR()){
       sub_intakeSubsystem.m_raise();
-    }else if(!sub_intakeSubsystem.m_getUpIR()){
-      sub_intakeSubsystem.m_brakeWayUp();
     }else{
       sub_intakeSubsystem.m_turnOffLower();
     }

@@ -54,9 +54,9 @@ public final class Constants {
         public static int LOWER_INTAKE_MOTOR_PORT = 2;
 
     //Motor Speeds
-        public static double INTAKE_LIFT_DOWN_SPEED = 0.15;
-        public static double INTAKE_LIFT_UP_SPEED = 0.6;
-        public static double BRAKE_SPEED = 0.01; //I know this is ridiculous but the lift works well now and if it ain
+        public static double INTAKE_LIFT_DOWN_SPEED = 0.35;
+        public static double INTAKE_LIFT_UP_SPEED = 0.35;
+        public static double BRAKE_SPEED = 0.02; //I know this is ridiculous but the lift works well now and if it ain
                                                           //'t broke don't fix it.
         public static double INTAKE_SPEED = 0.3;
         public static double OUTTAKE_SPEED = -0.7;
