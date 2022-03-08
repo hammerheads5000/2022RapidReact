@@ -4,7 +4,9 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class RaiseIntakeCommand extends CommandBase {
@@ -18,13 +20,16 @@ public class RaiseIntakeCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    if(sub_intakeSubsystem.m_getUpIR()){
+    if(!sub_intakeSubsystem.m_getDownIR()){
       sub_intakeSubsystem.m_raise();
+    }else if(!sub_intakeSubsystem.m_getUpIR()){
+      sub_intakeSubsystem.m_brakeWayUp();
     }else{
       sub_intakeSubsystem.m_turnOffLower();
     }
