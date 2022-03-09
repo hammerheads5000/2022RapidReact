@@ -70,9 +70,15 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.config_kD(Constants.PID_LOOP_IDX, Constants.kGains.kDShooter, Constants.TIMEOUT_MS);
   }
 
+
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public static void setRPM(int newrpm){
+    rpm = newrpm;
   }
 
   public void m_TurnOnLimelight(){
