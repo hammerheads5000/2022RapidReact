@@ -63,6 +63,7 @@ public final class Constants {
     
     //Timer
         public static double BRAKE_TIME = 0.5;
+        public static double RAISE_TIME = 1.0;
  
     //IR Sensors
         public static int INTAKE_UPPER_IR_PORT = 8;
