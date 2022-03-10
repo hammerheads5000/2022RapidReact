@@ -35,7 +35,7 @@ public class FeedSubsystem extends SubsystemBase {
 
   }
   public void periodic(){
-    SmartDashboard.putBoolean("Shooter Side IR", m_getShooterSideIRSensor());
+    //SmartDashboard.putBoolean("Shooter Side IR", m_getShooterSideIRSensor());
   }
 
 

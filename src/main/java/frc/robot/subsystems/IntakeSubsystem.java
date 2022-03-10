@@ -37,8 +37,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void periodic(){
-    SmartDashboard.putBoolean("Down IR", m_getDownIR());
-    SmartDashboard.putBoolean("Up IR", m_getUpIR());
+    //SmartDashboard.putBoolean("Down IR", m_getDownIR());
+    //SmartDashboard.putBoolean("Up IR", m_getUpIR());
   }
   public void m_lower(){
    

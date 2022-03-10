@@ -29,7 +29,7 @@ public final class Constants {
         public static double SLIPPERINESS = 0.4;
         public static double LIMELIGHT_HEIGHT_OFF_GROUND = 20.125; //in
         public static double GOAL_HEIGHT = 104; //in
-        public static double LIMELIGHT_MOUNT_ANGLE = 35.0; // in degrees
+        public static double LIMELIGHT_MOUNT_ANGLE = 25.0; // in degrees
         public static double GRAVITY = -32.174;
 
     //Motor Ports
@@ -56,9 +56,9 @@ public final class Constants {
     //Motor Speeds
         public static double INTAKE_LIFT_DOWN_SPEED = 0.35;
         public static double INTAKE_LIFT_UP_SPEED = 0.35;
-        public static double BRAKE_SPEED = 0.02; //I know this is ridiculous but the lift works well now and if it ain
+        public static double BRAKE_SPEED = 0.03; //I know this is ridiculous but the lift works well now and if it ain
                                                           //'t broke don't fix it.
-        public static double INTAKE_SPEED = 0.3;
+        public static double INTAKE_SPEED = 0.6;
         public static double OUTTAKE_SPEED = -0.7;
     
     //Timer
@@ -97,7 +97,7 @@ public final class Constants {
         public static int RIGHT_BACK_DRIVE_MOTOR_PORT = 24;
  
     //Drive related constants
-        public static double DRIVE_SENSITIVITY_CONSTANT = 2;
+        public static double DRIVE_SENSITIVITY_CONSTANT = 1;
         public static double TURN_ADJUST = 0.4;
 
     //PID Constants
@@ -108,7 +108,7 @@ public final class Constants {
 
 
 /*
----------------------------------------------------------Joystick Constants
+---------------------------------------------------------Joystick Constants-----------------------------------------------------------
 */
 
     //Joystick constants
@@ -129,6 +129,7 @@ public final class Constants {
         public static int AIM_BUTTON = 2;
         public static int FEED_IN_BUTTON = 3;
         public static int FEED_OUT_BUTTON = 5;
+        public static int TURN_OFF_LIMELIGHT_BUTTON = 4;
 
 
 /*
