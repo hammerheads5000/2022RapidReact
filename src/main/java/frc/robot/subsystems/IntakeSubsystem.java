@@ -37,16 +37,20 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void periodic(){
-    SmartDashboard.putBoolean("Down IR", m_getDownIR());
-    SmartDashboard.putBoolean("Up IR", m_getUpIR());
+    //SmartDashboard.putBoolean("Down IR", m_getDownIR());
+    //SmartDashboard.putBoolean("Up IR", m_getUpIR());
   }
   public void m_lower(){
    
     lowerMotor.set(Constants.INTAKE_LIFT_DOWN_SPEED);
   }
 
-  public void m_brake(){
+  public void m_brakeWayDown(){
     lowerMotor.set(-Constants.BRAKE_SPEED);
+  }
+
+  public void m_brakeWayUp(){
+    lowerMotor.set(Constants.BRAKE_SPEED);
   }
 
   public void m_raise(){

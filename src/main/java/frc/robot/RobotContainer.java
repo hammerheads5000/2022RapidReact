@@ -43,8 +43,6 @@ public class RobotContainer {
 
 
   //Feed commands
-  
- // private final FeedInCommand cmd_feedInCommand = new FeedInCommand(sub_feedSubsystem);
   private final FeedInManualCommand cmd_feedInManualCommand = new FeedInManualCommand(sub_feedSubsystem);
   private final FeedOutCommand cmd_feedOutCommand = new FeedOutCommand(sub_feedSubsystem);
 
@@ -53,9 +51,9 @@ public class RobotContainer {
   private final RaiseIntakeCommand cmd_raiseIntakeCommand = new RaiseIntakeCommand(sub_intakeSubsystem);
 
   //Shooter commands
-
+  private final AimCommand cmd_aimCommand = new AimCommand(sub_shooterSubsystem);
   private final ShooterCommand cmd_shooterCommand = new ShooterCommand(sub_shooterSubsystem);
-
+  private final TurnOffLimelightCommand cmd_turnOffLimelightCommand = new TurnOffLimelightCommand(sub_shooterSubsystem);
 
 
   //Auto commands
@@ -83,6 +81,7 @@ public class RobotContainer {
      // sub_feedSubsystem.setDefaultCommand(cmd_feedInCommand);
   }
 
+
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -108,7 +107,11 @@ public class RobotContainer {
     JoystickButton b_shootButton = new JoystickButton(buttonsJoystick, Constants.SHOOT_BUTTON);
     b_shootButton.whileHeld(cmd_shooterCommand, Constants.NOT_INTERRUPTIBLE);
 
+    JoystickButton b_aimButton = new JoystickButton(buttonsJoystick, Constants.AIM_BUTTON);
+    b_aimButton.whileHeld(cmd_aimCommand, Constants.NOT_INTERRUPTIBLE);
 
+    JoystickButton b_turnOffLimelightButton = new JoystickButton(buttonsJoystick, Constants.TURN_OFF_LIMELIGHT_BUTTON);
+    b_turnOffLimelightButton.whenPressed(cmd_turnOffLimelightCommand, Constants.NOT_INTERRUPTIBLE);
   }
 
   /**

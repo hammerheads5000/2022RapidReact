@@ -39,12 +39,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
     //Math.sqrt(2) * 0.5 comes from sin(45) and cos(45) (trig is necessary to get the power in mecanum)
     double ADPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
     double BCPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
+
     double turningScale = turnPower;
-    
-    
-    //0.3 and 0.3 are deadband values
+    //0.3 and 0.4 are deadband values
     if (Math.abs(turnPower) <= 0.3){
-      if(Math.abs(translationPower) < 0.3){
+      if(Math.abs(translationAngle) < 0.4 && Math.abs(translationPower) < 0.4){
         
       }else{
       leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
@@ -53,7 +52,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
       rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
       }
     }else{
-      turningScale = Math.pow(turningScale, 2);
       //5 is to slow down the motors because turning shouldn't feel like you're an F1 racer
       leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
       leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);

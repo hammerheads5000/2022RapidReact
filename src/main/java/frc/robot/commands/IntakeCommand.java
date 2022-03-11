@@ -50,7 +50,7 @@ public class IntakeCommand extends CommandBase {
       sub_intakeSubsystem.m_turnOffLower();
       sub_intakeSubsystem.m_intake();
     }else{
-      sub_intakeSubsystem.m_brake();
+      sub_intakeSubsystem.m_brakeWayDown();
     }
 
 

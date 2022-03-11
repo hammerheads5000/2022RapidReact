@@ -29,12 +29,12 @@ public class ShooterSubsystem extends SubsystemBase {
  private double circball;
  private double circwheel;
  private double Vi;
- private double xDisplacement = 0;
+ private double xDisplacement;
  private double angleToGoal;
  private double rpsball;
  private double rps_ratio;
  private double rpsflywheel;
- private static double rpm = 0;
+ private static double rpm;
 
 
  private static TalonFX LEFT_FRONT_DRIVE_MOTOR = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
@@ -84,14 +84,13 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void m_calculateRPM(){
-    angleToGoal = ty.getDouble(0);//the 0 is a constant
-    SmartDashboard.putNumber("Angle To Goal", angleToGoal);
+    angleToGoal = ty.getDouble(0.0);//the 0 is a constant
+    SmartDashboard.putNumber("Angle to Goal", angleToGoal);
     xDisplacement = (Constants.GOAL_HEIGHT - Constants.LIMELIGHT_HEIGHT_OFF_GROUND) / 
         Math.tan(Math.toRadians(angleToGoal) + Math.toRadians(Constants.LIMELIGHT_MOUNT_ANGLE));
     xDisplacement += 10; //Distance between shooter and limelight
     xDisplacement /= 12.0; //To feet
     xDisplacement += 3; //Adding the radius of the hoop
-
     SmartDashboard.putNumber("DISTANCE", xDisplacement);
     numerator = Constants.GRAVITY * xDisplacement * xDisplacement;
     denominator = 2.0 * (((Constants.GOAL_HEIGHT / 12.0) - (Constants.SHOOTER_HEIGHT_OFF_GROUND / 12.0)) - (xDisplacement * Math.tan(Constants.THETA))) 
@@ -105,20 +104,21 @@ public class ShooterSubsystem extends SubsystemBase {
     rps_ratio = (circball / circwheel); //ratio of ball rpm to wheel rpm
     rpsflywheel = rpsball * rps_ratio / Constants.SLIPPERINESS; //rotations per second
     rpm = 60 * rpsflywheel;
+    if(angleToGoal == 0){
+      rpm = 0;
+    }
   }
 
   public void m_aim(){
     double headingError = tx.getDouble(0.0); //-27 to 27
-    double steeringAdjust = Math.abs(headingError) / 27.0; //27 is the max angular displacement
+    double steeringAdjust = headingError / 27.0; //27 is the max angular displacement
 
-    SmartDashboard.putNumber("Steering Adjust", steeringAdjust);
-    SmartDashboard.putNumber("Limelight x", headingError);
 
     if (headingError > 5.0) 
     {
       steeringAdjust = Constants.KP_DRIVE_AIM*headingError - Constants.MIN_COMMAND_DRIVE_AIM;
     }
-    else if (headingError < 5.0)
+    else if (headingError < -5.0)
     {
       steeringAdjust = Constants.KP_DRIVE_AIM*headingError + Constants.MIN_COMMAND_DRIVE_AIM;
     }
@@ -130,7 +130,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void m_shoot()
   {    
-    SmartDashboard.putNumber("rpm", rpm);
+    SmartDashboard.putNumber("Set rpm", rpm);
 
     double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * rpm;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
