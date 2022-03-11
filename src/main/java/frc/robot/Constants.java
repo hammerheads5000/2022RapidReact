@@ -143,6 +143,5 @@ public final class Constants {
     public static boolean INVERTED = true;
     public static double K_SENSOR_UNITS_PER_ROTATION = 2048.0;
 
-  
 
 }
