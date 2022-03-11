@@ -148,22 +148,5 @@ public final class Constants {
     public static boolean INVERTED = true;
     public static double K_SENSOR_UNITS_PER_ROTATION = 2048.0;
 
-  
 
-<<<<<<< HEAD
-
-    //PIDF - IZone - PeakOutput
-    public static Gains kGains = new Gains(0.18, 0.0, 0.09, 0.047,  0,  1.0);
-
-
-    public static double kS = 0.80192;
-    public static double kV = 0.09327;
-    public static double kA = 0.004018;
-
-    //Lift Constants
-    public static double LIFT_DISTANCE = 1000.0; //I don't know the actual distance it'll need to go up so I'm guessing it'll be a meter for now
-    public static double MOTOR_SHAFT_DIAMETER = 6.0;
-    
-=======
->>>>>>> c51dac1e2a78cdcd9a19709a764984a6f94e9ffc
 }
