@@ -43,7 +43,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     double turningScale = turnPower;
     //0.3 and 0.4 are deadband values
     if (Math.abs(turnPower) <= 0.3){
-      if(Math.abs(translationAngle) < 0.4 && Math.abs(translationPower) < 0.4){
+      if(Math.abs(translationPower) < 0.4){
         
       }else{
       leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
