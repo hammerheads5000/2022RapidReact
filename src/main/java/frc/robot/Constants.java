@@ -56,12 +56,13 @@ public final class Constants {
     //Motor Speeds
         public static double INTAKE_LIFT_DOWN_SPEED = 0.4;
         public static double INTAKE_LIFT_UP_SPEED = 0.35;
-        public static double BRAKE_SPEED = 0.05; 
+        public static double BRAKE_SPEED = 0.04; 
+        public static double BRAKE_UP_SPEED = 0.07;
         public static double INTAKE_SPEED = 0.6;
         public static double OUTTAKE_SPEED = -0.7;
     
     //Timer
-        public static double RAISE_TIME = 1.5;
+        public static double RAISE_TIME = 5;
  
     //IR Sensors
         public static int INTAKE_UPPER_IR_PORT = 8;
@@ -97,8 +98,8 @@ public final class Constants {
     //Drive related constants
         public static double DRIVE_SENSITIVITY_CONSTANT = 1;
         public static double TURN_ADJUST = 0.4;
-        public static double TRANSLATION_DEADBAND = 0.3;
-        public static double TURN_DEADBAND = 0.5;
+        public static double TRANSLATION_DEADBAND = 0.2;
+        public static double TURN_DEADBAND = 0.4;
 
     //PID Constants
         public static double KP_DRIVE_AIM = 0.15;
@@ -131,7 +132,6 @@ public final class Constants {
         public static int FEED_OUT_BUTTON = 5;
         public static int TURN_OFF_LIMELIGHT_BUTTON = 4;
         public static int END_OF_MATCH_BUTTON = 7;
-
 /*
 --------------------------------------------------------PID Constants-----------------------------------------------------------------------
 */

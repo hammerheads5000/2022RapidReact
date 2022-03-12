@@ -23,11 +23,7 @@ public class EndOfMatchCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!sub_intakeSubsystem.m_getEndOfMatch()){
-      sub_intakeSubsystem.m_atTheEnd();
-    }else{
-      sub_intakeSubsystem.m_atTheEndTwo();
-    }
+    sub_intakeSubsystem.m_atTheEnd();
   }
 
   // Called once the command ends or is interrupted.

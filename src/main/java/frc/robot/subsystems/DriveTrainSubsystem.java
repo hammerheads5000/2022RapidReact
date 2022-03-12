@@ -75,5 +75,5 @@ public class DriveTrainSubsystem extends SubsystemBase {
         rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
     }
   }
- 
+
 }

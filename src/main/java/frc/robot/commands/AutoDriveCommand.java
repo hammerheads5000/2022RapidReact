@@ -27,7 +27,9 @@ public class AutoDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    sub_autoDriveSubsystem.m_drive(distance);
+    double setpoint = distance * 2048;
+
+    sub_autoDriveSubsystem.m_drive(setpoint);
     
   }
 
@@ -42,6 +44,7 @@ public class AutoDriveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+
     return false;
   }
 }

@@ -65,7 +65,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void m_brakeWayUp(){
-    lowerMotor.set(Constants.BRAKE_SPEED);
+    lowerMotor.set(Constants.BRAKE_UP_SPEED);
   }
 
   public void m_raise(){

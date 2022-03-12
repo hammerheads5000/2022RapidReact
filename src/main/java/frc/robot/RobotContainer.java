@@ -45,7 +45,6 @@ public class RobotContainer {
   ---------------------------------------------------------Commands------------------------------------------------------------------------
   */
 
-
   //Feed commands
   private final FeedInManualCommand cmd_feedInManualCommand = new FeedInManualCommand(sub_feedSubsystem);
   private final FeedOutCommand cmd_feedOutCommand = new FeedOutCommand(sub_feedSubsystem);
@@ -99,7 +98,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
- 
+
 
     //Feed buttons!
     JoystickButton b_feedInButton = new JoystickButton(buttonsJoystick, Constants.FEED_IN_BUTTON);
