@@ -42,24 +42,29 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     double turningScale = turnPower;
     //0.3 and 0.4 are deadband values
-    if (Math.abs(turnPower) <= 0.3){ //TODO: Make deadbands variables
-      if(translationPower < 0.4){
+    if (Math.abs(turnPower) <= Constants.TURN_DEADBAND){
+      if(translationPower < Constants.TRANSLATION_DEADBAND){
         leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, 0);
         leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, 0);
         rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, 0);
         rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, 0);
       }else{
-        translationPower -= 0.4;
+        translationPower -= Constants.TRANSLATION_DEADBAND;
+        translationPower = translationPower / (1 - Constants.TRANSLATION_DEADBAND); //1 is the max speed of the motor
+
         ADPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
         BCPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
 
-      leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
-      leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
-      rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
-      rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
+        leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
+        leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
+        rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
+        rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
       }
     }else{
       //5 is to slow down the motors because turning shouldn't feel like you're an F1 racer
+      turningScale -= Constants.TURN_DEADBAND;
+      turningScale = turningScale / (1 - Constants.TURN_DEADBAND); //1 is the max speed of the motor
+
       leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
       leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
       rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
