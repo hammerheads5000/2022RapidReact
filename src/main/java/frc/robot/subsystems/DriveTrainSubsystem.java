@@ -37,22 +37,34 @@ public class DriveTrainSubsystem extends SubsystemBase {
     //A is front left, b is front right, c is back left, d is back right
     // calculate motor power
     //Math.sqrt(2) * 0.5 comes from sin(45) and cos(45) (trig is necessary to get the power in mecanum)
-    double ADPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
-    double BCPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
+    double ADPower;
+    double BCPower;
 
     double turningScale = turnPower;
     //0.3 and 0.4 are deadband values
-    if (Math.abs(turnPower) <= 0.3){
-      if(Math.abs(translationAngle) < 0.4 && Math.abs(translationPower) < 0.4){
-        
+    if (Math.abs(turnPower) <= Constants.TURN_DEADBAND){
+      if(translationPower < Constants.TRANSLATION_DEADBAND){
+        leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, 0);
+        leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, 0);
+        rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, 0);
+        rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, 0);
       }else{
-      leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
-      leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
-      rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
-      rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
+        translationPower -= Constants.TRANSLATION_DEADBAND;
+        translationPower = translationPower / (1 - Constants.TRANSLATION_DEADBAND); //1 is the max speed of the motor
+
+        ADPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
+        BCPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
+
+        leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
+        leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
+        rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
+        rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
       }
     }else{
-      //5 is to slow down the motors because turning shouldn't feel like you're an F1 racer
+        //5 is to slow down the motors because turning shouldn't feel like you're an F1 racer
+        turningScale -= Constants.TURN_DEADBAND;
+        turningScale = turningScale / (1 - Constants.TURN_DEADBAND); //1 is the max speed of the motor
+
       leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
       leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
       rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);

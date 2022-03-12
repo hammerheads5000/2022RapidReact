@@ -54,10 +54,9 @@ public final class Constants {
         public static int LOWER_INTAKE_MOTOR_PORT = 2;
 
     //Motor Speeds
-        public static double INTAKE_LIFT_DOWN_SPEED = 0.35;
+        public static double INTAKE_LIFT_DOWN_SPEED = 0.38;
         public static double INTAKE_LIFT_UP_SPEED = 0.35;
-        public static double BRAKE_SPEED = 0.03; //I know this is ridiculous but the lift works well now and if it ain
-                                                          //'t broke don't fix it.
+        public static double BRAKE_SPEED = 0.03; 
         public static double INTAKE_SPEED = 0.6;
         public static double OUTTAKE_SPEED = -0.7;
     
@@ -81,7 +80,7 @@ public final class Constants {
 
     //Motor speed
         public static double FEED_MOTOR_SPEED = 0.7;
-
+        public static double WHILE_INTAKE_FEED_MOTOR_SPEED = 0.2;
     //IR Sensors
         public static int IR_SENSOR_1_PORT = 0;
         public static int IR_SENSOR_2_PORT = 2;
@@ -99,6 +98,8 @@ public final class Constants {
     //Drive related constants
         public static double DRIVE_SENSITIVITY_CONSTANT = 1;
         public static double TURN_ADJUST = 0.4;
+        public static double TRANSLATION_DEADBAND = 0.4;
+        public static double TURN_DEADBAND = 0.3;
 
     //PID Constants
         public static double KP_DRIVE_AIM = 0.15;

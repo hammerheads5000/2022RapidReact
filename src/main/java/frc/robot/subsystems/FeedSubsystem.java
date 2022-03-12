@@ -40,7 +40,7 @@ public class FeedSubsystem extends SubsystemBase {
 
 
   public void m_shooterSideFeedMotor(){
-    shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
+    shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.WHILE_INTAKE_FEED_MOTOR_SPEED);
   }
 
   public void m_intakeSideFeedMotor(){
