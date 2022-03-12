@@ -52,7 +52,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
       }else{
         power -= Constants.TRANSLATION_DEADBAND;
         power = power / (1 - Constants.TRANSLATION_DEADBAND); //1 is the max speed of the motor
-
+        power = Math.pow(power, 2);
         ADPower = power * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
         BCPower = power * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
 
@@ -65,7 +65,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
         //5 is to slow down the motors because turning shouldn't feel like you're an F1 racer
         turningScale -= Constants.TURN_DEADBAND;
         turningScale = turningScale / (1 - Constants.TURN_DEADBAND); //1 is the max speed of the motor
-
+        if(turningScale < 0){
+          turningScale = Math.abs(Math.pow(turningScale, 1.5));
+        }else{
+          turningScale = Math.abs(Math.pow(turningScale, 1.5));
+        }
         leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
         leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
         rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);

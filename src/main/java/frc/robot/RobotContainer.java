@@ -57,7 +57,6 @@ public class RobotContainer {
   //Shooter commands
   private final AimCommand cmd_aimCommand = new AimCommand(sub_shooterSubsystem);
   private final ShooterCommand cmd_shooterCommand = new ShooterCommand(sub_shooterSubsystem);
-  private final TurnOffLimelightCommand cmd_turnOffLimelightCommand = new TurnOffLimelightCommand(sub_shooterSubsystem);
 
 
   //Auto commands
@@ -119,8 +118,6 @@ public class RobotContainer {
     JoystickButton b_aimButton = new JoystickButton(buttonsJoystick, Constants.AIM_BUTTON);
     b_aimButton.whileHeld(cmd_aimCommand, Constants.NOT_INTERRUPTIBLE);
 
-    JoystickButton b_turnOffLimelightButton = new JoystickButton(buttonsJoystick, Constants.TURN_OFF_LIMELIGHT_BUTTON);
-    b_turnOffLimelightButton.whenPressed(cmd_turnOffLimelightCommand, Constants.NOT_INTERRUPTIBLE);
   }
 
   /**

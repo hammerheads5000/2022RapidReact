@@ -61,7 +61,7 @@ public final class Constants {
         public static double OUTTAKE_SPEED = -0.7;
     
     //Timer
-        public static double BRAKE_TIME = 0.5;
+        public static double BRAKE_TIME = 2.0;
         public static double RAISE_TIME = 1.0;
  
     //IR Sensors
