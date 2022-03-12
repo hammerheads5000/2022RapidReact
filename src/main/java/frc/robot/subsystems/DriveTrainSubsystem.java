@@ -61,9 +61,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
         rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
       }
     }else{
-      //5 is to slow down the motors because turning shouldn't feel like you're an F1 racer
-      turningScale -= Constants.TURN_DEADBAND;
-      turningScale = turningScale / (1 - Constants.TURN_DEADBAND); //1 is the max speed of the motor
+        //5 is to slow down the motors because turning shouldn't feel like you're an F1 racer
+        turningScale -= Constants.TURN_DEADBAND;
+        turningScale = turningScale / (1 - Constants.TURN_DEADBAND); //1 is the max speed of the motor
 
       leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
       leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
