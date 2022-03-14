@@ -35,7 +35,8 @@ public class ShooterSubsystem extends SubsystemBase {
  private double rps_ratio;
  private double rpsflywheel;
  private static double rpm;
-
+ private static double averageRPM;
+ private static int count = 0;
 
  private static TalonFX LEFT_FRONT_DRIVE_MOTOR = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
  private static TalonFX LEFT_BACK_DRIVE_MOTOR = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
@@ -81,6 +82,11 @@ public class ShooterSubsystem extends SubsystemBase {
     rpm = newrpm;
   }
 
+  public static void m_resetAverage(){
+    averageRPM = 0;
+    count = 0;
+  }
+
   public void m_TurnOnLimelight(){
     table.getEntry("ledMode").setNumber(0); 
   }
@@ -90,13 +96,14 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void m_calculateRPM(){
+
     angleToGoal = ty.getDouble(0.0);//the 0 is a constant
     SmartDashboard.putNumber("Angle to Goal", angleToGoal);
     xDisplacement = (Constants.GOAL_HEIGHT - Constants.LIMELIGHT_HEIGHT_OFF_GROUND) / 
         Math.tan(Math.toRadians(angleToGoal) + Math.toRadians(Constants.LIMELIGHT_MOUNT_ANGLE));
     xDisplacement += 10; //Distance between shooter and limelight
     xDisplacement /= 12.0; //To feet
-    xDisplacement += 4; //Adding the radius of the hoop
+    xDisplacement += 3; //Adding the radius of the hoop
     
     SmartDashboard.putNumber("DISTANCE", xDisplacement);
     numerator = Constants.GRAVITY * xDisplacement * xDisplacement;
@@ -114,6 +121,14 @@ public class ShooterSubsystem extends SubsystemBase {
     if(angleToGoal == 0){
       rpm = 0;
     }
+
+    if(rpm != 0){
+      averageRPM *= count;
+      count++;
+      averageRPM += rpm;
+      averageRPM /= count;
+    }
+
   }
 
   public void m_aim(){
@@ -121,11 +136,11 @@ public class ShooterSubsystem extends SubsystemBase {
     double steeringAdjust = headingError / 27.0; //27 is the max angular displacement
 
 
-    if (headingError > 5.0 || headingError < -5.0){
-      LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, -steeringAdjust);
+    if (headingError > 1.0 || headingError < -1.0){
+      LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
       LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
       RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
-      RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, -steeringAdjust);
+      RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
     }else{
       LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
       LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
@@ -137,9 +152,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void m_shoot()
   {    
-    SmartDashboard.putNumber("Set rpm", rpm);
+    SmartDashboard.putNumber("Set rpm", averageRPM);
 
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * rpm;
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
 
     shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
