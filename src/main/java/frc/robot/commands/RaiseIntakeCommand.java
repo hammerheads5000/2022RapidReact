@@ -12,8 +12,6 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class RaiseIntakeCommand extends CommandBase {
   /** Creates a new RaiseIntakeCommand. */
   private IntakeSubsystem sub_intakeSubsystem;
-  private final Timer timer = new Timer();
-  private boolean started = false;
   public RaiseIntakeCommand(IntakeSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_intakeSubsystem = subsystem;
@@ -30,19 +28,15 @@ public class RaiseIntakeCommand extends CommandBase {
   public void execute(){
     
     if(!sub_intakeSubsystem.m_getEndOfMatch()){
-      if(sub_intakeSubsystem.m_getUpIR()){
+      if(sub_intakeSubsystem.m_getDownIR()){
         sub_intakeSubsystem.m_raise();
-        started = true;
-        timer.start();
-      }else if(timer.get() >= Constants.RAISE_TIME && started){
+      }else if(sub_intakeSubsystem.m_getUpIR()){
         sub_intakeSubsystem.m_turnOffLower();
-        started = false;
-        timer.stop();
-        timer.reset();
       }else{
         sub_intakeSubsystem.m_brakeWayUp();
       }
     }
+
   }
 
   // Called once the command ends or is interrupted.
