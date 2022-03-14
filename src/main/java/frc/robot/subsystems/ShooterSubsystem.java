@@ -121,18 +121,18 @@ public class ShooterSubsystem extends SubsystemBase {
     double steeringAdjust = headingError / 27.0; //27 is the max angular displacement
 
 
-    if (headingError > 5.0) 
-    {
-      steeringAdjust = Constants.KP_DRIVE_AIM*headingError - Constants.MIN_COMMAND_DRIVE_AIM;
+    if (headingError > 5.0 || headingError < -5.0){
+      LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, -steeringAdjust);
+      LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
+      RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
+      RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, -steeringAdjust);
+    }else{
+      LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
+      LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
+      RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
+      RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
     }
-    else if (headingError < -5.0)
-    {
-      steeringAdjust = Constants.KP_DRIVE_AIM*headingError + Constants.MIN_COMMAND_DRIVE_AIM;
-    }
-    LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, -steeringAdjust);
-    LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
-    RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
-    RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, -steeringAdjust);
+
   }
 
   public void m_shoot()
