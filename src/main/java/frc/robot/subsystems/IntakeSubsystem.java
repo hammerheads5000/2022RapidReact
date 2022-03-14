@@ -30,6 +30,8 @@ public class IntakeSubsystem extends SubsystemBase {
   private static DigitalInput upIR = new DigitalInput(Constants.INTAKE_UPPER_IR_PORT);
   private static DigitalInput downIR = new DigitalInput(Constants.INTAKE_LOWER_IR_PORT);  
 
+  private static boolean endOfMatch = false;
+
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     wheelMotor.setNeutralMode(NeutralMode.Coast);
@@ -40,6 +42,19 @@ public class IntakeSubsystem extends SubsystemBase {
     //SmartDashboard.putBoolean("Down IR", m_getDownIR());
     //SmartDashboard.putBoolean("Up IR", m_getUpIR());
   }
+
+  public void m_atTheEnd(){
+    endOfMatch = true;
+  }
+
+  public void m_atTheEndTwo(){
+    endOfMatch = false;
+  }
+
+  public boolean m_getEndOfMatch(){
+    return endOfMatch;
+  }
+
   public void m_lower(){
    
     lowerMotor.set(Constants.INTAKE_LIFT_DOWN_SPEED);
@@ -50,7 +65,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void m_brakeWayUp(){
-    lowerMotor.set(Constants.BRAKE_SPEED);
+    lowerMotor.set(Constants.BRAKE_UP_SPEED);
   }
 
   public void m_raise(){

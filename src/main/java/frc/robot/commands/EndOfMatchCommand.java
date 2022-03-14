@@ -5,16 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class AutoCommand extends CommandBase {
-  private final DriveTrainSubsystem sub_driveTrainSubsystem;
-
-  /** Creates a new AutoCommand. */
-  public AutoCommand(DriveTrainSubsystem subsystem) {
+public class EndOfMatchCommand extends CommandBase {
+  /** Creates a new EndOfMatchCommand. */
+  private IntakeSubsystem sub_intakeSubsystem;
+  public EndOfMatchCommand(IntakeSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    sub_driveTrainSubsystem = subsystem;
-    addRequirements(sub_driveTrainSubsystem);
+    sub_intakeSubsystem = subsystem;
+    addRequirements(sub_intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -23,7 +22,9 @@ public class AutoCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    sub_intakeSubsystem.m_atTheEnd();
+  }
 
   // Called once the command ends or is interrupted.
   @Override

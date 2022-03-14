@@ -27,7 +27,7 @@ public final class Constants {
         public static double RELEASE_ANGLE = 70.0; //degrees from horizontal
         public static double THETA = Math.toRadians(RELEASE_ANGLE);
         public static double SLIPPERINESS = 0.4;
-        public static double LIMELIGHT_HEIGHT_OFF_GROUND = 20.125; //in
+        public static double LIMELIGHT_HEIGHT_OFF_GROUND = 22.25; //in
         public static double GOAL_HEIGHT = 104; //in
         public static double LIMELIGHT_MOUNT_ANGLE = 25.0; // in degrees
         public static double GRAVITY = -32.174;
@@ -54,15 +54,15 @@ public final class Constants {
         public static int LOWER_INTAKE_MOTOR_PORT = 2;
 
     //Motor Speeds
-        public static double INTAKE_LIFT_DOWN_SPEED = 0.38;
+        public static double INTAKE_LIFT_DOWN_SPEED = 0.4;
         public static double INTAKE_LIFT_UP_SPEED = 0.35;
-        public static double BRAKE_SPEED = 0.03; 
+        public static double BRAKE_SPEED = 0.04; 
+        public static double BRAKE_UP_SPEED = 0.07;
         public static double INTAKE_SPEED = 0.6;
         public static double OUTTAKE_SPEED = -0.7;
     
     //Timer
-        public static double BRAKE_TIME = 0.5;
-        public static double RAISE_TIME = 1.0;
+        public static double RAISE_TIME = 5;
  
     //IR Sensors
         public static int INTAKE_UPPER_IR_PORT = 8;
@@ -98,8 +98,8 @@ public final class Constants {
     //Drive related constants
         public static double DRIVE_SENSITIVITY_CONSTANT = 1;
         public static double TURN_ADJUST = 0.4;
-        public static double TRANSLATION_DEADBAND = 0.4;
-        public static double TURN_DEADBAND = 0.3;
+        public static double TRANSLATION_DEADBAND = 0.2;
+        public static double TURN_DEADBAND = 0.4;
 
     //PID Constants
         public static double KP_DRIVE_AIM = 0.15;
@@ -131,8 +131,7 @@ public final class Constants {
         public static int FEED_IN_BUTTON = 3;
         public static int FEED_OUT_BUTTON = 5;
         public static int TURN_OFF_LIMELIGHT_BUTTON = 4;
-
-
+        public static int END_OF_MATCH_BUTTON = 7;
 /*
 --------------------------------------------------------PID Constants-----------------------------------------------------------------------
 */

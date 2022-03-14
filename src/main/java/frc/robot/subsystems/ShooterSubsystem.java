@@ -96,7 +96,8 @@ public class ShooterSubsystem extends SubsystemBase {
         Math.tan(Math.toRadians(angleToGoal) + Math.toRadians(Constants.LIMELIGHT_MOUNT_ANGLE));
     xDisplacement += 10; //Distance between shooter and limelight
     xDisplacement /= 12.0; //To feet
-    xDisplacement += 3; //Adding the radius of the hoop
+    xDisplacement += 4; //Adding the radius of the hoop
+    
     SmartDashboard.putNumber("DISTANCE", xDisplacement);
     numerator = Constants.GRAVITY * xDisplacement * xDisplacement;
     denominator = 2.0 * (((Constants.GOAL_HEIGHT / 12.0) - (Constants.SHOOTER_HEIGHT_OFF_GROUND / 12.0)) - (xDisplacement * Math.tan(Constants.THETA))) 

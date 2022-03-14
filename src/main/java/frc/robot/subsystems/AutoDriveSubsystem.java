@@ -60,7 +60,7 @@ double rpm = 6380;//dont know we'll find that later
 		leftFrontDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
 		leftFrontDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
 		leftFrontDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		leftFrontDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.AUTO_ERROR, AutoConstants.AUTO_TIMEOUT_MS);
+		leftFrontDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, 2048, AutoConstants.AUTO_TIMEOUT_MS);
 		leftFrontDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
     leftFrontDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
 		leftFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
@@ -73,7 +73,7 @@ double rpm = 6380;//dont know we'll find that later
 		rightFrontDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
 		rightFrontDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
 		rightFrontDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		rightFrontDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.AUTO_ERROR, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, 2048, AutoConstants.AUTO_TIMEOUT_MS);
 		rightFrontDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
     rightFrontDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
 		rightFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
@@ -86,7 +86,7 @@ double rpm = 6380;//dont know we'll find that later
 		leftBackDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
 		leftBackDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
 	  leftBackDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		leftBackDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.AUTO_ERROR, AutoConstants.AUTO_TIMEOUT_MS);
+		leftBackDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, 2048, AutoConstants.AUTO_TIMEOUT_MS);
 		leftBackDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
     leftBackDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
 		leftBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
@@ -99,81 +99,41 @@ double rpm = 6380;//dont know we'll find that later
 		rightBackDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
 		rightBackDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
 		rightBackDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		rightBackDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.AUTO_ERROR, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, 2048, AutoConstants.AUTO_TIMEOUT_MS);
 		rightBackDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
     rightBackDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
 		rightBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
     rightBackDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
   }
-  public void m_drive(double distance)
+  public void m_drive(double setpoint)
   {
-    double y = ty.getDouble(0.0);
-    double heading_error = -y;
-    double setpoint = distance * 2048;
-    //rpm = some funky equation
+ 
     
-    SmartDashboard.putNumber("rpm", AutoConstants.RPM_IN_AUTO);
-
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.RPM_IN_AUTO;
-    //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
-    //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
-
-    leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    leftFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
     rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
-    leftBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    leftBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
     rightBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
-   /*SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));//going off of the left one right now but idk
-   
-   String motorState;
-   if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) > 0){
-     motorState = "forward";
-   }else if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) == 0){
-     motorState = "stopped";
-   }else{
-     motorState = "reverse";
-   }
-
-   SmartDashboard.putString("Motor State", motorState);*/
+  
 
   }
   
   public void m_turn(boolean right, double degrees)
   {
-    double y = ty.getDouble(0.0);
-    double heading_error = -y;
     double setpoint = degrees;
-    //rpm = some funky equation
-    
-    SmartDashboard.putNumber("rpm", AutoConstants.RPM_IN_AUTO);
 
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * AutoConstants.RPM_IN_AUTO;
-    //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
-    //Right now I'm putting the motors at desired rpm for testing purposes 6380 or whatever number is after (2048 / 600) will change to rpm
+
     if (right){
     leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
-    rightFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
+    rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     leftBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
-    rightBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
+    rightBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     }
     else{
     leftFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
-    rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    rightFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
     leftBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
-    rightBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    rightBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
     }
-
-   /*SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity()));
-   
-   String motorState;
-   if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) > 0){
-     motorState = "forward";
-   }else if(leftFrontDriveMotor.getSelectedSensorVelocity(AutoConstants.AUTO_PID_LOOP_IDX) == 0){
-     motorState = "stopped";
-   }else{
-     motorState = "reverse"; 
-   }
-
-   SmartDashboard.putString("Motor State", motorState);*/
 
   }
   
@@ -211,7 +171,5 @@ double rpm = 6380;//dont know we'll find that later
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    
   }
 }
