@@ -15,6 +15,8 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -37,6 +39,10 @@ public class ShooterSubsystem extends SubsystemBase {
  private static double rpm;
  private static double averageRPM;
  private static int count = 0;
+
+ private ShuffleboardTab tab = Shuffleboard.getTab("Shooter");
+ private NetworkTableEntry testRPM =tab.add("RPM", 0).getEntry();
+
 
  private static TalonFX LEFT_FRONT_DRIVE_MOTOR = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
  private static TalonFX LEFT_BACK_DRIVE_MOTOR = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
@@ -152,9 +158,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void m_shoot()
   {    
-    SmartDashboard.putNumber("Set rpm", averageRPM);
-
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;
+    double setRPM = testRPM.getDouble(4500.0);
+    SmartDashboard.putNumber("Set RPM", setRPM);
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * setRPM; //TODO: Set back to average RPM
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
 
     shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);

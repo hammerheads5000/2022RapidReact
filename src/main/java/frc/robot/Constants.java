@@ -55,10 +55,10 @@ public final class Constants {
 
     //Motor Speeds
         public static double INTAKE_LIFT_DOWN_SPEED = 0.45;
-        public static double INTAKE_LIFT_UP_SPEED = 0.5;
+        public static double INTAKE_LIFT_UP_SPEED = 0.48;
         public static double BRAKE_SPEED = 0.04; 
         public static double BRAKE_UP_SPEED = 0.0;
-        public static double INTAKE_SPEED = 0.30;
+        public static double INTAKE_SPEED = 0.40;
         public static double OUTTAKE_SPEED = -0.7;
     
     //Timer
@@ -80,6 +80,7 @@ public final class Constants {
     //Motor speed
         public static double FEED_MOTOR_SPEED = 0.7;
         public static double WHILE_INTAKE_FEED_MOTOR_SPEED = 0.2;
+        public static double FEED_MOTOR_SPEED_WHILE_SHOOT = 0.5;
     //IR Sensors
         public static int IR_SENSOR_1_PORT = 0;
         public static int IR_SENSOR_2_PORT = 2;
