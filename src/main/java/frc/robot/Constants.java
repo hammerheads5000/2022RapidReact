@@ -27,7 +27,7 @@ public final class Constants {
         public static double RELEASE_ANGLE = 70.0; //degrees from horizontal
         public static double THETA = Math.toRadians(RELEASE_ANGLE);
         public static double SLIPPERINESS = 0.4;
-        public static double LIMELIGHT_HEIGHT_OFF_GROUND = 22.25; //in
+        public static double LIMELIGHT_HEIGHT_OFF_GROUND = 22.5; //in
         public static double GOAL_HEIGHT = 104; //in
         public static double LIMELIGHT_MOUNT_ANGLE = 25.0; // in degrees
         public static double GRAVITY = -32.174;
@@ -54,16 +54,15 @@ public final class Constants {
         public static int LOWER_INTAKE_MOTOR_PORT = 2;
 
     //Motor Speeds
-        public static double INTAKE_LIFT_DOWN_SPEED = 0.4;
-        public static double INTAKE_LIFT_UP_SPEED = 0.35;
+        public static double INTAKE_LIFT_DOWN_SPEED = 0.45;
+        public static double INTAKE_LIFT_UP_SPEED = 0.48;
         public static double BRAKE_SPEED = 0.04; 
-        public static double BRAKE_UP_SPEED = 0.07;
-        public static double INTAKE_SPEED = 0.6;
+        public static double BRAKE_UP_SPEED = 0.0;
+        public static double INTAKE_SPEED = 0.40;
         public static double OUTTAKE_SPEED = -0.7;
     
     //Timer
-        public static double RAISE_TIME = 5;
- 
+        public static double RAISE_UP_TIME = 0.5;
     //IR Sensors
         public static int INTAKE_UPPER_IR_PORT = 8;
         public static int INTAKE_LOWER_IR_PORT = 7;
@@ -81,6 +80,7 @@ public final class Constants {
     //Motor speed
         public static double FEED_MOTOR_SPEED = 0.7;
         public static double WHILE_INTAKE_FEED_MOTOR_SPEED = 0.2;
+        public static double FEED_MOTOR_SPEED_WHILE_SHOOT = 0.5;
     //IR Sensors
         public static int IR_SENSOR_1_PORT = 0;
         public static int IR_SENSOR_2_PORT = 2;
