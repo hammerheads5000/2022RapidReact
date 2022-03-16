@@ -36,7 +36,7 @@ public final class Constants {
         public static int SHOOTER_MOTOR_PORT = 1;
 
     //PID Constants
-        public static int SHOOTER_ERROR = 60;
+        public static int SHOOTER_ERROR =30;
 
         //PIDF - IZone - PeakOutput
             public static Gains kGains = new Gains(0.18, 0.0, 0.09, 0.047,  0,  1.0);
