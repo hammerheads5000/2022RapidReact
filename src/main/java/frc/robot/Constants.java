@@ -62,7 +62,7 @@ public final class Constants {
         public static double OUTTAKE_SPEED = -0.7;
     
     //Timer
-        public static double RAISE_UP_TIME = 0.5;
+        public static double RAISE_UP_TIME = 0.3;
     //IR Sensors
         public static int INTAKE_UPPER_IR_PORT = 8;
         public static int INTAKE_LOWER_IR_PORT = 7;
