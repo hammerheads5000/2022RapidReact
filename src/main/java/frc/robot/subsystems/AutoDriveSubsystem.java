@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -40,7 +41,8 @@ public class AutoDriveSubsystem extends SubsystemBase {
   private static TalonFX leftBackDriveMotor = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
   private static TalonFX rightFrontDriveMotor = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
   private static TalonFX rightBackDriveMotor = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
-
+  AnalogGyro gyro = new AnalogGyro(0);
+  
   
 double rpm = 6380;//dont know we'll find that later
 
@@ -119,8 +121,7 @@ double rpm = 6380;//dont know we'll find that later
   
   public void m_turn(boolean right, double degrees)
   {
-    double setpoint = degrees;
-
+    double setpoint = degrees + gyro.getAngle();
 
     if (right){
     leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
@@ -136,7 +137,6 @@ double rpm = 6380;//dont know we'll find that later
     }
 
   }
-  
   
   public void m_stopSpinning()
   {

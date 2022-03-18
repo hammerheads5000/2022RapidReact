@@ -42,18 +42,15 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     super(
     //new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_FIRST_TURN, AutoConstants.TURN_RIGHT),
     new ParallelDeadlineGroup( 
-      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH)));
-      //new IntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
-   // ),
-    /*
+      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH),
+      new IntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
+    ),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
     new FeedInManualCommand(sub_feedSubsystem),
     new AutoShootCommand(sub_shooterSubsystem, AutoConstants.BOTTOM_PATH_RPM),
     new AutoShootCommand(sub_shooterSubsystem, AutoConstants.BOTTOM_PATH_RPM),
     new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_THIRD_TURN, AutoConstants.TURN_LEFT),
-    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_BOTTOM_PATH)  
-    */
-    //)
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_BOTTOM_PATH));
     
     /*
     super(
