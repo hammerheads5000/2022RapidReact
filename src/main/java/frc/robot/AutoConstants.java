@@ -18,17 +18,17 @@ public class AutoConstants {
     public static double MAIN_MIDDLE_PATH = 20 * (140.5396742 / (2 * Math.PI * 6));
     public static double BOTTOM_PATH = 20 * (30 / (2 * Math.PI * 6)); //6 is radius of wheel
     public static double MAIN_BOTTOM_PATH = 20 * (217.3292433 / (2 * Math.PI * 6));
-    public static double TOP_PATH_FIRST_TURN = 7.947377778;//1.397
-    public static double TOP_PATH_SECOND_TURN = 958.7541333;//168.531 angle //958.7541333 amount of spinning the motor must do
-    public static double TOP_PATH_THIRD_TURN = 579.4759111;//101.861 //579.4759111
-    public static double TOP_MIDDLE_PATH_FIRST_TURN = 9.580088889;//1.684
-    public static double BOTTOM_MIDDLE_PATH_FIRST_TURN = 11.81582222;//2.077
-    public static double TOP_MIDDLE_PATH_SECOND_TURN = 794.7150222;//139.696 //794.7150222
-    public static double BOTTOM_MIDDLE_PATH_SECOND_TURN = 957.9576889;//168.391 //957.9576889
-    public static double MIDDLE_PATH_THIRD_TURN = 857.2302222;//150.685 
-    public static double BOTTOM_PATH_FIRST_TURN = 6.519466667;//1.146
-    public static double BOTTOM_PATH_SECOND_TURN = 972.288;//170.91 //972.288
-    public static double BOTTOM_PATH_THIRD_TURN = 527.6444444;//92.75 //527.6444444 
+    public static double TOP_PATH_FIRST_TURN = 1.397;
+    public static double TOP_PATH_SECOND_TURN = 168.531;
+    public static double TOP_PATH_THIRD_TURN = 101.861;
+    public static double TOP_MIDDLE_PATH_FIRST_TURN = 1.684;
+    public static double BOTTOM_MIDDLE_PATH_FIRST_TURN = 2.077;
+    public static double TOP_MIDDLE_PATH_SECOND_TURN = 139.696;
+    public static double BOTTOM_MIDDLE_PATH_SECOND_TURN = 168.391;
+    public static double MIDDLE_PATH_THIRD_TURN = 150.685;
+    public static double BOTTOM_PATH_FIRST_TURN = 1.146;
+    public static double BOTTOM_PATH_SECOND_TURN = 170.91; 
+    public static double BOTTOM_PATH_THIRD_TURN = 92.75; 
     public static int TOP_PATH_RPM = 0;
     public static int MIDDLE_TOP_PATH_RPM = 0;
     public static int MIDDLE_BOTTOM_PATH_RPM = 0;
@@ -36,4 +36,5 @@ public class AutoConstants {
     public static int RPM_IN_AUTO = 6380;
     public static boolean TURN_RIGHT = true;
     public static boolean TURN_LEFT = false;
+    public static int GYRO_PORT = 0;
 }

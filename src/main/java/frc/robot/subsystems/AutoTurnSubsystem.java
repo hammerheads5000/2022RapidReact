@@ -32,11 +32,11 @@ import edu.wpi.first.networktables.NetworkTableInstance;
  
 
 
-public class AutoDriveSubsystem extends SubsystemBase {
-  /** Creates a new AutoDriveSubsystem. */
+public class AutoTurnSubsystem extends SubsystemBase {
+  /** Creates a new AutoTurnSubsystem. */
   //(x units/100ms) = (rpm * Constants.K_SENSOR_UNITS_PER_ROTATION/600(units/100ms))
 
-
+  private static AnalogGyro gyro = new AnalogGyro(AutoConstants.GYRO_PORT);
   private static TalonFX leftFrontDriveMotor = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
   private static TalonFX leftBackDriveMotor = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
   private static TalonFX rightFrontDriveMotor = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
@@ -52,8 +52,7 @@ double rpm = 6380;//dont know we'll find that later
  NetworkTableEntry ty = table.getEntry("ty");
  //probably not gonna apply at all ^
   
-  public AutoDriveSubsystem() {
-    
+  public AutoTurnSubsystem() {
     
     leftFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
     leftFrontDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
@@ -93,7 +92,7 @@ double rpm = 6380;//dont know we'll find that later
     leftBackDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
 		leftBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
     leftBackDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
-  
+    
     rightBackDriveMotor.setNeutralMode(NeutralMode.Coast);
     rightBackDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     rightBackDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
@@ -107,15 +106,32 @@ double rpm = 6380;//dont know we'll find that later
 		rightBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
     rightBackDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
   }
-  public void m_drive(double setpoint)
-  {
  
-    
-    leftFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
-    rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
-    leftBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
-    rightBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
   
+  public void m_turn(boolean right, double degrees)
+  {
+    double setpoint = degrees;
+
+    if (right){
+    leftFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
+    rightFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
+    leftBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
+    rightBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
+    leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    leftBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    rightBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    }
+    else{
+    leftFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
+    rightFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
+    leftBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
+    rightBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
+    leftFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
+    rightFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
+    leftBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
+    rightBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
+    }
 
   }
   
@@ -135,18 +151,22 @@ double rpm = 6380;//dont know we'll find that later
   }
 
   public static double m_getFrontLeftPosition(){
+    leftFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
     return leftFrontDriveMotor.getSelectedSensorPosition();
   }
 
   public static double m_getFrontRightPosition(){
+    rightFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
     return rightFrontDriveMotor.getSelectedSensorPosition();
   }
 
   public static double m_getBackLeftPosition(){
+    leftBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
     return leftBackDriveMotor.getSelectedSensorPosition();
   }
 
   public static double m_getBackRightPosition(){
+    rightBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
     return rightBackDriveMotor.getSelectedSensorPosition();
   }
 
@@ -154,3 +174,4 @@ double rpm = 6380;//dont know we'll find that later
   public void periodic() {
   }
 }
+
