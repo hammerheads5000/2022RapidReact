@@ -52,6 +52,8 @@ public class RobotContainer {
   //Feed commands
   private final FeedInManualCommand cmd_feedInManualCommand = new FeedInManualCommand(sub_feedSubsystem);
   private final FeedOutCommand cmd_feedOutCommand = new FeedOutCommand(sub_feedSubsystem);
+  private final OrganizeFeedCommand cmd_organizeFeedCommand = new OrganizeFeedCommand(sub_feedSubsystem);
+
 
   //Intake commands
   private final IntakeCommand cmd_intakeCommand = new IntakeCommand(sub_intakeSubsystem, sub_feedSubsystem);
@@ -117,6 +119,8 @@ public class RobotContainer {
     JoystickButton b_feedOutButton = new JoystickButton(buttonsJoystick, Constants.FEED_OUT_BUTTON);
     b_feedOutButton.whenHeld(cmd_feedOutCommand, Constants.NOT_INTERRUPTIBLE);
 
+    JoystickButton b_organizeFeedButton = new JoystickButton(buttonsJoystick, Constants.ORGANIZE_FEED_BUTTON);
+    b_organizeFeedButton.whenHeld(cmd_organizeFeedCommand, Constants.NOT_INTERRUPTIBLE);
     //Intake buttons!
     JoystickButton b_intakeButton = new JoystickButton(driveJoystick, Constants.INTAKE_BUTTON);
     b_intakeButton.whenHeld(cmd_intakeCommand, Constants.NOT_INTERRUPTIBLE);

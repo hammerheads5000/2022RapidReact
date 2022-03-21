@@ -7,14 +7,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FeedSubsystem;
 
-public class FeedOutCommand extends CommandBase {
-  /** Creates a new FeedOutCommand. */
-  private FeedSubsystem sub_feedSubsystem;  
-  public FeedOutCommand(FeedSubsystem subsystem) {
+public class OrganizeFeedCommand extends CommandBase {
+  /** Creates a new OrganizeFeedCommand. */
+  private FeedSubsystem sub_feedSubsystem;
+  public OrganizeFeedCommand(FeedSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_feedSubsystem = subsystem;
     addRequirements(sub_feedSubsystem);
   }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
@@ -22,7 +23,8 @@ public class FeedOutCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    sub_feedSubsystem.m_feedOut();
+    sub_feedSubsystem.m_shooterSideFeedOut();
+    sub_feedSubsystem.m_intakeSideFeedMotor();
   }
 
   // Called once the command ends or is interrupted.

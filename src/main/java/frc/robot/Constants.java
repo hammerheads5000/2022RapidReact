@@ -13,7 +13,6 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  //TODO: Two RPM contigency things, bumper and safezone
 /*
 --------------------------------------------------Shooter Constants-------------------------------------------------------------------
 */
@@ -141,7 +140,7 @@ public final class Constants {
         public static int END_OF_MATCH_BUTTON = 7;
         public static int BUMPER_SHOT_BUTTON = 8;
         public static int SAFE_ZONE_SHOT_BUTTON = 9;
-
+        public static int ORGANIZE_FEED_BUTTON = 10;
 /*
 --------------------------------------------------------PID Constants-----------------------------------------------------------------------
 */
