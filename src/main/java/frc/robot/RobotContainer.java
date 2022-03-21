@@ -62,6 +62,8 @@ public class RobotContainer {
   //Shooter commands
   private final AimCommand cmd_aimCommand = new AimCommand(sub_shooterSubsystem);
   private final ShooterCommand cmd_shooterCommand = new ShooterCommand(sub_shooterSubsystem);
+  private final BumperShotCommand cmd_bumperShotCommand = new BumperShotCommand(sub_shooterSubsystem);
+  private final SafeZoneShotCommand cmd_safeZoneShotCommand = new SafeZoneShotCommand(sub_shooterSubsystem);
 
   //Camera commands
   private final InitializeCamerasCommand cmd_initializeCamerasCommand = new InitializeCamerasCommand(sub_cameraSubsystem);
@@ -127,6 +129,11 @@ public class RobotContainer {
     //Shooter buttons!
     JoystickButton b_shootButton = new JoystickButton(buttonsJoystick, Constants.SHOOT_BUTTON);
     b_shootButton.whileHeld(cmd_shooterCommand, Constants.NOT_INTERRUPTIBLE);
+    JoystickButton b_bumperShotButton = new JoystickButton(buttonsJoystick, Constants.BUMPER_SHOT_BUTTON);
+    b_bumperShotButton.whileHeld(cmd_bumperShotCommand, Constants.NOT_INTERRUPTIBLE);
+    JoystickButton b_safeZoneShotButton = new JoystickButton(buttonsJoystick, Constants.SAFE_ZONE_SHOT_BUTTON);
+    b_safeZoneShotButton.whileHeld(cmd_safeZoneShotCommand, Constants.NOT_INTERRUPTIBLE);
+
 
     JoystickButton b_aimButton = new JoystickButton(buttonsJoystick, Constants.AIM_BUTTON);
     b_aimButton.whileHeld(cmd_aimCommand, Constants.NOT_INTERRUPTIBLE);

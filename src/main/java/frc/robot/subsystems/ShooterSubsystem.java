@@ -165,21 +165,19 @@ public class ShooterSubsystem extends SubsystemBase {
 
     shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
 
-   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * shooterMotor.getSelectedSensorVelocity()));
+   SmartDashboard.putNumber("Actual RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * shooterMotor.getSelectedSensorVelocity()));
    
-   String motorState;
-   if(shooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) > 0){
-     motorState = "forward";
-   }else if(shooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) == 0){
-     motorState = "stopped";
-   }else{
-     motorState = "reverse";
-   }
-
-   SmartDashboard.putString("Motor State", motorState);
-
   }
 
+  public void m_bumperShot(){
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * Constants.BUMPER_RPM;
+    shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
+  }
+
+  public void m_safeZoneShot(){
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * Constants.SAFE_ZONE_RPM;
+    shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
+  }
 
   public void m_stopSpinning()
   {

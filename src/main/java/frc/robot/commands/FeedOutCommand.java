@@ -15,7 +15,7 @@ public class FeedOutCommand extends CommandBase {
     sub_feedSubsystem = subsystem;
     addRequirements(sub_feedSubsystem);
   }
-
+//TODO: Make a version that just does shooterside
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}

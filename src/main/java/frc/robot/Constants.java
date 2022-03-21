@@ -13,7 +13,7 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  
+  //TODO: Two RPM contigency things, bumper and safezone
 /*
 --------------------------------------------------Shooter Constants-------------------------------------------------------------------
 */
@@ -34,6 +34,10 @@ public final class Constants {
 
     //Motor Ports
         public static int SHOOTER_MOTOR_PORT = 1;
+
+    //Set RPM Constants
+        public static double BUMPER_RPM = 3500;
+        public static double SAFE_ZONE_RPM = 4800; //TODO: Get the right number
 
     //PID Constants
         public static int SHOOTER_ERROR = 30;
@@ -126,7 +130,7 @@ public final class Constants {
         public static int INIT_CAMERAS_BUTTON = 2;
         public static int SET_CAMERA_ONE_BUTTON = 3;
         public static int SET_CAMERA_TWO_BUTTON = 4;
-        
+
     //Buttons Joystick Buttons
         public static int SHOOT_BUTTON = 1;
         public static int AIM_BUTTON = 2;
@@ -135,7 +139,8 @@ public final class Constants {
         public static int FEED_OUT_BUTTON = 5;
         public static int OUTTAKE_BUTTON = 6;
         public static int END_OF_MATCH_BUTTON = 7;
-
+        public static int BUMPER_SHOT_BUTTON = 8;
+        public static int SAFE_ZONE_SHOT_BUTTON = 9;
 
 /*
 --------------------------------------------------------PID Constants-----------------------------------------------------------------------
