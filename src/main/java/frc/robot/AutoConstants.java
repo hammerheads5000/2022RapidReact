@@ -37,4 +37,6 @@ public class AutoConstants {
     public static boolean TURN_RIGHT = true;
     public static boolean TURN_LEFT = false;
     public static int GYRO_PORT = 0;
+    public static double EASY_PATH_DISTANCE = 20 * (5 / (2 * Math.PI * 6));
+    public static int EASY_PATH_RPM = 0;
 }
