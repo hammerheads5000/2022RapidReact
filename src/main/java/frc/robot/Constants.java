@@ -126,21 +126,20 @@ public final class Constants {
 
     //Drive Joystick Buttons
         public static int INTAKE_BUTTON = 1;
-        public static int INIT_CAMERAS_BUTTON = 2;
+        public static int INIT_CAMERAS_BUTTON = 5;
         public static int SET_CAMERA_ONE_BUTTON = 3;
         public static int SET_CAMERA_TWO_BUTTON = 4;
+        public static int OUTTAKE_BUTTON = 6;
 
     //Buttons Joystick Buttons
         public static int SHOOT_BUTTON = 1;
         public static int AIM_BUTTON = 2;
-        public static int FEED_IN_BUTTON = 3;
-        public static int TURN_OFF_LIMELIGHT_BUTTON = 4;
+        public static int FEED_IN_BUTTON = 4;
         public static int FEED_OUT_BUTTON = 5;
-        public static int OUTTAKE_BUTTON = 6;
         public static int END_OF_MATCH_BUTTON = 7;
-        public static int BUMPER_SHOT_BUTTON = 8;
-        public static int SAFE_ZONE_SHOT_BUTTON = 9;
-        public static int ORGANIZE_FEED_BUTTON = 10;
+        public static int BUMPER_SHOT_BUTTON = 11;
+        public static int SAFE_ZONE_SHOT_BUTTON = 10;
+        public static int ORGANIZE_FEED_BUTTON = 3;
 /*
 --------------------------------------------------------PID Constants-----------------------------------------------------------------------
 */

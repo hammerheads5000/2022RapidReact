@@ -20,7 +20,7 @@ public class CameraSubsystem extends SubsystemBase {
 
   public void m_init(){
     camera1 = CameraServer.startAutomaticCapture(0);
-    camera2 = CameraServer.startAutomaticCapture(1);
+   // camera2 = CameraServer.startAutomaticCapture(1);
 
     cameraSelection = NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
   }

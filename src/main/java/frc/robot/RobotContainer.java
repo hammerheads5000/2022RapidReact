@@ -99,7 +99,6 @@ public class RobotContainer {
       () -> -driveJoystick.getRawAxis(Constants.Y), 
       () -> -driveJoystick.getRawAxis(Constants.Z)));
 
-     // sub_feedSubsystem.setDefaultCommand(cmd_feedInCommand);
   }
 
 
@@ -127,7 +126,7 @@ public class RobotContainer {
     b_intakeButton.whenInactive(cmd_raiseIntakeCommand, Constants.INTERRUPTIBLE);
     JoystickButton b_endOfMatchButton = new JoystickButton(buttonsJoystick, Constants.END_OF_MATCH_BUTTON);
     b_endOfMatchButton.whenPressed(cmd_endOfMatchCommand, Constants.NOT_INTERRUPTIBLE);
-    JoystickButton b_outtakeButton = new JoystickButton(buttonsJoystick, Constants.OUTTAKE_BUTTON);
+    JoystickButton b_outtakeButton = new JoystickButton(driveJoystick, Constants.OUTTAKE_BUTTON);
     b_outtakeButton.whenHeld(cmd_intakeOutCommand, Constants.NOT_INTERRUPTIBLE);
 
     //Shooter buttons!

@@ -9,7 +9,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeOutCommand extends CommandBase {
   /** Creates a new IntakeOutCommand. */
-  public IntakeSubsystem sub_intakeSubsystem;
+  private IntakeSubsystem sub_intakeSubsystem;
   public IntakeOutCommand(IntakeSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_intakeSubsystem = subsystem;
@@ -28,7 +28,9 @@ public class IntakeOutCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    sub_intakeSubsystem.m_turnOffWheel();
+  }
 
   // Returns true when the command should end.
   @Override
