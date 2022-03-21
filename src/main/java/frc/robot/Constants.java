@@ -123,7 +123,10 @@ public final class Constants {
 
     //Drive Joystick Buttons
         public static int INTAKE_BUTTON = 1;
-    
+        public static int INIT_CAMERAS_BUTTON = 2;
+        public static int SET_CAMERA_ONE_BUTTON = 3;
+        public static int SET_CAMERA_TWO_BUTTON = 4;
+        
     //Buttons Joystick Buttons
         public static int SHOOT_BUTTON = 1;
         public static int AIM_BUTTON = 2;
