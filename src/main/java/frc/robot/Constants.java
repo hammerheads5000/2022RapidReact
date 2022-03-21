@@ -36,7 +36,7 @@ public final class Constants {
         public static int SHOOTER_MOTOR_PORT = 1;
 
     //PID Constants
-        public static int SHOOTER_ERROR = 60;
+        public static int SHOOTER_ERROR = 30;
 
         //PIDF - IZone - PeakOutput
             public static Gains kGains = new Gains(0.18, 0.0, 0.09, 0.047,  0,  1.0);
@@ -57,12 +57,12 @@ public final class Constants {
         public static double INTAKE_LIFT_DOWN_SPEED = 0.45;
         public static double INTAKE_LIFT_UP_SPEED = 0.48;
         public static double BRAKE_SPEED = 0.04; 
-        public static double BRAKE_UP_SPEED = 0.0;
+        public static double BRAKE_UP_SPEED = 0.01;
         public static double INTAKE_SPEED = 0.40;
         public static double OUTTAKE_SPEED = -0.7;
     
     //Timer
-        public static double RAISE_UP_TIME = 0.5;
+        public static double RAISE_UP_TIME = 0.3;
     //IR Sensors
         public static int INTAKE_UPPER_IR_PORT = 8;
         public static int INTAKE_LOWER_IR_PORT = 7;
@@ -123,15 +123,17 @@ public final class Constants {
 
     //Drive Joystick Buttons
         public static int INTAKE_BUTTON = 1;
-        public static int OUTTAKE_BUTTON = 2;
     
     //Buttons Joystick Buttons
         public static int SHOOT_BUTTON = 1;
         public static int AIM_BUTTON = 2;
         public static int FEED_IN_BUTTON = 3;
-        public static int FEED_OUT_BUTTON = 5;
         public static int TURN_OFF_LIMELIGHT_BUTTON = 4;
+        public static int FEED_OUT_BUTTON = 5;
+        public static int OUTTAKE_BUTTON = 6;
         public static int END_OF_MATCH_BUTTON = 7;
+
+
 /*
 --------------------------------------------------------PID Constants-----------------------------------------------------------------------
 */

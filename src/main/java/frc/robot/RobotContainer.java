@@ -53,7 +53,7 @@ public class RobotContainer {
   private final IntakeCommand cmd_intakeCommand = new IntakeCommand(sub_intakeSubsystem, sub_feedSubsystem);
   private final RaiseIntakeCommand cmd_raiseIntakeCommand = new RaiseIntakeCommand(sub_intakeSubsystem);
   private final EndOfMatchCommand cmd_endOfMatchCommand = new EndOfMatchCommand(sub_intakeSubsystem);
-
+  private final IntakeOutCommand cmd_intakeOutCommand = new IntakeOutCommand(sub_intakeSubsystem);
 
   //Shooter commands
   private final AimCommand cmd_aimCommand = new AimCommand(sub_shooterSubsystem);
@@ -113,7 +113,8 @@ public class RobotContainer {
     b_intakeButton.whenInactive(cmd_raiseIntakeCommand, Constants.INTERRUPTIBLE);
     JoystickButton b_endOfMatchButton = new JoystickButton(buttonsJoystick, Constants.END_OF_MATCH_BUTTON);
     b_endOfMatchButton.whenPressed(cmd_endOfMatchCommand, Constants.NOT_INTERRUPTIBLE);
-
+    JoystickButton b_outtakeButton = new JoystickButton(buttonsJoystick, Constants.OUTTAKE_BUTTON);
+    b_outtakeButton.whenHeld(cmd_intakeOutCommand, Constants.NOT_INTERRUPTIBLE);
 
     //Shooter buttons!
     JoystickButton b_shootButton = new JoystickButton(buttonsJoystick, Constants.SHOOT_BUTTON);
