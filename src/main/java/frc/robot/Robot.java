@@ -4,7 +4,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -20,7 +24,10 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-
+  UsbCamera camera1;
+  UsbCamera camera2;
+  Joystick joy1 = new Joystick(0);
+  NetworkTableEntry cameraSelection;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -30,7 +37,10 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    
+    camera1 = CameraServer.startAutomaticCapture(0);
+    camera2 = CameraServer.startAutomaticCapture(1);
+
+    cameraSelection = NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
 
 
 
@@ -50,6 +60,14 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+
+    if (joy1.getTriggerPressed()) {
+      System.out.println("Setting camera 2");
+      cameraSelection.setString(camera2.getName());
+  } else if (joy1.getTriggerReleased()) {
+      System.out.println("Setting camera 1");
+      cameraSelection.setString(camera1.getName());
+  }
     CommandScheduler.getInstance().run();
   }
 

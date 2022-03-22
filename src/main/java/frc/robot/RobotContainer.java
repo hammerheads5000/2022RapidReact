@@ -41,9 +41,6 @@ public class RobotContainer {
 
   private final AutoDriveSubsystem sub_autoDriveSubsystem = new AutoDriveSubsystem();
 
-  //Camera Subsystem
-  
-  private final CameraSubsystem sub_cameraSubsystem = new CameraSubsystem();
 
   /*
   ---------------------------------------------------------Commands------------------------------------------------------------------------
@@ -67,10 +64,6 @@ public class RobotContainer {
   private final BumperShotCommand cmd_bumperShotCommand = new BumperShotCommand(sub_shooterSubsystem);
   private final SafeZoneShotCommand cmd_safeZoneShotCommand = new SafeZoneShotCommand(sub_shooterSubsystem);
 
-  //Camera commands
-  private final InitializeCamerasCommand cmd_initializeCamerasCommand = new InitializeCamerasCommand(sub_cameraSubsystem);
-  private final SetCameraOneCommand cmd_setCameraOneCommand = new SetCameraOneCommand(sub_cameraSubsystem);
-  private final SetCameraTwoCommand cmd_setCameraTwoCommand = new SetCameraTwoCommand(sub_cameraSubsystem);
 
   //Auto commands
   private final AutoCommandGroup cmd_autoCommand = new AutoCommandGroup(
@@ -141,13 +134,7 @@ public class RobotContainer {
     JoystickButton b_aimButton = new JoystickButton(buttonsJoystick, Constants.AIM_BUTTON);
     b_aimButton.whileHeld(cmd_aimCommand, Constants.NOT_INTERRUPTIBLE);
 
-    //Camera buttons
-    JoystickButton b_initCamerasButton = new JoystickButton(driveJoystick, Constants.INIT_CAMERAS_BUTTON);
-    b_initCamerasButton.whenPressed(cmd_initializeCamerasCommand, Constants.NOT_INTERRUPTIBLE);
-    JoystickButton b_setCameraOneButton = new JoystickButton(driveJoystick, Constants.SET_CAMERA_ONE_BUTTON);
-    b_setCameraOneButton.whenPressed(cmd_setCameraOneCommand, Constants.NOT_INTERRUPTIBLE);
-    JoystickButton b_setCameraTwoButton = new JoystickButton(driveJoystick, Constants.SET_CAMERA_TWO_BUTTON);
-    b_setCameraTwoButton.whenPressed(cmd_setCameraTwoCommand, Constants.NOT_INTERRUPTIBLE);
+
   }
 
   /**
