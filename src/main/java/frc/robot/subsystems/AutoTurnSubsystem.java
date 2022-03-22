@@ -21,6 +21,9 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.AutoConstants;
+
+import javax.management.openmbean.OpenMBeanConstructorInfoSupport;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -42,9 +45,13 @@ public class AutoTurnSubsystem extends SubsystemBase {
   private static TalonFX leftBackDriveMotor = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
   private static TalonFX rightFrontDriveMotor = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
   private static TalonFX rightBackDriveMotor = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
-  
-  
-  
+  private static double error = 0;
+  private static double output;
+  private static double setpoint;
+  private static double currentAngle;
+  private static double totalError = 0;
+  private static double previousError;
+  private static double changeInError;
 double rpm = 6380;//dont know we'll find that later
 
 
@@ -173,6 +180,17 @@ double rpm = 6380;//dont know we'll find that later
 
   @Override
   public void periodic() {
+    currentAngle = gyro.getAngle();
+    previousError = error;
+    error = (setpoint - currentAngle) / 360;
+    changeInError = error - previousError;
+    totalError += error;
+
+    output = AutoConstants.aGains.kPAuto * error + AutoConstants.aGains.kIAuto * totalError + AutoConstants.aGains.kDAuto * changeInError;
+    leftFrontDriveMotor.set(TalonFXControlMode.Position, output);
+    rightFrontDriveMotor.set(TalonFXControlMode.Position, output);
+    leftBackDriveMotor.set(TalonFXControlMode.Position, output);
+    rightBackDriveMotor.set(TalonFXControlMode.Position, output);
   }
 }
 

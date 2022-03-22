@@ -14,8 +14,10 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
@@ -36,12 +38,14 @@ public class AutoDriveSubsystem extends SubsystemBase {
   /** Creates a new AutoDriveSubsystem. */
   //(x units/100ms) = (rpm * Constants.K_SENSOR_UNITS_PER_ROTATION/600(units/100ms))
 
-
+  private static Accelerometer accelerometer = new BuiltInAccelerometer();
+  private static double prevXAccel = 0;
+  private static double prevYAccel = 0;
   private static TalonFX leftFrontDriveMotor = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
   private static TalonFX leftBackDriveMotor = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
   private static TalonFX rightFrontDriveMotor = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
   private static TalonFX rightBackDriveMotor = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
-  
+  private static boolean hasCollided = false;
   
   
 double rpm = 6380;//dont know we'll find that later
@@ -134,6 +138,10 @@ double rpm = 6380;//dont know we'll find that later
     rightBackDriveMotor.setSelectedSensorPosition(0);
   }
 
+  public static boolean getCollided(){
+    return hasCollided;
+  }
+
   public static double m_getFrontLeftPosition(){
     return leftFrontDriveMotor.getSelectedSensorPosition();
   }
@@ -152,5 +160,18 @@ double rpm = 6380;//dont know we'll find that later
 
   @Override
   public void periodic() {
+    double xAccel = accelerometer.getX();
+    double yAccel = accelerometer.getY();
+
+    // Calculates the jerk in the X and Y directions
+    // Divides by .02 because default loop timing is 20ms
+    double xJerk = (xAccel - prevXAccel)/.02;
+    double yJerk = (yAccel - prevYAccel)/.02;    
+    prevXAccel = xAccel;
+    prevYAccel = yAccel;
+    if (xJerk > AutoConstants.MAXIMUM_JERK || yJerk > AutoConstants.MAXIMUM_JERK){
+      hasCollided = true;
+    }
+
   }
 }

@@ -40,7 +40,9 @@ public class AutoDriveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
+    if (AutoDriveSubsystem.getCollided()){
+      return true;
+    }
     return false;
   }
 }
