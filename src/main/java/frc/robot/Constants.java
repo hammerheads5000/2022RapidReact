@@ -13,7 +13,6 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  
 /*
 --------------------------------------------------Shooter Constants-------------------------------------------------------------------
 */
@@ -35,6 +34,10 @@ public final class Constants {
     //Motor Ports
         public static int SHOOTER_MOTOR_PORT = 1;
 
+    //Set RPM Constants
+        public static double BUMPER_RPM = 3300;
+        public static double SAFE_ZONE_RPM = 5500; //TODO: Get the right number
+
     //PID Constants
         public static int SHOOTER_ERROR = 30;
 
@@ -54,12 +57,12 @@ public final class Constants {
         public static int LOWER_INTAKE_MOTOR_PORT = 2;
 
     //Motor Speeds
-        public static double INTAKE_LIFT_DOWN_SPEED = 0.45;
-        public static double INTAKE_LIFT_UP_SPEED = 0.48;
-        public static double BRAKE_SPEED = 0.04; 
+        public static double INTAKE_LIFT_DOWN_SPEED = 0.52;
+        public static double INTAKE_LIFT_UP_SPEED = 0.65;
+        public static double BRAKE_SPEED = 0.02; 
         public static double BRAKE_UP_SPEED = 0.01;
-        public static double INTAKE_SPEED = 0.40;
-        public static double OUTTAKE_SPEED = -0.7;
+        public static double INTAKE_SPEED = 0.30;
+        public static double OUTTAKE_SPEED = 0.7;
     
     //Timer
         public static double RAISE_UP_TIME = 0.3;
@@ -123,17 +126,21 @@ public final class Constants {
 
     //Drive Joystick Buttons
         public static int INTAKE_BUTTON = 1;
-    
+        public static int INIT_CAMERAS_BUTTON = 5;
+        public static int SET_CAMERA_ONE_BUTTON = 3;
+        public static int SET_CAMERA_TWO_BUTTON = 4;
+        public static int OUTTAKE_BUTTON = 6;
+        public static int CHANGE_CAMERA_BUTTON = 11;
+
     //Buttons Joystick Buttons
         public static int SHOOT_BUTTON = 1;
         public static int AIM_BUTTON = 2;
-        public static int FEED_IN_BUTTON = 3;
-        public static int TURN_OFF_LIMELIGHT_BUTTON = 4;
+        public static int FEED_IN_BUTTON = 4;
         public static int FEED_OUT_BUTTON = 5;
-        public static int OUTTAKE_BUTTON = 6;
         public static int END_OF_MATCH_BUTTON = 7;
-
-
+        public static int BUMPER_SHOT_BUTTON = 11;
+        public static int SAFE_ZONE_SHOT_BUTTON = 10;
+        public static int ORGANIZE_FEED_BUTTON = 3;
 /*
 --------------------------------------------------------PID Constants-----------------------------------------------------------------------
 */

@@ -43,6 +43,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
     double turningScale = turnPower;
     double power = translationPower;
 
+    SmartDashboard.putNumber("DrivePosition", leftFrontDriveMotor.getSelectedSensorPosition());
+
     if (Math.abs(turnPower) <= Constants.TURN_DEADBAND){
       if(translationPower < Constants.TRANSLATION_DEADBAND){
 

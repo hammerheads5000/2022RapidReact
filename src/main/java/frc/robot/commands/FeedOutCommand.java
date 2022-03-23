@@ -15,7 +15,6 @@ public class FeedOutCommand extends CommandBase {
     sub_feedSubsystem = subsystem;
     addRequirements(sub_feedSubsystem);
   }
-
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
