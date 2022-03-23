@@ -72,7 +72,8 @@ public class RobotContainer {
     );
     private final EasyAutoCommandGroup cmd_easyAutoCommand = new EasyAutoCommandGroup(
     sub_autoDriveSubsystem,
-    sub_shooterSubsystem
+    sub_shooterSubsystem,
+    sub_autoTurnSubsystem
     );
 
   /*private final AutoDriveCommand cmd_autoDriveCommand = new AutoDriveCommand(sub_autoDriveSubsystem);

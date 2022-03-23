@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.AutoDriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.AutoTurnSubsystem;
 import frc.robot.AutoConstants;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -16,12 +17,18 @@ import frc.robot.AutoConstants;
 public class EasyAutoCommandGroup extends SequentialCommandGroup {
   
   /** Creates a new EasyAutoCommandGroup. */
-  public EasyAutoCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, ShooterSubsystem sub_shooterSubsystem) {
+  public EasyAutoCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, ShooterSubsystem sub_shooterSubsystem, AutoTurnSubsystem sub_autoTurnSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.EASY_PATH_DISTANCE),
-      new AutoShootCommand(sub_shooterSubsystem, AutoConstants.EASY_PATH_RPM)
+      new AutoShootCommand(sub_shooterSubsystem, AutoConstants.EASY_PATH_RPM),
+      //new ShooterCommand(sub_shooterSubsystem)
+      new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_LEFT),
+      //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_RIGHT),
+      //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.FORTY_FIVE_DEGREES, AutoConstants.TURN_LEFT),
+      //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.FORTY_FIVE_DEGREES, AutoConstants.TURN_RIGHT),
+      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.EASY_PATH_DISTANCE)
     );
   }
 }

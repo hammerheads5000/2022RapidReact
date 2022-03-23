@@ -67,52 +67,52 @@ double rpm = 6380;//dont know we'll find that later
     leftFrontDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
     leftFrontDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
 		leftFrontDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
-		leftFrontDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		leftFrontDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		leftFrontDriveMotor.configPeakOutputForward(AutoConstants.tGains.kPeakOutputTurn, AutoConstants.AUTO_TIMEOUT_MS);
+		leftFrontDriveMotor.configPeakOutputReverse(-AutoConstants.tGains.kPeakOutputTurn, AutoConstants.AUTO_TIMEOUT_MS);
 		leftFrontDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, 2048, AutoConstants.AUTO_TIMEOUT_MS);
-		leftFrontDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
-    leftFrontDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		leftFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
-    leftFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		leftFrontDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kFTurn, AutoConstants.AUTO_TIMEOUT_MS);  
+    leftFrontDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kPTurn, AutoConstants.AUTO_TIMEOUT_MS);
+		leftFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kITurn, AutoConstants.AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kDTurn, AutoConstants.AUTO_TIMEOUT_MS);
     
     rightFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
     rightFrontDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     rightFrontDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
     rightFrontDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
 		rightFrontDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
-		rightFrontDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		rightFrontDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.configPeakOutputForward(AutoConstants.tGains.kPeakOutputTurn, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.configPeakOutputReverse(-AutoConstants.tGains.kPeakOutputTurn, AutoConstants.AUTO_TIMEOUT_MS);
 		rightFrontDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, 2048, AutoConstants.AUTO_TIMEOUT_MS);
-		rightFrontDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
-    rightFrontDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		rightFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
-    rightFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kFTurn, AutoConstants.AUTO_TIMEOUT_MS);  
+    rightFrontDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kPTurn, AutoConstants.AUTO_TIMEOUT_MS);
+		rightFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kITurn, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kDTurn, AutoConstants.AUTO_TIMEOUT_MS);
   
     leftBackDriveMotor.setNeutralMode(NeutralMode.Coast);
     leftBackDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     leftBackDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
     leftBackDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
 		leftBackDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
-		leftBackDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
-	  leftBackDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		leftBackDriveMotor.configPeakOutputForward(AutoConstants.tGains.kPeakOutputTurn, AutoConstants.AUTO_TIMEOUT_MS);
+	  leftBackDriveMotor.configPeakOutputReverse(-AutoConstants.tGains.kPeakOutputTurn, AutoConstants.AUTO_TIMEOUT_MS);
 		leftBackDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, 2048, AutoConstants.AUTO_TIMEOUT_MS);
-		leftBackDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
-    leftBackDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		leftBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
-    leftBackDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		leftBackDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kFTurn, AutoConstants.AUTO_TIMEOUT_MS);  
+    leftBackDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kPTurn, AutoConstants.AUTO_TIMEOUT_MS);
+		leftBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kITurn, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kDTurn, AutoConstants.AUTO_TIMEOUT_MS);
     
     rightBackDriveMotor.setNeutralMode(NeutralMode.Coast);
     rightBackDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     rightBackDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
     rightBackDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
 		rightBackDriveMotor.configNominalOutputReverse(0, AutoConstants.AUTO_TIMEOUT_MS);
-		rightBackDriveMotor.configPeakOutputForward(AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		rightBackDriveMotor.configPeakOutputReverse(-AutoConstants.aGains.kPeakOutputAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.configPeakOutputForward(AutoConstants.tGains.kPeakOutputTurn, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.configPeakOutputReverse(-AutoConstants.tGains.kPeakOutputTurn, AutoConstants.AUTO_TIMEOUT_MS);
 		rightBackDriveMotor.configAllowableClosedloopError(AutoConstants.AUTO_PID_LOOP_IDX, 2048, AutoConstants.AUTO_TIMEOUT_MS);
-		rightBackDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kFAuto, AutoConstants.AUTO_TIMEOUT_MS);  
-    rightBackDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kPAuto, AutoConstants.AUTO_TIMEOUT_MS);
-		rightBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
-    rightBackDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.config_kF(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kFTurn, AutoConstants.AUTO_TIMEOUT_MS);  
+    rightBackDriveMotor.config_kP(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kPTurn, AutoConstants.AUTO_TIMEOUT_MS);
+		rightBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kITurn, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.tGains.kDTurn, AutoConstants.AUTO_TIMEOUT_MS);
   }
  
   
@@ -121,20 +121,12 @@ double rpm = 6380;//dont know we'll find that later
     double setpoint = degrees;
 
     if (right){
-    leftFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
-    rightFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
-    leftBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
-    rightBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
     leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     leftBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     rightBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     }
     else{
-    leftFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
-    rightFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
-    leftBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
-    rightBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
     leftFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
     rightFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
     leftBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
@@ -159,22 +151,18 @@ double rpm = 6380;//dont know we'll find that later
   }
 
   public static double m_getFrontLeftPosition(){
-    leftFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
     return leftFrontDriveMotor.getSelectedSensorPosition();
   }
 
   public static double m_getFrontRightPosition(){
-    rightFrontDriveMotor.setSelectedSensorPosition(gyro.getAngle());
     return rightFrontDriveMotor.getSelectedSensorPosition();
   }
 
   public static double m_getBackLeftPosition(){
-    leftBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
     return leftBackDriveMotor.getSelectedSensorPosition();
   }
 
   public static double m_getBackRightPosition(){
-    rightBackDriveMotor.setSelectedSensorPosition(gyro.getAngle());
     return rightBackDriveMotor.getSelectedSensorPosition();
   }
 
@@ -186,7 +174,7 @@ double rpm = 6380;//dont know we'll find that later
     changeInError = error - previousError;
     totalError += error;
 
-    output = AutoConstants.aGains.kPAuto * error + AutoConstants.aGains.kIAuto * totalError + AutoConstants.aGains.kDAuto * changeInError;
+    output = AutoConstants.tGains.kPTurn * error + AutoConstants.tGains.kITurn * totalError + AutoConstants.tGains.kDTurn * changeInError;
     leftFrontDriveMotor.set(TalonFXControlMode.Position, output);
     rightFrontDriveMotor.set(TalonFXControlMode.Position, output);
     leftBackDriveMotor.set(TalonFXControlMode.Position, output);
