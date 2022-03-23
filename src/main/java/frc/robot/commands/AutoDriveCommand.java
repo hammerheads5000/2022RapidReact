@@ -26,24 +26,33 @@ public class AutoDriveCommand extends CommandBase {
     double setpoint = distance * 2048;
 
     sub_autoDriveSubsystem.m_drive(setpoint);
-  }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-
+    sub_autoDriveSubsystem.m_stopSpinning();
     
+    sub_autoDriveSubsystem.m_zeroEncoder();
   }
+
+
+ 
+
+
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    }
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {  
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (AutoDriveSubsystem.getCollided()){
+      return true;
+    }
+    return false;
 
     return true;
   }

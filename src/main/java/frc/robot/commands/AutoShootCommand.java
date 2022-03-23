@@ -23,20 +23,18 @@ public class AutoShootCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    ShooterSubsystem.setRPM(rpm);
+    sub_shooterSubsystem.m_shoot();
+    sub_shooterSubsystem.m_stopSpinning();
+    sub_shooterSubsystem.m_zeroEncoder();
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ShooterSubsystem.setRPM(rpm);
-    sub_shooterSubsystem.m_shoot();
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    sub_shooterSubsystem.m_stopSpinning();
-    sub_shooterSubsystem.m_zeroEncoder();
+    
   }
 
   // Returns true when the command should end.
