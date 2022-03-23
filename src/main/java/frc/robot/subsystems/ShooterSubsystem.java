@@ -126,7 +126,7 @@ public class ShooterSubsystem extends SubsystemBase {
     rpsflywheel = rpsball * rps_ratio / Constants.SLIPPERINESS; //rotations per second
     rpm = 60 * rpsflywheel;
     */
-
+    //This is an equation calculated from graphed points taken by setting RPM at specific distances
     rpm=  -0.0008*Math.pow(angleToGoal,5) + 0.0097* Math.pow(angleToGoal,4)   + 0.2661 * Math.pow(angleToGoal,3)  + 10.5798*  Math.pow(angleToGoal,2)  + -412.1856 * angleToGoal + 7361.1006-500;
     SmartDashboard.putNumber("Requested RPM", rpm);
 
@@ -146,7 +146,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public void m_aim(){
     double headingError = tx.getDouble(0.0); //-27 to 27
     double steeringAdjust = headingError / 27.0; //27 is the max angular displacement
-
+    steeringAdjust *= 0.8; //Dampening the speed
 
     if (headingError > 1.5 || headingError < -1.5){
       LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
@@ -164,9 +164,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void m_shoot()
   {    
-    double setRPM = rpm;//testRPM.getDouble(4500.0);
-    SmartDashboard.putNumber("Set RPM", setRPM);
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * setRPM; //TODO: Set back to average RPM
+    SmartDashboard.putNumber("Set RPM", averageRPM);
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
 
     shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);

@@ -51,10 +51,10 @@ public class AutoDriveCommand extends CommandBase {
   public boolean isFinished() {
     if (AutoDriveSubsystem.getCollided()){
       return true;
-    }
-    return false;
+    }else{
+      return false;
 
-    return true;
+    }
   }
 }
 
