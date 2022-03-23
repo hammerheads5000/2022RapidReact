@@ -35,8 +35,8 @@ public final class Constants {
         public static int SHOOTER_MOTOR_PORT = 1;
 
     //Set RPM Constants
-        public static double BUMPER_RPM = 3500;
-        public static double SAFE_ZONE_RPM = 4800; //TODO: Get the right number
+        public static double BUMPER_RPM = 3300;
+        public static double SAFE_ZONE_RPM = 5500; //TODO: Get the right number
 
     //PID Constants
         public static int SHOOTER_ERROR = 30;
@@ -57,12 +57,12 @@ public final class Constants {
         public static int LOWER_INTAKE_MOTOR_PORT = 2;
 
     //Motor Speeds
-        public static double INTAKE_LIFT_DOWN_SPEED = 0.45;
-        public static double INTAKE_LIFT_UP_SPEED = 0.48;
-        public static double BRAKE_SPEED = 0.04; 
+        public static double INTAKE_LIFT_DOWN_SPEED = 0.52;
+        public static double INTAKE_LIFT_UP_SPEED = 0.65;
+        public static double BRAKE_SPEED = 0.02; 
         public static double BRAKE_UP_SPEED = 0.01;
-        public static double INTAKE_SPEED = 0.40;
-        public static double OUTTAKE_SPEED = -0.7;
+        public static double INTAKE_SPEED = 0.30;
+        public static double OUTTAKE_SPEED = 0.7;
     
     //Timer
         public static double RAISE_UP_TIME = 0.3;
@@ -130,6 +130,7 @@ public final class Constants {
         public static int SET_CAMERA_ONE_BUTTON = 3;
         public static int SET_CAMERA_TWO_BUTTON = 4;
         public static int OUTTAKE_BUTTON = 6;
+        public static int CHANGE_CAMERA_BUTTON = 11;
 
     //Buttons Joystick Buttons
         public static int SHOOT_BUTTON = 1;

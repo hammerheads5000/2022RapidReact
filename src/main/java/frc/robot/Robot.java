@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -26,7 +27,9 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   UsbCamera camera1;
   UsbCamera camera2;
-  Joystick joy1 = new Joystick(0);
+  private final Joystick driveJoystick = new Joystick(Constants.DRIVE_JOYSTICK_PORT);
+  JoystickButton b_changeCamerasButton = new JoystickButton(driveJoystick, Constants.CHANGE_CAMERA_BUTTON);
+  public static boolean cameraOne = true;
   NetworkTableEntry cameraSelection;
 
   /**
@@ -38,6 +41,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     camera1 = CameraServer.startAutomaticCapture(0);
+    camera1.setResolution(100, 100);
+    camera1.setFPS(20);
     camera2 = CameraServer.startAutomaticCapture(1);
 
     cameraSelection = NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
@@ -61,12 +66,14 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
 
-    if (joy1.getTriggerPressed()) {
+    if (b_changeCamerasButton.getAsBoolean() && cameraOne) {
       System.out.println("Setting camera 2");
       cameraSelection.setString(camera2.getName());
-  } else if (joy1.getTriggerReleased()) {
+      cameraOne = false;
+  } else if (b_changeCamerasButton.getAsBoolean()) {
       System.out.println("Setting camera 1");
       cameraSelection.setString(camera1.getName());
+      cameraOne = true;
   }
     CommandScheduler.getInstance().run();
   }
