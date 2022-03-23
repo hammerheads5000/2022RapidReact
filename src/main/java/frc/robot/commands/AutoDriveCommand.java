@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.AutoConstants;
 import frc.robot.subsystems.AutoDriveSubsystem;
 
 public class AutoDriveCommand extends CommandBase {
@@ -23,6 +24,12 @@ public class AutoDriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {  
     double setpoint = distance * 2048;
 
     sub_autoDriveSubsystem.m_drive(setpoint);
@@ -32,15 +39,10 @@ public class AutoDriveCommand extends CommandBase {
     sub_autoDriveSubsystem.m_zeroEncoder();
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {  
-  }
-
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (AutoDriveSubsystem.getCollided()){
+    if (AutoDriveSubsystem.getCollided() || AutoConstants.AUTO_ERROR >= Math.abs(distance * 2048 - AutoDriveSubsystem.m_getFrontLeftPosition())){ 
       return true;
     }
     return false;
