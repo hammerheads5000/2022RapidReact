@@ -32,6 +32,15 @@ public class AutoDriveCommand extends CommandBase {
     sub_autoDriveSubsystem.m_zeroEncoder();
   }
 
+
+ 
+
+
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {  
@@ -44,6 +53,8 @@ public class AutoDriveCommand extends CommandBase {
       return true;
     }
     return false;
+
+    return true;
   }
 }
 

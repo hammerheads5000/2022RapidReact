@@ -15,6 +15,8 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -35,6 +37,11 @@ public class ShooterSubsystem extends SubsystemBase {
  private double rps_ratio;
  private double rpsflywheel;
  private static double rpm;
+ private static double averageRPM;
+ private static int count = 0;
+
+ private ShuffleboardTab tab = Shuffleboard.getTab("Shooter");
+ private NetworkTableEntry testRPM =tab.add("RPM", 0).getEntry();
 
 
  private static TalonFX LEFT_FRONT_DRIVE_MOTOR = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
@@ -81,6 +88,11 @@ public class ShooterSubsystem extends SubsystemBase {
     rpm = newrpm;
   }
 
+  public static void m_resetAverage(){
+    averageRPM = 0;
+    count = 0;
+  }
+
   public void m_TurnOnLimelight(){
     table.getEntry("ledMode").setNumber(0); 
   }
@@ -90,13 +102,16 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void m_calculateRPM(){
+
     angleToGoal = ty.getDouble(0.0);//the 0 is a constant
     SmartDashboard.putNumber("Angle to Goal", angleToGoal);
+    /*
     xDisplacement = (Constants.GOAL_HEIGHT - Constants.LIMELIGHT_HEIGHT_OFF_GROUND) / 
         Math.tan(Math.toRadians(angleToGoal) + Math.toRadians(Constants.LIMELIGHT_MOUNT_ANGLE));
     xDisplacement += 10; //Distance between shooter and limelight
     xDisplacement /= 12.0; //To feet
     xDisplacement += 3; //Adding the radius of the hoop
+    
     SmartDashboard.putNumber("DISTANCE", xDisplacement);
     numerator = Constants.GRAVITY * xDisplacement * xDisplacement;
     denominator = 2.0 * (((Constants.GOAL_HEIGHT / 12.0) - (Constants.SHOOTER_HEIGHT_OFF_GROUND / 12.0)) - (xDisplacement * Math.tan(Constants.THETA))) 
@@ -110,9 +125,22 @@ public class ShooterSubsystem extends SubsystemBase {
     rps_ratio = (circball / circwheel); //ratio of ball rpm to wheel rpm
     rpsflywheel = rpsball * rps_ratio / Constants.SLIPPERINESS; //rotations per second
     rpm = 60 * rpsflywheel;
+    */
+
+    rpm=  -0.0008*Math.pow(angleToGoal,5) + 0.0097* Math.pow(angleToGoal,4)   + 0.2661 * Math.pow(angleToGoal,3)  + 10.5798*  Math.pow(angleToGoal,2)  + -412.1856 * angleToGoal + 7361.1006-500;
+    SmartDashboard.putNumber("Requested RPM", rpm);
+
     if(angleToGoal == 0){
       rpm = 0;
     }
+
+    if(rpm != 0){
+      averageRPM *= count;
+      count++;
+      averageRPM += rpm;
+      averageRPM /= count;
+    }
+
   }
 
   public void m_aim(){
@@ -120,44 +148,42 @@ public class ShooterSubsystem extends SubsystemBase {
     double steeringAdjust = headingError / 27.0; //27 is the max angular displacement
 
 
-    if (headingError > 5.0) 
-    {
-      steeringAdjust = Constants.KP_DRIVE_AIM*headingError - Constants.MIN_COMMAND_DRIVE_AIM;
+    if (headingError > 1.5 || headingError < -1.5){
+      LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
+      LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
+      RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
+      RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
+    }else{
+      LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
+      LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
+      RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
+      RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
     }
-    else if (headingError < -5.0)
-    {
-      steeringAdjust = Constants.KP_DRIVE_AIM*headingError + Constants.MIN_COMMAND_DRIVE_AIM;
-    }
-    LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, -steeringAdjust);
-    LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
-    RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
-    RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, -steeringAdjust);
+
   }
 
   public void m_shoot()
   {    
-    SmartDashboard.putNumber("Set rpm", rpm);
-
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * rpm;
+    double setRPM = rpm;//testRPM.getDouble(4500.0);
+    SmartDashboard.putNumber("Set RPM", setRPM);
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * setRPM; //TODO: Set back to average RPM
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
 
     shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
 
-   SmartDashboard.putNumber("RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * shooterMotor.getSelectedSensorVelocity()));
+   SmartDashboard.putNumber("Actual RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * shooterMotor.getSelectedSensorVelocity()));
    
-   String motorState;
-   if(shooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) > 0){
-     motorState = "forward";
-   }else if(shooterMotor.getSelectedSensorVelocity(Constants.PID_LOOP_IDX) == 0){
-     motorState = "stopped";
-   }else{
-     motorState = "reverse";
-   }
-
-   SmartDashboard.putString("Motor State", motorState);
-
   }
 
+  public void m_bumperShot(){
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * Constants.BUMPER_RPM;
+    shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
+  }
+
+  public void m_safeZoneShot(){
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * Constants.SAFE_ZONE_RPM;
+    shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
+  }
 
   public void m_stopSpinning()
   {

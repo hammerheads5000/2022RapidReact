@@ -35,26 +35,25 @@ public class FeedSubsystem extends SubsystemBase {
 
   }
   public void periodic(){
-    //SmartDashboard.putBoolean("Shooter Side IR", m_getShooterSideIRSensor());
   }
 
-
-  public void m_shooterSideFeedMotor(){
-    shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.WHILE_INTAKE_FEED_MOTOR_SPEED);
-  }
 
   public void m_intakeSideFeedMotor(){
     intakeSideFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
   }
 
   public void m_feedInManual(){
-    shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
-    intakeSideFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED);
+    shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED_WHILE_SHOOT);
+    intakeSideFeedMotor.set(TalonSRXControlMode.PercentOutput, -Constants.FEED_MOTOR_SPEED_WHILE_SHOOT);
   }
 
   public void m_feedOut(){
     shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
     intakeSideFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED);
+  }
+
+  public void m_shooterSideFeedOut(){
+    shooterSideFeedMotor.set(TalonSRXControlMode.PercentOutput, Constants.FEED_MOTOR_SPEED_WHILE_SHOOT);
   }
 
   public void m_stopFeed(){

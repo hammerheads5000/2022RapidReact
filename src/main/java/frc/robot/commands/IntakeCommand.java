@@ -38,7 +38,7 @@ public class IntakeCommand extends CommandBase {
       sub_feedSubsystem.m_intakeSideFeedMotor();
     }else if(shooterSideIRSensor){
       sub_feedSubsystem.m_intakeSideFeedMotor();
-      sub_feedSubsystem.m_shooterSideFeedMotor();
+      sub_feedSubsystem.m_shooterSideFeedOut();
 
     }else{
       sub_feedSubsystem.m_stopFeed();

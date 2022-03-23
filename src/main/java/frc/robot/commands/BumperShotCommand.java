@@ -5,40 +5,31 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShooterCommand extends CommandBase {
-
+public class BumperShotCommand extends CommandBase {
+  /** Creates a new BumperShotCommand. */
   private ShooterSubsystem sub_shooterSubsystem;
-
-
-  /** Creates a new ShootCommand. */
-  public ShooterCommand(ShooterSubsystem subsystem) {
-    sub_shooterSubsystem = subsystem;
+  public BumperShotCommand(ShooterSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    sub_shooterSubsystem = subsystem;
     addRequirements(sub_shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    sub_shooterSubsystem.m_TurnOnLimelight();
-    sub_shooterSubsystem.m_calculateRPM();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    sub_shooterSubsystem.m_shoot();
+    sub_shooterSubsystem.m_bumperShot();
   }
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     sub_shooterSubsystem.m_stopSpinning();
-    sub_shooterSubsystem.m_zeroEncoder();
-    ShooterSubsystem.m_resetAverage();
-   // sub_shooterSubsystem.m_TurnOffLimelight();
   }
 
   // Returns true when the command should end.
