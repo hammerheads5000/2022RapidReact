@@ -44,6 +44,7 @@ public class RobotContainer {
   private final AutoTurnSubsystem sub_autoTurnSubsystem = new AutoTurnSubsystem();
 
 
+
   /*
   ---------------------------------------------------------Commands------------------------------------------------------------------------
   */
@@ -78,7 +79,8 @@ public class RobotContainer {
     private final EasyAutoCommandGroup cmd_easyAutoCommand = new EasyAutoCommandGroup(
     sub_autoDriveSubsystem,
     sub_shooterSubsystem,
-    sub_autoTurnSubsystem
+    sub_autoTurnSubsystem,
+    sub_feedSubsystem
     );
 
   /*private final AutoDriveCommand cmd_autoDriveCommand = new AutoDriveCommand(sub_autoDriveSubsystem);

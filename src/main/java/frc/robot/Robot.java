@@ -27,8 +27,6 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   UsbCamera camera1;
   UsbCamera camera2;
-  private final Joystick driveJoystick = new Joystick(Constants.DRIVE_JOYSTICK_PORT);
-  JoystickButton b_changeCamerasButton = new JoystickButton(driveJoystick, Constants.CHANGE_CAMERA_BUTTON);
   public static boolean cameraOne = true;
   NetworkTableEntry cameraSelection;
 
@@ -66,15 +64,6 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
 
-    if (b_changeCamerasButton.getAsBoolean() && cameraOne) {
-      System.out.println("Setting camera 2");
-      cameraSelection.setString(camera2.getName());
-      cameraOne = false;
-  } else if (b_changeCamerasButton.getAsBoolean()) {
-      System.out.println("Setting camera 1");
-      cameraSelection.setString(camera1.getName());
-      cameraOne = true;
-  }
     CommandScheduler.getInstance().run();
   }
 

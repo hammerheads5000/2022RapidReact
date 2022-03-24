@@ -168,6 +168,7 @@ double rpm = 6380;//dont know we'll find that later
 
   @Override
   public void periodic() {
+    /*
     currentAngle = gyro.getAngle();
     previousError = error;
     error = (setpoint - currentAngle) / 360;
@@ -179,6 +180,7 @@ double rpm = 6380;//dont know we'll find that later
     rightFrontDriveMotor.set(TalonFXControlMode.Position, output);
     leftBackDriveMotor.set(TalonFXControlMode.Position, output);
     rightBackDriveMotor.set(TalonFXControlMode.Position, output);
+    */
   }
 }
 

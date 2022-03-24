@@ -59,7 +59,7 @@ double rpm = 6380;//dont know we'll find that later
   public AutoDriveSubsystem() {
     
     
-    leftFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
+    leftFrontDriveMotor.setNeutralMode(NeutralMode.Brake);
     leftFrontDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     leftFrontDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
     leftFrontDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
@@ -72,7 +72,7 @@ double rpm = 6380;//dont know we'll find that later
 		leftFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
     leftFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
     
-    rightFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rightFrontDriveMotor.setNeutralMode(NeutralMode.Brake);
     rightFrontDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     rightFrontDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
     rightFrontDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
@@ -85,7 +85,7 @@ double rpm = 6380;//dont know we'll find that later
 		rightFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
     rightFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
   
-    leftBackDriveMotor.setNeutralMode(NeutralMode.Coast);
+    leftBackDriveMotor.setNeutralMode(NeutralMode.Brake);
     leftBackDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     leftBackDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
     leftBackDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
@@ -98,7 +98,7 @@ double rpm = 6380;//dont know we'll find that later
 		leftBackDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
     leftBackDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
   
-    rightBackDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rightBackDriveMotor.setNeutralMode(NeutralMode.Brake);
     rightBackDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     rightBackDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
     rightBackDriveMotor.configNominalOutputForward(0, AutoConstants.AUTO_TIMEOUT_MS);
@@ -160,6 +160,7 @@ double rpm = 6380;//dont know we'll find that later
 
   @Override
   public void periodic() {
+    /*
     double xAccel = accelerometer.getX();
     double yAccel = accelerometer.getY();
 
@@ -172,6 +173,6 @@ double rpm = 6380;//dont know we'll find that later
     if (xJerk > AutoConstants.MAXIMUM_JERK || yJerk > AutoConstants.MAXIMUM_JERK){
       hasCollided = true;
     }
-
+    */
   }
 }
