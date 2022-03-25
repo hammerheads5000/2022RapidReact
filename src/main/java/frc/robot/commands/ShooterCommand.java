@@ -24,12 +24,12 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void initialize() {
     sub_shooterSubsystem.m_TurnOnLimelight();
-    sub_shooterSubsystem.m_calculateRPM();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    sub_shooterSubsystem.m_calculateRPM();
     sub_shooterSubsystem.m_shoot();
   }
   // Called once the command ends or is interrupted.
@@ -38,7 +38,7 @@ public class ShooterCommand extends CommandBase {
     sub_shooterSubsystem.m_stopSpinning();
     sub_shooterSubsystem.m_zeroEncoder();
     ShooterSubsystem.m_resetAverage();
-   // sub_shooterSubsystem.m_TurnOffLimelight();
+    sub_shooterSubsystem.m_TurnOffLimelight();
   }
 
   // Returns true when the command should end.

@@ -94,6 +94,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void m_TurnOnLimelight(){
+    SmartDashboard.putString("LL", "ON");
     table.getEntry("ledMode").setNumber(0); 
   }
 
@@ -102,8 +103,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void m_calculateRPM(){
-
-    angleToGoal = ty.getDouble(0.0);//the 0 is a constant
+    SmartDashboard.putString("LL", "Calculating");
+    angleToGoal = ty.getDouble(0);//the 0 is a constant
     SmartDashboard.putNumber("Angle to Goal", angleToGoal);
     /*
     xDisplacement = (Constants.GOAL_HEIGHT - Constants.LIMELIGHT_HEIGHT_OFF_GROUND) / 

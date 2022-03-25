@@ -25,10 +25,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  UsbCamera camera1;
+  //UsbCamera camera1;
   UsbCamera camera2;
-  public static boolean cameraOne = true;
-  NetworkTableEntry cameraSelection;
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -38,15 +37,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    camera1 = CameraServer.startAutomaticCapture(0);
-    camera1.setResolution(100, 100);
-    camera1.setFPS(20);
+    //camera1 = CameraServer.startAutomaticCapture(0);
     camera2 = CameraServer.startAutomaticCapture(1);
-
-    cameraSelection = NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
-
-
-
     m_robotContainer = new RobotContainer();
   }
 

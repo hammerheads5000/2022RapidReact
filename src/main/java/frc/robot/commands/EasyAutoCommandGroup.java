@@ -33,16 +33,21 @@ public class EasyAutoCommandGroup extends SequentialCommandGroup {
     );*/
     super(
     //new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_FIRST_TURN, AutoConstants.TURN_RIGHT),
-    
-      //new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.EASY_PATH_DISTANCE),
+    new SequentialCommandGroup(
+      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.EASY_PATH_DISTANCE),
       
       //new AutoShootCommand(sub_shooterSubsystem, AutoConstants.EASY_PATH_RPM),
+     
       new ParallelDeadlineGroup( 
 
-      new ShooterCommand(sub_shooterSubsystem),
+      new AutoShootCommand(sub_shooterSubsystem, AutoConstants.EASY_PATH_RPM),
       
       new AutoFeedInManualCommand(sub_feedSubsystem))
-      );
+      
+
+     ) );
+
+      
       //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_LEFT),
       //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_RIGHT),
       //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.FORTY_FIVE_DEGREES, AutoConstants.TURN_LEFT),
