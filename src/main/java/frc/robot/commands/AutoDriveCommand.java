@@ -4,18 +4,19 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.AutoConstants;
 import frc.robot.subsystems.AutoDriveSubsystem;
 
 public class AutoDriveCommand extends CommandBase {
   /** Creates a new AutoDriveCommand. */
   private AutoDriveSubsystem sub_autoDriveSubsystem;
-  double distance;
-
+  double setpoint;
   public AutoDriveCommand(AutoDriveSubsystem subsystem, double distance) {
     sub_autoDriveSubsystem = subsystem;
-    this.distance = distance;
+    setpoint = distance;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(sub_autoDriveSubsystem);
   }
@@ -23,38 +24,47 @@ public class AutoDriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    double setpoint = distance * 2048;
+    sub_autoDriveSubsystem.m_zeroEncoder();  
 
-    sub_autoDriveSubsystem.m_drive(setpoint);
 
-    sub_autoDriveSubsystem.m_stopSpinning();
-    
-    sub_autoDriveSubsystem.m_zeroEncoder();
   }
 
-
- 
-
-
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {  
-  }
+  public void execute() {
+    sub_autoDriveSubsystem.m_drive(setpoint);
 
-  // Returns true when the command should end.
+  }
+  @Override
+  public void end(boolean interrupted) {
+    SmartDashboard.putString("AutoDone", "Ended");
+
+    sub_autoDriveSubsystem.m_stopSpinning();
+    sub_autoDriveSubsystem.m_zeroEncoder();  
+
+    }
+
   @Override
   public boolean isFinished() {
+    /*
     if (AutoDriveSubsystem.getCollided()){
       return true;
-    }
-    return false;
+    }else 
+    */
+    
+    
+    if(Math.abs(AutoDriveSubsystem.m_getBackLeftPosition()) >= Math.abs(setpoint) - AutoConstants.AUTO_ERROR /*&& AutoDriveSubsystem.m_getBackLeftPosition() <=  || Math.abs(AutoDriveSubsystem.m_getFrontRightPosition()) >= Math.abs(setpoint)*/){
+      SmartDashboard.putString("AutoDone", "Finished");
+      return true;
 
-    return true;
+    }else{
+      SmartDashboard.putString("AutoDone", "Not Finished");
+
+      return false;
+    }
+   
+ 
+    
   }
 }
 

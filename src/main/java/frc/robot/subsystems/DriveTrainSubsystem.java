@@ -51,7 +51,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
       }else{
         power -= Constants.TRANSLATION_DEADBAND;
         power = power / (1 - Constants.TRANSLATION_DEADBAND); //1 is the max speed of the motor
-        power = Math.pow(power, 2);
+        //power = Math.pow(power, 2);
         ADPower = power * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
         BCPower = power * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
 
