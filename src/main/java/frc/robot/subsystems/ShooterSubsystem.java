@@ -147,7 +147,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public void m_aim(){
     double headingError = tx.getDouble(0.0); //-27 to 27
     double steeringAdjust = headingError / 27.0; //27 is the max angular displacement
-    steeringAdjust *= 0.8; //Dampening the speed
+    steeringAdjust *= 0.4; //Dampening the speed
 
     if (headingError > 1.5 || headingError < -1.5){
       LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
