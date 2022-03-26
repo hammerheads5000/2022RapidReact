@@ -35,7 +35,8 @@ public final class Constants {
         public static int SHOOTER_MOTOR_PORT = 1;
 
     //Set RPM Constants
-        public static double BUMPER_RPM = 1500;
+        public static double BUMPER_RPM = 3475; //LowerRPM from tape is 2500
+        
         public static double SAFE_ZONE_RPM = 4425; 
 
     //PID Constants
