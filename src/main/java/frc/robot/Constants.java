@@ -35,8 +35,8 @@ public final class Constants {
         public static int SHOOTER_MOTOR_PORT = 1;
 
     //Set RPM Constants
-        public static double BUMPER_RPM = 3370;
-        public static double SAFE_ZONE_RPM = 5500; //TODO: Get the right number
+        public static double BUMPER_RPM = 1500;
+        public static double SAFE_ZONE_RPM = 4425; 
 
     //PID Constants
         public static int SHOOTER_ERROR = 30;

@@ -104,7 +104,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void m_calculateRPM(){
     SmartDashboard.putString("LL", "Calculating");
-    angleToGoal = ty.getDouble(0);//the 0 is a constant
+    angleToGoal = ty.getDouble(11.0207051);//the 0 is a constant
     SmartDashboard.putNumber("Angle to Goal", angleToGoal);
     /*
     xDisplacement = (Constants.GOAL_HEIGHT - Constants.LIMELIGHT_HEIGHT_OFF_GROUND) / 
@@ -128,7 +128,9 @@ public class ShooterSubsystem extends SubsystemBase {
     rpm = 60 * rpsflywheel;
     */
     //This is an equation calculated from graphed points taken by setting RPM at specific distances
-    rpm=  -0.0008*Math.pow(angleToGoal,5) + 0.0097* Math.pow(angleToGoal,4)   + 0.2661 * Math.pow(angleToGoal,3)  + 10.5798*  Math.pow(angleToGoal,2)  + -412.1856 * angleToGoal + 7361.1006 - 100;
+   double x = angleToGoal;
+    rpm = -0.6017*Math.pow(x, 3) + 29.8757 * Math.pow(x, 2) - 501.7749*x + 6466.6850;
+   // rpm=  -0.0008*Math.pow(angleToGoal,5) + 0.0097* Math.pow(angleToGoal,4)   + 0.2661 * Math.pow(angleToGoal,3)  + 10.5798*  Math.pow(angleToGoal,2)  + -412.1856 * angleToGoal + 7361.1006 - 750;
     SmartDashboard.putNumber("Requested RPM", rpm);
 
     if(angleToGoal == 0){
@@ -149,7 +151,7 @@ public class ShooterSubsystem extends SubsystemBase {
     double steeringAdjust = headingError / 27.0; //27 is the max angular displacement
     steeringAdjust *= 0.4; //Dampening the speed
 
-    if (headingError > 1.5 || headingError < -1.5){
+    if (headingError > 1 || headingError < -1){
       LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
       LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
       RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
@@ -165,8 +167,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void m_shoot()
   { 
-    SmartDashboard.putNumber("Set RPM", averageRPM);
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;
+    //TODO: back to averageRPM
+    SmartDashboard.putNumber("Set RPM", averageRPM);//testRPM.getDouble(6000));
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;//testRPM.getDouble(6000);
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
 
     shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);

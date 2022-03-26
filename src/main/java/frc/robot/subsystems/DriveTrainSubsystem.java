@@ -28,10 +28,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public DriveTrainSubsystem(){
 
-    leftFrontDriveMotor.setNeutralMode(NeutralMode.Brake);
-    leftBackDriveMotor.setNeutralMode(NeutralMode.Brake);
-    rightFrontDriveMotor.setNeutralMode(NeutralMode.Brake);
-    rightBackDriveMotor.setNeutralMode(NeutralMode.Brake);
+    leftFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
+    leftBackDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rightFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rightBackDriveMotor.setNeutralMode(NeutralMode.Coast);
   }
   public static void setMecanumDrive(double translationAngle, double translationPower, double turnPower){
     //A is front left, b is front right, c is back left, d is back right
