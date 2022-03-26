@@ -61,7 +61,7 @@ public final class Constants {
         public static double INTAKE_LIFT_UP_SPEED = 0.65;
         public static double BRAKE_SPEED = 0.02; 
         public static double BRAKE_UP_SPEED = 0.01;
-        public static double INTAKE_SPEED = 0.45;
+        public static double INTAKE_SPEED = 0.6;
         public static double OUTTAKE_SPEED = 0.7;
     
     //Timer
