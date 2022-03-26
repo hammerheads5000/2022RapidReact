@@ -108,7 +108,8 @@ public final class Constants {
         public static double KP_DRIVE_AIM = 0.15;
         public static double MIN_COMMAND_DRIVE_AIM = 0.05;
 
-
+    //Accelerometer Constants
+        public static double MAX_ACCELERATION = 1;
 
 
 /*

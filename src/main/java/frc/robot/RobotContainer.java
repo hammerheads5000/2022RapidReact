@@ -23,6 +23,7 @@ public class RobotContainer {
   //Drive subsystems
 
   private final DriveTrainSubsystem sub_driveTrainSubsystem = new DriveTrainSubsystem();
+  private final JerkSubsystem sub_jerkSubsystem = new JerkSubsystem();
   
   //Feed subsystems
 
@@ -97,7 +98,7 @@ public class RobotContainer {
     configureButtonBindings();
 
         sub_driveTrainSubsystem.setDefaultCommand(
-      new DriveCommand(sub_driveTrainSubsystem, 
+      new DriveCommand(sub_driveTrainSubsystem,
       () -> -driveJoystick.getRawAxis(Constants.X),
       () -> -driveJoystick.getRawAxis(Constants.Y), 
       () -> -driveJoystick.getRawAxis(Constants.Z)));

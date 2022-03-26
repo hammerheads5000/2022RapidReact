@@ -24,11 +24,13 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void initialize() {
     sub_shooterSubsystem.m_TurnOnLimelight();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    sub_shooterSubsystem.startAngle = sub_shooterSubsystem.m_getAngle();
     sub_shooterSubsystem.m_calculateRPM();
     sub_shooterSubsystem.m_shoot();
   }

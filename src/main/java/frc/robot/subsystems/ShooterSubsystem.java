@@ -10,16 +10,22 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.DriveTrainSubsystem;
+
 
 public class ShooterSubsystem extends SubsystemBase {
  private static TalonFX shooterMotor = new TalonFX(Constants.SHOOTER_MOTOR_PORT);
@@ -48,6 +54,13 @@ public class ShooterSubsystem extends SubsystemBase {
  private static TalonFX LEFT_BACK_DRIVE_MOTOR = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
  private static TalonFX RIGHT_FRONT_DRIVE_MOTOR = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
  private static TalonFX RIGHT_BACK_DRIVE_MOTOR = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
+ private static Accelerometer accelerometer = new BuiltInAccelerometer();
+private double accelX;
+private double accelY;
+private static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+public double startAngle;
+private double currentAngle;
+private boolean isShooting;
 
 
 //(x units/100ms) = (rpm * Constants.K_SENSOR_UNITS_PER_ROTATION/600(units/100ms))
@@ -82,6 +95,22 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    accelX = accelerometer.getX();
+    accelX /= 8;
+    accelY = accelerometer.getY();
+    accelY /= 8;
+    double totalAccel = Math.sqrt(Math.pow(accelX, 2) + Math.pow(accelY, 2));
+    double translationAngle = Math.atan2(totalAccel, accelX);
+    currentAngle = m_getAngle();
+    double correctionAngle = currentAngle - startAngle;
+    if (totalAccel > Constants.MAX_ACCELERATION){
+      DriveTrainSubsystem.setMecanumDrive(-translationAngle, -totalAccel, -correctionAngle);
+    }
+    
+  }
+
+  public double m_getAngle(){
+    return gyro.getAngle();
   }
 
   public static void setRPM(int newrpm){
@@ -169,6 +198,13 @@ public class ShooterSubsystem extends SubsystemBase {
     double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
 
+    if (motorSpeed > 0){
+      isShooting = true;
+    }
+    else{
+      isShooting = false;
+    }
+
     shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);
 
    SmartDashboard.putNumber("Actual RPM", ( (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * shooterMotor.getSelectedSensorVelocity()));
@@ -197,4 +233,5 @@ public class ShooterSubsystem extends SubsystemBase {
   public double m_getPosition(){
     return shooterMotor.getSelectedSensorPosition();
   }
+
 }
