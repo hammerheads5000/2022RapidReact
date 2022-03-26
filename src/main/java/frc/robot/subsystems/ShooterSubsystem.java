@@ -128,7 +128,7 @@ public class ShooterSubsystem extends SubsystemBase {
     rpm = 60 * rpsflywheel;
     */
     //This is an equation calculated from graphed points taken by setting RPM at specific distances
-    rpm=  -0.0008*Math.pow(angleToGoal,5) + 0.0097* Math.pow(angleToGoal,4)   + 0.2661 * Math.pow(angleToGoal,3)  + 10.5798*  Math.pow(angleToGoal,2)  + -412.1856 * angleToGoal + 7361.1006-500;
+    rpm=  -0.0008*Math.pow(angleToGoal,5) + 0.0097* Math.pow(angleToGoal,4)   + 0.2661 * Math.pow(angleToGoal,3)  + 10.5798*  Math.pow(angleToGoal,2)  + -412.1856 * angleToGoal + 7361.1006 - 100;
     SmartDashboard.putNumber("Requested RPM", rpm);
 
     if(angleToGoal == 0){
@@ -164,7 +164,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void m_shoot()
-  {    
+  { 
     SmartDashboard.putNumber("Set RPM", averageRPM);
     double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
