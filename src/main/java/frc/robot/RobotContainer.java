@@ -23,7 +23,6 @@ public class RobotContainer {
   //Drive subsystems
 
   private final DriveTrainSubsystem sub_driveTrainSubsystem = new DriveTrainSubsystem();
-  private final JerkSubsystem sub_jerkSubsystem = new JerkSubsystem();
   
   //Feed subsystems
 
