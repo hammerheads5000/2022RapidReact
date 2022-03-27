@@ -7,6 +7,7 @@
  
 package frc.robot.commands;
  
+import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -31,7 +32,11 @@ public class DriveCommand extends CommandBase {
   public void execute() {
     double angle = Math.atan2(m_forward.getAsDouble(), m_sideways.getAsDouble());
     double magnitude = Math.hypot(m_sideways.getAsDouble(), m_forward.getAsDouble());
-    
+
+   if(RobotState.isTeleop()){
     DriveTrainSubsystem.setMecanumDrive(angle, magnitude, m_rotation.getAsDouble());
+   }
+
+    
   }
 }
