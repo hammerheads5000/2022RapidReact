@@ -55,10 +55,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
         ADPower = power * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
         BCPower = power * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
 
+
         leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
         leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
         rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
         rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
+        SmartDashboard.putNumber("ADPower", ADPower);
       }
     }else{
 

@@ -167,7 +167,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void m_shoot()
   { 
-    //TODO: back to averageRPM
     SmartDashboard.putNumber("Set RPM", averageRPM);//testRPM.getDouble(6000));
     double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;//testRPM.getDouble(6000);
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 

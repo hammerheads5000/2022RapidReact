@@ -102,8 +102,8 @@ public final class Constants {
     //Drive related constants
         public static double DRIVE_SENSITIVITY_CONSTANT = 1;
         public static double TURN_ADJUST = 0.4;
-        public static double TRANSLATION_DEADBAND = 0.1;
-        public static double TURN_DEADBAND = 0.3;
+        public static double TRANSLATION_DEADBAND = 0.0;
+        public static double TURN_DEADBAND = 0.4;
 
     //PID Constants
         public static double KP_DRIVE_AIM = 0.1;
