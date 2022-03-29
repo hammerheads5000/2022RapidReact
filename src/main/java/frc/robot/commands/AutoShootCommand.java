@@ -28,21 +28,24 @@ public class AutoShootCommand extends CommandBase {
   @Override
   public void initialize() {
     sub_shooterSubsystem.m_TurnOnLimelight();
+    timer.reset();
     timer.start();
+    
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    sub_shooterSubsystem.m_shoot();
     sub_shooterSubsystem.m_calculateRPM();
+    sub_shooterSubsystem.m_shoot();
   }
 
   @Override
   public void end(boolean isFinished){
     ShooterSubsystem.m_resetAverage();
     sub_shooterSubsystem.m_stopSpinning();
+    sub_shooterSubsystem.m_TurnOffLimelight();
     timer.stop();
     timer.reset();
   }
