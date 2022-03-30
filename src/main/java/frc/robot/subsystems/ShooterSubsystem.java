@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.AutoConstants;
 import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -60,6 +61,15 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
+    LEFT_FRONT_DRIVE_MOTOR.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    LEFT_FRONT_DRIVE_MOTOR.configPeakOutputReverse(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    RIGHT_FRONT_DRIVE_MOTOR.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    RIGHT_FRONT_DRIVE_MOTOR.configPeakOutputReverse(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    LEFT_BACK_DRIVE_MOTOR.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    LEFT_BACK_DRIVE_MOTOR.configPeakOutputReverse(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    RIGHT_BACK_DRIVE_MOTOR.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    RIGHT_BACK_DRIVE_MOTOR.configPeakOutputReverse(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+
     shooterMotor.setNeutralMode(NeutralMode.Coast);
 
     shooterMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
@@ -157,10 +167,12 @@ public class ShooterSubsystem extends SubsystemBase {
       RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
       RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
     }else{
+      
       LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
       LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
       RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
       RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
+      
     }
 
   }
