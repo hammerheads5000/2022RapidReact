@@ -3,14 +3,16 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.AutoConstants;
 import frc.robot.subsystems.FeedSubsystem;
 
 public class AutoFeedInManualCommand extends CommandBase {
   /** Creates a new FeedInManualCommand. */
   private FeedSubsystem sub_feedSubsystem;
+  Timer timer = new Timer();
   public AutoFeedInManualCommand(FeedSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_feedSubsystem = subsystem;
@@ -38,6 +40,11 @@ public class AutoFeedInManualCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    //This may not be necessary depending on how parallel command groups work
+    if(timer.get() >= AutoConstants.EASY_AUTO_TIME_LIMIT){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

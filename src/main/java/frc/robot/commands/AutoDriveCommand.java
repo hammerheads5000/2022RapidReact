@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -14,6 +15,7 @@ public class AutoDriveCommand extends CommandBase {
   /** Creates a new AutoDriveCommand. */
   private AutoDriveSubsystem sub_autoDriveSubsystem;
   double setpoint;
+
   public AutoDriveCommand(AutoDriveSubsystem subsystem, double distance) {
     sub_autoDriveSubsystem = subsystem;
     setpoint = distance;
@@ -41,7 +43,7 @@ public class AutoDriveCommand extends CommandBase {
 
     sub_autoDriveSubsystem.m_stopSpinning();
     sub_autoDriveSubsystem.m_zeroEncoder();  
-
+  
     }
 
   @Override
@@ -54,7 +56,6 @@ public class AutoDriveCommand extends CommandBase {
     
     
     if(Math.abs(AutoDriveSubsystem.m_getBackLeftPosition()) >= Math.abs(setpoint) - AutoConstants.AUTO_ERROR /*&& AutoDriveSubsystem.m_getBackLeftPosition() <=  || Math.abs(AutoDriveSubsystem.m_getFrontRightPosition()) >= Math.abs(setpoint)*/){
-      SmartDashboard.putString("AutoDone", "Finished");
       return true;
 
     }else{
