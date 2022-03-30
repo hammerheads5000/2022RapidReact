@@ -51,6 +51,7 @@ public class AutoConstants {
     public static int GYRO_PORT = 0;
     public static double EASY_PATH_DISTANCE = -1 * ENCODER_TICKS_PER_FOOT;
 
+    //If you're as discriminating as I am, it can be tough to figure out what to put for the RPM.
     public static int EASY_PATH_RPM = 0;
     public static int MAXIMUM_JERK_AUTO = 1000;
     public static double NINETY_DEGREES = 90 * ONE_DEGREE;
