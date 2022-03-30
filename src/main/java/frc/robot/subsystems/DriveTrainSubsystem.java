@@ -71,43 +71,32 @@ public class DriveTrainSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("DrivePosition", leftFrontDriveMotor.getSelectedSensorPosition());
 
 
-    if (Math.abs(turnPower) <= Constants.TURN_DEADBAND){
-      if(translationPower < Constants.TRANSLATION_DEADBAND){
-
+    if(translationPower > Constants.TRANSLATION_DEADBAND || Math.abs(turningScale) > Constants.TURN_DEADBAND){
+      power -= Constants.TRANSLATION_DEADBAND;
+      power = power / (1 - Constants.TRANSLATION_DEADBAND); //1 is the max speed of the motor
+      ADPower = power * (Math.sin(translationAngle) - Math.cos(translationAngle));
+      BCPower = power * (Math.sin(translationAngle) + Math.cos(translationAngle));
+      if(turningScale > 0){
+        leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower * (1 + Math.abs(turningScale)));
+        leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower * (1 + Math.abs(turningScale)));
+        rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower * Math.abs(turningScale));
+        rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower * Math.abs(turningScale));
+      }else if(turningScale < 0){
+        leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower * Math.abs(turningScale));
+        leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower * Math.abs(turningScale));
+        rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower * (1 + Math.abs(turningScale)));
+        rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower * (1 + Math.abs(turningScale)));
       }else{
-        power -= Constants.TRANSLATION_DEADBAND;
-        power = power / (1 - Constants.TRANSLATION_DEADBAND); //1 is the max speed of the motor
-        //power = Math.pow(power, 2);
-        ADPower = power * (Math.sin(translationAngle) - Math.cos(translationAngle));
-        BCPower = power * (Math.sin(translationAngle) + Math.cos(translationAngle));
-        
-
         leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
         leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
         rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
         rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
-        SmartDashboard.putNumber("ADPower", ADPower);
-        SmartDashboard.putNumber("BCPower", BCPower);
-        SmartDashboard.putNumber("power", power);
-        SmartDashboard.putNumber("RPM", (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity());
-
       }
-    }else{
 
-        //5 is to slow down the motors because turning shouldn't feel like you're an F1 racer
-        if(turningScale < 0){
-          turningScale += Constants.TURN_DEADBAND;
-          turningScale = turningScale / (1 - Constants.TURN_DEADBAND);
-        }else{
-          turningScale -= Constants.TURN_DEADBAND;
-          turningScale = turningScale / (1 - Constants.TURN_DEADBAND); //1 is the max speed of the motor
-        }
-
-        leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
-        leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
-        rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
-        rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
-        SmartDashboard.putNumber("turning scale", turningScale);
+      leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
+      leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
+      rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
+      rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
     }
   }
 
