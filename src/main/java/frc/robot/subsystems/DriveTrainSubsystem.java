@@ -70,18 +70,19 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     SmartDashboard.putNumber("DrivePosition", leftFrontDriveMotor.getSelectedSensorPosition());
 
+    power -= Constants.TRANSLATION_DEADBAND;
+    power = power / (1 - Constants.TRANSLATION_DEADBAND); //1 is the max speed of the motor
+    ADPower = power * (Math.sin(translationAngle) - Math.cos(translationAngle));
+    BCPower = power * (Math.sin(translationAngle) + Math.cos(translationAngle));
 
-    if(translationPower > Constants.TRANSLATION_DEADBAND || Math.abs(turningScale) > Constants.TURN_DEADBAND){
-      power -= Constants.TRANSLATION_DEADBAND;
-      power = power / (1 - Constants.TRANSLATION_DEADBAND); //1 is the max speed of the motor
-      ADPower = power * (Math.sin(translationAngle) - Math.cos(translationAngle));
-      BCPower = power * (Math.sin(translationAngle) + Math.cos(translationAngle));
-      if(turningScale > 0){
+    if(translationPower > Constants.TRANSLATION_DEADBAND && Math.abs(turningScale) > Constants.TURN_DEADBAND){
+
+      if(turningScale < 0){
         leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower * (1 + Math.abs(turningScale)));
         leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower * (1 + Math.abs(turningScale)));
         rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower * Math.abs(turningScale));
         rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower * Math.abs(turningScale));
-      }else if(turningScale < 0){
+      }else if(turningScale > 0){
         leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower * Math.abs(turningScale));
         leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower * Math.abs(turningScale));
         rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower * (1 + Math.abs(turningScale)));
@@ -93,10 +94,16 @@ public class DriveTrainSubsystem extends SubsystemBase {
         rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
       }
 
+    }else if(translationPower > Constants.TRANSLATION_DEADBAND){
       leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
       leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
       rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
       rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
+    }else if(Math.abs(turningScale) > Constants.TURN_DEADBAND){
+      leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
+      leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
+      rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
+      rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
     }
   }
 

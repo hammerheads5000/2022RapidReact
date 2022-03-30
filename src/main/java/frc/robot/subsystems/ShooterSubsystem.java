@@ -116,31 +116,9 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putString("LL", "Calculating");
     angleToGoal = ty.getDouble(11.0207051);//the 0 is a constant
     SmartDashboard.putNumber("Angle to Goal", angleToGoal);
-    /*
-    xDisplacement = (Constants.GOAL_HEIGHT - Constants.LIMELIGHT_HEIGHT_OFF_GROUND) / 
-        Math.tan(Math.toRadians(angleToGoal) + Math.toRadians(Constants.LIMELIGHT_MOUNT_ANGLE));
-    xDisplacement += 10; //Distance between shooter and limelight
-    xDisplacement /= 12.0; //To feet
-    xDisplacement += 3; //Adding the radius of the hoop
-    
-    SmartDashboard.putNumber("DISTANCE", xDisplacement);
-    numerator = Constants.GRAVITY * xDisplacement * xDisplacement;
-    denominator = 2.0 * (((Constants.GOAL_HEIGHT / 12.0) - (Constants.SHOOTER_HEIGHT_OFF_GROUND / 12.0)) - (xDisplacement * Math.tan(Constants.THETA))) 
-        * Math.pow(Math.cos(Constants.THETA), 2);
-    
-    frac = numerator / denominator;
-    Vi = Math.sqrt(frac);
-    circball = (2.0 * Math.PI * Constants.COMPRESSED_RADIUS) / 12.0; //ft
-    circwheel = (2.0 * Math.PI * Constants.FLYWHEEL_RADIUS) / 12.0; //ft
-    rpsball = Vi / circball; //rotations per second
-    rps_ratio = (circball / circwheel); //ratio of ball rpm to wheel rpm
-    rpsflywheel = rpsball * rps_ratio / Constants.SLIPPERINESS; //rotations per second
-    rpm = 60 * rpsflywheel;
-    */
     //This is an equation calculated from graphed points taken by setting RPM at specific distances
    double x = angleToGoal;
     rpm = -0.6017*Math.pow(x, 3) + 29.8757 * Math.pow(x, 2) - 501.7749*x + 6466.6850;
-   // rpm=  -0.0008*Math.pow(angleToGoal,5) + 0.0097* Math.pow(angleToGoal,4)   + 0.2661 * Math.pow(angleToGoal,3)  + 10.5798*  Math.pow(angleToGoal,2)  + -412.1856 * angleToGoal + 7361.1006 - 750;
     SmartDashboard.putNumber("Requested RPM", rpm);
 
     if(angleToGoal == 0){
@@ -154,6 +132,14 @@ public class ShooterSubsystem extends SubsystemBase {
       averageRPM /= count;
     }
 
+  }
+
+  public double m_getActualRPM(){
+    return (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * shooterMotor.getSelectedSensorVelocity();
+  }
+
+  public double m_getSetRPM(){
+    return averageRPM;
   }
 
   public void m_aim(){

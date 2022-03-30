@@ -6,18 +6,20 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.subsystems.FeedSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterCommand extends CommandBase {
 
   private ShooterSubsystem sub_shooterSubsystem;
-
+  private FeedSubsystem sub_feedSubsystem;
 
   /** Creates a new ShootCommand. */
-  public ShooterCommand(ShooterSubsystem subsystem) {
+  public ShooterCommand(ShooterSubsystem subsystem, FeedSubsystem subsystem2) {
     sub_shooterSubsystem = subsystem;
+    sub_feedSubsystem = subsystem2;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(sub_shooterSubsystem);
+    addRequirements(sub_shooterSubsystem, sub_feedSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -31,6 +33,11 @@ public class ShooterCommand extends CommandBase {
   public void execute() {
     sub_shooterSubsystem.m_calculateRPM();
     sub_shooterSubsystem.m_shoot();
+
+    if(sub_shooterSubsystem.m_getActualRPM() <= sub_shooterSubsystem.m_getSetRPM() + 60 || sub_shooterSubsystem.m_getActualRPM() >= sub_shooterSubsystem.m_getSetRPM() - 60 ){
+      sub_feedSubsystem.m_feedInManual();
+    }
+  
   }
   // Called once the command ends or is interrupted.
   @Override
@@ -39,6 +46,7 @@ public class ShooterCommand extends CommandBase {
     sub_shooterSubsystem.m_zeroEncoder();
     ShooterSubsystem.m_resetAverage();
     sub_shooterSubsystem.m_TurnOffLimelight();
+    sub_feedSubsystem.m_stopFeed();
   }
 
   // Returns true when the command should end.
