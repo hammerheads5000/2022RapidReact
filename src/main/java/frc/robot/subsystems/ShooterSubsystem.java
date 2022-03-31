@@ -135,7 +135,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public double m_getActualRPM(){
-    return (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * shooterMotor.getSelectedSensorVelocity();
+    return Math.abs((600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * shooterMotor.getSelectedSensorVelocity());
   }
 
   public double m_getSetRPM(){

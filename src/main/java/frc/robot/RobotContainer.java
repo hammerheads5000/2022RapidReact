@@ -67,8 +67,8 @@ public class RobotContainer {
   //Shooter commands
   private final AimCommand cmd_aimCommand = new AimCommand(sub_shooterSubsystem);
   private final ShooterCommand cmd_shooterCommand = new ShooterCommand(sub_shooterSubsystem, sub_feedSubsystem);
-  private final BumperShotCommand cmd_bumperShotCommand = new BumperShotCommand(sub_shooterSubsystem);
-  private final SafeZoneShotCommand cmd_safeZoneShotCommand = new SafeZoneShotCommand(sub_shooterSubsystem);
+  private final BumperShotCommand cmd_bumperShotCommand = new BumperShotCommand(sub_shooterSubsystem, sub_feedSubsystem);
+  private final SafeZoneShotCommand cmd_safeZoneShotCommand = new SafeZoneShotCommand(sub_shooterSubsystem, sub_feedSubsystem);
 
 
   //Auto commands

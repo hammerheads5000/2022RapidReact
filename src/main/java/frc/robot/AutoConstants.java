@@ -10,7 +10,7 @@ public class AutoConstants {
 
     public static int AUTO_PID_LOOP_IDX = 0;
     public static int AUTO_TIMEOUT_MS = 5;
-    public static AutoGains aGains = new AutoGains(0.2, 0.00002, 0.6, 0.0,  0,  0.3);
+    public static AutoGains aGains = new AutoGains(0.05, 0.00002, 0.6, 0.0,  0,  0.3);
     public static AutoTurnGains tGains = new AutoTurnGains(0.2, 0.00002, 0.6, 0.0,  0,  0.3);
     public static int AUTO_ERROR = 1000;//temporary
     public static double EASY_AUTO_TIME_LIMIT = 7;

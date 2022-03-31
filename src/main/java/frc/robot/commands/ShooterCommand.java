@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.FeedSubsystem;
@@ -33,10 +34,18 @@ public class ShooterCommand extends CommandBase {
   public void execute() {
     sub_shooterSubsystem.m_calculateRPM();
     sub_shooterSubsystem.m_shoot();
-
-    if(sub_shooterSubsystem.m_getActualRPM() <= sub_shooterSubsystem.m_getSetRPM() + 60 || sub_shooterSubsystem.m_getActualRPM() >= sub_shooterSubsystem.m_getSetRPM() - 60 ){
+    SmartDashboard.putNumber("Actual RPM", sub_shooterSubsystem.m_getActualRPM());
+    SmartDashboard.putNumber("Set RPM", sub_shooterSubsystem.m_getSetRPM());
+    boolean uhoh = false;
+    if(sub_shooterSubsystem.m_getActualRPM() <= sub_shooterSubsystem.m_getSetRPM() + 40 && sub_shooterSubsystem.m_getActualRPM() >= sub_shooterSubsystem.m_getSetRPM() - 40 ){
       sub_feedSubsystem.m_feedInManual();
+      uhoh = true;
+    }else{
+      uhoh = false;
+      sub_feedSubsystem.m_stopFeed();
     }
+    SmartDashboard.putBoolean("uhoh", uhoh);
+
   
   }
   // Called once the command ends or is interrupted.

@@ -5,15 +5,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.subsystems.FeedSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class SafeZoneShotCommand extends CommandBase {
   /** Creates a new SafeZoneShotCommand. */
   private ShooterSubsystem sub_shooterSubsystem;
-  public SafeZoneShotCommand(ShooterSubsystem subsystem) {
+  private FeedSubsystem sub_feedSubsystem;
+  public SafeZoneShotCommand(ShooterSubsystem subsystem, FeedSubsystem subsystem2) {
     // Use addRequirements() here to declare subsystem dependencies.
     sub_shooterSubsystem = subsystem;
-    addRequirements(sub_shooterSubsystem);
+    sub_feedSubsystem = subsystem2;
+    addRequirements(sub_shooterSubsystem, sub_feedSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -24,6 +28,13 @@ public class SafeZoneShotCommand extends CommandBase {
   @Override
   public void execute() {
     sub_shooterSubsystem.m_safeZoneShot();
+    if(sub_shooterSubsystem.m_getActualRPM() <= Constants.SAFE_ZONE_RPM + 40 && sub_shooterSubsystem.m_getActualRPM() >= Constants.SAFE_ZONE_RPM - 40 ){
+      sub_feedSubsystem.m_feedInManual();
+      //uhoh = true;
+    }else{
+      //uhoh = false;
+      sub_feedSubsystem.m_stopFeed();
+    }
   }
 
   // Called once the command ends or is interrupted.
