@@ -40,8 +40,8 @@ public class AutoDriveCommand extends CommandBase {
   public void end(boolean interrupted) {
     SmartDashboard.putString("AutoDone", "Ended");
 
-    sub_autoDriveSubsystem.m_stopSpinning();
-    sub_autoDriveSubsystem.m_zeroEncoder();  
+   // sub_autoDriveSubsystem.m_stopSpinning();
+   // sub_autoDriveSubsystem.m_zeroEncoder();  
 
     }
 
