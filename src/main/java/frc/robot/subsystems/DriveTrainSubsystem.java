@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.AutoConstants;
 import frc.robot.Constants;
 
  
@@ -24,19 +25,43 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private static TalonFX rightFrontDriveMotor = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
   private static TalonFX rightBackDriveMotor = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
 
-
+  public void DriveTrainSubsystemInit(){
+    leftFrontDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
+    leftBackDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rightFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rightBackDriveMotor.setNeutralMode(NeutralMode.Coast);
+  }
 
   public DriveTrainSubsystem(){
-
-    leftFrontDriveMotor.setNeutralMode(NeutralMode.Brake);
-    leftBackDriveMotor.setNeutralMode(NeutralMode.Brake);
-    rightFrontDriveMotor.setNeutralMode(NeutralMode.Brake);
-    rightBackDriveMotor.setNeutralMode(NeutralMode.Brake);
+    leftFrontDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
+    leftBackDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rightFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
+    rightBackDriveMotor.setNeutralMode(NeutralMode.Coast);
   }
   public static void setMecanumDrive(double translationAngle, double translationPower, double turnPower){
     //A is front left, b is front right, c is back left, d is back right
     // calculate motor power
     //Math.sqrt(2) * 0.5 comes from sin(45) and cos(45) (trig is necessary to get the power in mecanum)
+
+    SmartDashboard.putNumber("Translation Angle", translationAngle);
+    SmartDashboard.putNumber("Translation Power", translationPower);
+    SmartDashboard.putNumber("turn power", turnPower);
     double ADPower;
     double BCPower;
 
@@ -45,6 +70,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     SmartDashboard.putNumber("DrivePosition", leftFrontDriveMotor.getSelectedSensorPosition());
 
+
     if (Math.abs(turnPower) <= Constants.TURN_DEADBAND){
       if(translationPower < Constants.TRANSLATION_DEADBAND){
 
@@ -52,13 +78,19 @@ public class DriveTrainSubsystem extends SubsystemBase {
         power -= Constants.TRANSLATION_DEADBAND;
         power = power / (1 - Constants.TRANSLATION_DEADBAND); //1 is the max speed of the motor
         //power = Math.pow(power, 2);
-        ADPower = power * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
-        BCPower = power * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
+        ADPower = power * (Math.sin(translationAngle) - Math.cos(translationAngle));
+        BCPower = power * (Math.sin(translationAngle) + Math.cos(translationAngle));
+        
 
         leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower);
         leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower);
         rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -BCPower);
         rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -ADPower);
+        SmartDashboard.putNumber("ADPower", ADPower);
+        SmartDashboard.putNumber("BCPower", BCPower);
+        SmartDashboard.putNumber("power", power);
+        SmartDashboard.putNumber("RPM", (600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * leftFrontDriveMotor.getSelectedSensorVelocity());
+
       }
     }else{
 
@@ -75,6 +107,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
         leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
         rightFrontDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
         rightBackDriveMotor.set(TalonFXControlMode.PercentOutput, -turningScale / 5.0);
+        SmartDashboard.putNumber("turning scale", turningScale);
     }
   }
 

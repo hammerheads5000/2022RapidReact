@@ -35,8 +35,9 @@ public final class Constants {
         public static int SHOOTER_MOTOR_PORT = 1;
 
     //Set RPM Constants
-        public static double BUMPER_RPM = 3300;
-        public static double SAFE_ZONE_RPM = 5500; //TODO: Get the right number
+        public static double BUMPER_RPM = 3475; //LowerRPM from tape is 2500
+        
+        public static double SAFE_ZONE_RPM = 4750; 
 
     //PID Constants
         public static int SHOOTER_ERROR = 30;
@@ -61,7 +62,7 @@ public final class Constants {
         public static double INTAKE_LIFT_UP_SPEED = 0.65;
         public static double BRAKE_SPEED = 0.02; 
         public static double BRAKE_UP_SPEED = 0.01;
-        public static double INTAKE_SPEED = 0.45;
+        public static double INTAKE_SPEED = 0.6;
         public static double OUTTAKE_SPEED = 0.7;
     
     //Timer
@@ -101,8 +102,8 @@ public final class Constants {
     //Drive related constants
         public static double DRIVE_SENSITIVITY_CONSTANT = 1;
         public static double TURN_ADJUST = 0.4;
-        public static double TRANSLATION_DEADBAND = 0.1;
-        public static double TURN_DEADBAND = 0.3;
+        public static double TRANSLATION_DEADBAND = 0.0;
+        public static double TURN_DEADBAND = 0.4;
 
     //PID Constants
         public static double KP_DRIVE_AIM = 0.1;

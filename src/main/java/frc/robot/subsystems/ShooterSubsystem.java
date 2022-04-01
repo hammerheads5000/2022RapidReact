@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.AutoConstants;
 import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -60,6 +61,15 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
+    LEFT_FRONT_DRIVE_MOTOR.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    LEFT_FRONT_DRIVE_MOTOR.configPeakOutputReverse(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    RIGHT_FRONT_DRIVE_MOTOR.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    RIGHT_FRONT_DRIVE_MOTOR.configPeakOutputReverse(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    LEFT_BACK_DRIVE_MOTOR.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    LEFT_BACK_DRIVE_MOTOR.configPeakOutputReverse(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    RIGHT_BACK_DRIVE_MOTOR.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    RIGHT_BACK_DRIVE_MOTOR.configPeakOutputReverse(1.0, AutoConstants.AUTO_TIMEOUT_MS);
+
     shooterMotor.setNeutralMode(NeutralMode.Coast);
 
     shooterMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, Constants.PID_LOOP_IDX, Constants.TIMEOUT_MS);
@@ -104,7 +114,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void m_calculateRPM(){
     SmartDashboard.putString("LL", "Calculating");
-    angleToGoal = ty.getDouble(0);//the 0 is a constant
+    angleToGoal = ty.getDouble(11.0207051);//the 0 is a constant
     SmartDashboard.putNumber("Angle to Goal", angleToGoal);
     /*
     xDisplacement = (Constants.GOAL_HEIGHT - Constants.LIMELIGHT_HEIGHT_OFF_GROUND) / 
@@ -128,7 +138,9 @@ public class ShooterSubsystem extends SubsystemBase {
     rpm = 60 * rpsflywheel;
     */
     //This is an equation calculated from graphed points taken by setting RPM at specific distances
-    rpm=  -0.0008*Math.pow(angleToGoal,5) + 0.0097* Math.pow(angleToGoal,4)   + 0.2661 * Math.pow(angleToGoal,3)  + 10.5798*  Math.pow(angleToGoal,2)  + -412.1856 * angleToGoal + 7361.1006-500;
+   double x = angleToGoal;
+    rpm = -0.6017*Math.pow(x, 3) + 29.8757 * Math.pow(x, 2) - 501.7749*x + 6466.6850;
+   // rpm=  -0.0008*Math.pow(angleToGoal,5) + 0.0097* Math.pow(angleToGoal,4)   + 0.2661 * Math.pow(angleToGoal,3)  + 10.5798*  Math.pow(angleToGoal,2)  + -412.1856 * angleToGoal + 7361.1006 - 750;
     SmartDashboard.putNumber("Requested RPM", rpm);
 
     if(angleToGoal == 0){
@@ -149,24 +161,26 @@ public class ShooterSubsystem extends SubsystemBase {
     double steeringAdjust = headingError / 27.0; //27 is the max angular displacement
     steeringAdjust *= 0.4; //Dampening the speed
 
-    if (headingError > 1.5 || headingError < -1.5){
+    if (headingError > 1 || headingError < -1){
       LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
       LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
       RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
       RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
     }else{
+      
       LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
       LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
       RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
       RIGHT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, 0);
+      
     }
 
   }
 
   public void m_shoot()
-  {    
-    SmartDashboard.putNumber("Set RPM", averageRPM);
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;
+  { 
+    SmartDashboard.putNumber("Set RPM", averageRPM);//testRPM.getDouble(6000));
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;//testRPM.getDouble(6000);
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
 
     shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);

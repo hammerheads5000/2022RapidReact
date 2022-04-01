@@ -7,9 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
 import frc.robot.commands.*;
@@ -22,7 +25,7 @@ public class RobotContainer {
 
   //Drive subsystems
 
-  private final DriveTrainSubsystem sub_driveTrainSubsystem = new DriveTrainSubsystem();
+  public final DriveTrainSubsystem sub_driveTrainSubsystem = new DriveTrainSubsystem();
   
   //Feed subsystems
 
@@ -102,7 +105,13 @@ public class RobotContainer {
       () -> -driveJoystick.getRawAxis(Constants.Y), 
       () -> -driveJoystick.getRawAxis(Constants.Z)));
 
-  }
+
+      CommandScheduler.getInstance().onCommandInitialize(command -> Shuffleboard.addEventMarker("Command initialized", command.getName(), EventImportance.kNormal));
+      CommandScheduler.getInstance().onCommandInterrupt(command -> Shuffleboard.addEventMarker("Command interrupted", command.getName(), EventImportance.kNormal));
+      CommandScheduler.getInstance().onCommandFinish(command -> Shuffleboard.addEventMarker("Command finished", command.getName(), EventImportance.kNormal));
+      CommandScheduler.getInstance().onCommandExecute(command -> Shuffleboard.addEventMarker("Command execute", command.getName(), EventImportance.kNormal));
+
+   }
 
 
   /**

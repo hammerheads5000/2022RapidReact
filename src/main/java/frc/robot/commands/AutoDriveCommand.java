@@ -14,8 +14,8 @@ import frc.robot.subsystems.AutoDriveSubsystem;
 public class AutoDriveCommand extends CommandBase {
   /** Creates a new AutoDriveCommand. */
   private AutoDriveSubsystem sub_autoDriveSubsystem;
-  double setpoint;
 
+  private double setpoint;
   public AutoDriveCommand(AutoDriveSubsystem subsystem, double distance) {
     sub_autoDriveSubsystem = subsystem;
     setpoint = distance;
@@ -34,6 +34,7 @@ public class AutoDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putNumber("Encoder", AutoDriveSubsystem.m_getBackLeftPosition());
     sub_autoDriveSubsystem.m_drive(setpoint);
 
   }
@@ -67,5 +68,5 @@ public class AutoDriveCommand extends CommandBase {
  
     
   }
-}
+}             
 

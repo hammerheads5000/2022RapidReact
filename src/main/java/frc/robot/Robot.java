@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,8 +26,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  //UsbCamera camera1;
-  UsbCamera camera2;
+  UsbCamera camera1;
+ // UsbCamera camera2;
 
 
   /**
@@ -37,8 +38,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    //camera1 = CameraServer.startAutomaticCapture(0);
-    camera2 = CameraServer.startAutomaticCapture(1);
+    camera1 = CameraServer.startAutomaticCapture(0);
+   // camera2 = CameraServer.startAutomaticCapture(1);
     m_robotContainer = new RobotContainer();
   }
 
@@ -90,6 +91,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_robotContainer.sub_driveTrainSubsystem.DriveTrainSubsystemInit();
   }
 
   /** This function is called periodically during operator control. */
