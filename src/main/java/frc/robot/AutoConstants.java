@@ -10,7 +10,7 @@ public class AutoConstants {
 
     public static int AUTO_PID_LOOP_IDX = 0;
     public static int AUTO_TIMEOUT_MS = 5;
-    public static AutoGains aGains = new AutoGains(0.05, 0.00002, 0.6, 0.0,  0,  0.3);
+    public static AutoGains aGains = new AutoGains(0.05, 0.0, 0.4, 0.0,  0,  0.3);
     public static AutoTurnGains tGains = new AutoTurnGains(0.05, 0.0, 0.6, 0.0,  0,  0.3);
     public static int AUTO_ERROR = 1000;//temporary
     public static double EASY_AUTO_TIME_LIMIT = 5;
@@ -49,7 +49,7 @@ public class AutoConstants {
     public static boolean TURN_RIGHT = true;
     public static boolean TURN_LEFT = false;
     public static int GYRO_PORT = 0;
-    public static double EASY_PATH_DISTANCE = -2 * ENCODER_TICKS_PER_FOOT;
+    public static double EASY_PATH_DISTANCE = -3 * ENCODER_TICKS_PER_FOOT;
 
     //If you're as discriminating as I am, it can be tough to figure out what to put for the RPM.
     public static int EASY_PATH_RPM = 0;

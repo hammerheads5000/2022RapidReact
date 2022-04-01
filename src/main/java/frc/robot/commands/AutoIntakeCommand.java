@@ -30,6 +30,8 @@ public class AutoIntakeCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.reset();
+    timer.start();
     
   }
 
@@ -56,8 +58,7 @@ public class AutoIntakeCommand extends CommandBase {
     }else{
       sub_intakeSubsystem.m_brakeWayDown();
     }
-    sub_intakeSubsystem.m_turnOffWheel();
-    sub_feedSubsystem.m_stopFeed();
+    
 
   }
 

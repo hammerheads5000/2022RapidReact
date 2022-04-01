@@ -11,6 +11,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.AutoTurnSubsystem;
 import frc.robot.subsystems.FeedSubsystem;
 import frc.robot.AutoConstants;
+import frc.robot.subsystems.IntakeSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,7 +19,7 @@ import frc.robot.AutoConstants;
 public class EasyAutoCommandGroup extends SequentialCommandGroup {
   
   /** Creates a new EasyAutoCommandGroup. */
-  public EasyAutoCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, ShooterSubsystem sub_shooterSubsystem, AutoTurnSubsystem sub_autoTurnSubsystem, FeedSubsystem sub_feedSubsystem) {
+  public EasyAutoCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, ShooterSubsystem sub_shooterSubsystem, AutoTurnSubsystem sub_autoTurnSubsystem, FeedSubsystem sub_feedSubsystem, IntakeSubsystem sub_intakeSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     /*addCommands(
@@ -34,19 +35,20 @@ public class EasyAutoCommandGroup extends SequentialCommandGroup {
     super(
     //new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_FIRST_TURN, AutoConstants.TURN_RIGHT),
     new SequentialCommandGroup(
-      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.EASY_PATH_DISTANCE),
+      new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
+      //new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.EASY_PATH_DISTANCE),
       
       //new AutoShootCommand(sub_shooterSubsystem, AutoConstants.EASY_PATH_RPM),
      
-      new ParallelDeadlineGroup( 
+     /* new ParallelDeadlineGroup( 
 
       new AutoShootCommand(sub_shooterSubsystem, AutoConstants.EASY_PATH_RPM),
       
       new AutoFeedInManualCommand(sub_feedSubsystem)
       
-      ),
+      )//,*/
 
-     new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_LEFT)
+    // new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_LEFT)
 
      ) );
 

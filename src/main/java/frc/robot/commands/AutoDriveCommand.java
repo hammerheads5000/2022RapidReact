@@ -27,7 +27,6 @@ public class AutoDriveCommand extends CommandBase {
   @Override
   public void initialize() {
     sub_autoDriveSubsystem.m_zeroEncoder();  
-    sub_autoDriveSubsystem.m_zeroEncoder();  
 
 
 
@@ -47,7 +46,7 @@ public class AutoDriveCommand extends CommandBase {
     SmartDashboard.putString("AutoDone", "Ended");
 
     //sub_autoDriveSubsystem.m_stopSpinning();
-    sub_autoDriveSubsystem.m_zeroEncoder();  
+    //sub_autoDriveSubsystem.m_zeroEncoder();  
   
     }
 
