@@ -4,9 +4,11 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.subsystems.FeedSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -14,7 +16,7 @@ public class ShooterCommand extends CommandBase {
 
   private ShooterSubsystem sub_shooterSubsystem;
   private FeedSubsystem sub_feedSubsystem;
-
+  private Timer timer = new Timer();
   /** Creates a new ShootCommand. */
   public ShooterCommand(ShooterSubsystem subsystem, FeedSubsystem subsystem2) {
     sub_shooterSubsystem = subsystem;
@@ -27,6 +29,8 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void initialize() {
     sub_shooterSubsystem.m_TurnOnLimelight();
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,7 +41,7 @@ public class ShooterCommand extends CommandBase {
     SmartDashboard.putNumber("Actual RPM", sub_shooterSubsystem.m_getActualRPM());
     SmartDashboard.putNumber("Set RPM", sub_shooterSubsystem.m_getSetRPM());
     boolean uhoh = false;
-    if(sub_shooterSubsystem.m_getActualRPM() <= sub_shooterSubsystem.m_getSetRPM() + 40 && sub_shooterSubsystem.m_getActualRPM() >= sub_shooterSubsystem.m_getSetRPM() - 40 ){
+    if(timer.get() >= Constants.CYCLE_TIME){
       sub_feedSubsystem.m_feedInManual();
       uhoh = true;
     }else{
@@ -56,6 +60,8 @@ public class ShooterCommand extends CommandBase {
     ShooterSubsystem.m_resetAverage();
     sub_shooterSubsystem.m_TurnOffLimelight();
     sub_feedSubsystem.m_stopFeed();
+    timer.stop();
+    timer.reset();
   }
 
   // Returns true when the command should end.

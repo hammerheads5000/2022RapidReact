@@ -31,6 +31,7 @@ public final class Constants {
         public static double LIMELIGHT_MOUNT_ANGLE = 25.0; // in degrees
         public static double GRAVITY = -32.174;
 
+        public static double CYCLE_TIME = 1;
     //Motor Ports
         public static int SHOOTER_MOTOR_PORT = 1;
 

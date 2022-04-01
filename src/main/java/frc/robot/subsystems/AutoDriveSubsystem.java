@@ -42,6 +42,7 @@ public class AutoDriveSubsystem extends SubsystemBase {
   private static double prevXAccel = 0;
   private static double prevYAccel = 0;
   private static TalonFX leftFrontDriveMotor = new TalonFX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
+  
   private static TalonFX leftBackDriveMotor = new TalonFX(Constants.LEFT_BACK_DRIVE_MOTOR_PORT);
   private static TalonFX rightFrontDriveMotor = new TalonFX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
   private static TalonFX rightBackDriveMotor = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
@@ -72,6 +73,8 @@ double rpm = 6380;//dont know we'll find that later
 		leftFrontDriveMotor.config_kI(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kIAuto, AutoConstants.AUTO_TIMEOUT_MS);
     leftFrontDriveMotor.config_kD(AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.aGains.kDAuto, AutoConstants.AUTO_TIMEOUT_MS);
     
+
+
     rightFrontDriveMotor.setNeutralMode(NeutralMode.Brake);
     rightFrontDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     rightFrontDriveMotor.setSensorPhase(Constants.PHASE_SENSOR);
@@ -160,6 +163,7 @@ double rpm = 6380;//dont know we'll find that later
 
   @Override
   public void periodic() {
+    //SmartDashboard.putString("LFMode",""+leftFrontDriveMotor.getControlMode());
     /*
     double xAccel = accelerometer.getX();
     double yAccel = accelerometer.getY();
