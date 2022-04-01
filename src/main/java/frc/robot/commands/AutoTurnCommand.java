@@ -27,7 +27,7 @@ public class AutoTurnCommand extends CommandBase {
   @Override
   public void initialize() {
 
-    sub_autoTurnSubsystem.m_stopSpinning();
+    
     
     sub_autoTurnSubsystem.m_zeroEncoder();
   }
@@ -35,16 +35,19 @@ public class AutoTurnCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    sub_autoTurnSubsystem.m_turn(right, setpoint);
+    sub_autoTurnSubsystem.m_turn(right, angle);
 
     
   }
-@Override
-public void end(boolean interrupted){
-  sub_autoTurnSubsystem.m_stopSpinning();
-  sub_autoTurnSubsystem.m_zeroEncoder();  
-}
-  
+
+  @Override
+  public void end(boolean interrupted){
+    sub_autoTurnSubsystem.m_stopSpinning();
+    
+    sub_autoTurnSubsystem.m_zeroEncoder();
+
+  }
+
 
   // Returns true when the command should end.
   @Override

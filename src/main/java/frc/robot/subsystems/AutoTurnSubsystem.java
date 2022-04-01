@@ -120,16 +120,16 @@ double rpm = 6380;//dont know we'll find that later
     double setpoint = degrees;
 
     if (right){
-    leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
-    rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
-    leftBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
-    rightBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
-    }
-    else{
     leftFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
     rightFrontDriveMotor.set(TalonFXControlMode.Position, setpoint);
     leftBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
     rightBackDriveMotor.set(TalonFXControlMode.Position, setpoint);
+    }
+    else{
+    leftFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    rightFrontDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    leftBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
+    rightBackDriveMotor.set(TalonFXControlMode.Position, -setpoint);
     }
 
   }

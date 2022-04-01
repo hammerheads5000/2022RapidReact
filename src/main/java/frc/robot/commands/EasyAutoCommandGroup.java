@@ -38,12 +38,13 @@ public class EasyAutoCommandGroup extends SequentialCommandGroup {
       
       //new AutoShootCommand(sub_shooterSubsystem, AutoConstants.EASY_PATH_RPM),
      
-      new ParallelDeadlineGroup( 
+      /*new ParallelDeadlineGroup( 
 
       new AutoShootCommand(sub_shooterSubsystem, AutoConstants.EASY_PATH_RPM),
       
-      new AutoFeedInManualCommand(sub_feedSubsystem))
-      
+      new AutoFeedInManualCommand(sub_feedSubsystem))*/
+
+     new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_LEFT)
 
      ) );
 

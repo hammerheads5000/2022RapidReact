@@ -27,6 +27,8 @@ public class AutoDriveCommand extends CommandBase {
   @Override
   public void initialize() {
     sub_autoDriveSubsystem.m_zeroEncoder();  
+    sub_autoDriveSubsystem.m_zeroEncoder();  
+
 
 
   }
@@ -34,6 +36,8 @@ public class AutoDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putString("AutoDone", "In progress");
+
     SmartDashboard.putNumber("Encoder", AutoDriveSubsystem.m_getBackLeftPosition());
     sub_autoDriveSubsystem.m_drive(setpoint);
 
@@ -42,7 +46,7 @@ public class AutoDriveCommand extends CommandBase {
   public void end(boolean interrupted) {
     SmartDashboard.putString("AutoDone", "Ended");
 
-    sub_autoDriveSubsystem.m_stopSpinning();
+    //sub_autoDriveSubsystem.m_stopSpinning();
     sub_autoDriveSubsystem.m_zeroEncoder();  
   
     }
@@ -65,7 +69,6 @@ public class AutoDriveCommand extends CommandBase {
       return false;
     }
    
- 
     
   }
 }             
