@@ -6,17 +6,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.AutoConstants;
 import frc.robot.subsystems.AutoTurnSubsystem;
 
 public class AutoTurnCommand extends CommandBase {
   /** Creates a new AutoDriveCommand. */
   private AutoTurnSubsystem sub_autoTurnSubsystem;
-  double angle;
+  double setpoint;
   boolean right;
 
   public AutoTurnCommand(AutoTurnSubsystem subsystem, double angle, boolean right) {
     sub_autoTurnSubsystem = subsystem;
-    this.angle = angle;
+    setpoint = angle;
     this.right = right;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(sub_autoTurnSubsystem);
@@ -47,9 +48,18 @@ public class AutoTurnCommand extends CommandBase {
 
   }
 
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(Math.abs(AutoTurnSubsystem.m_getBackLeftPosition()) >= Math.abs(setpoint) - AutoConstants.AUTO_ERROR /*&& AutoTurnSubsystem.m_getBackLeftPosition() <=  || Math.abs(AutoTurnSubsystem.m_getFrontRightPosition()) >= Math.abs(setpoint)*/){
+      //SmartDashboard.putString("AutoDone", "Finished");
+      return true;
+
+    }else{
+      //SmartDashboard.putString("AutoDone", "Not Finished");
+
+      return false;
+    }
   }
 }

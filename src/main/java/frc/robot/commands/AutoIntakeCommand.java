@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.AutoConstants;
 import frc.robot.Constants;
 import frc.robot.subsystems.FeedSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -17,6 +18,7 @@ public class AutoIntakeCommand extends CommandBase {
   private FeedSubsystem sub_feedSubsystem;
 
   private boolean shooterSideIRSensor;
+  static Timer timer = new Timer();
   /** Creates a new AutoIntakeCommand. */
   public AutoIntakeCommand(IntakeSubsystem subsystem, FeedSubsystem subsystem2) {
     sub_intakeSubsystem = subsystem;
@@ -28,6 +30,12 @@ public class AutoIntakeCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
     shooterSideIRSensor = sub_feedSubsystem.m_getShooterSideIRSensor();
 
     if(!shooterSideIRSensor){
@@ -50,19 +58,25 @@ public class AutoIntakeCommand extends CommandBase {
     }
     sub_intakeSubsystem.m_turnOffWheel();
     sub_feedSubsystem.m_stopFeed();
-  }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    sub_intakeSubsystem.m_turnOffWheel();
+    sub_feedSubsystem.m_stopFeed();
+    timer.stop();
+    timer.reset();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(timer.get() >= AutoConstants.AUTO_INTAKE_TIME){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

@@ -26,66 +26,83 @@ public class AutoCommandGroup extends SequentialCommandGroup {
 
   
   public AutoCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, FeedSubsystem sub_feedSubsystem, IntakeSubsystem sub_intakeSubsystem, ShooterSubsystem sub_shooterSubsystem, AutoTurnSubsystem sub_autoTurnSubsystem) {
-    /*super(
-    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_FIRST_TURN, AutoConstants.TURN_LEFT), 
+    /*
+    super(
+    new SequentialCommandGroup(
+    //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_FIRST_TURN, AutoConstants.TURN_LEFT), 
     new ParallelDeadlineGroup(
       new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH),
-      new IntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
+      new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
     ),
     new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
-    new FeedInManualCommand(sub_feedSubsystem),
-    new AutoShootCommand(sub_shooterSubsystem, AutoConstants.TOP_PATH_RPM),
-    new AutoShootCommand(sub_shooterSubsystem, AutoConstants.TOP_PATH_RPM),
+    new ParallelDeadlineGroup(
+      new AutoShootCommand(sub_shooterSubsystem, AutoConstants.TOP_PATH_RPM),
+      new AutoFeedInManualCommand(sub_feedSubsystem),
+      new AutoFeedInManualCommand(sub_feedSubsystem)
+    ),
     new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_THIRD_TURN, AutoConstants.TURN_RIGHT),
     new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_TOP_PATH)  
+    )
     );*/
     
-    super(
+    /*super(
     //new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_FIRST_TURN, AutoConstants.TURN_RIGHT),
+    new SequentialCommandGroup(
+
     new ParallelDeadlineGroup( 
       new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH),
-      new IntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
+      new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
     ),
+
     new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.BOTTOM_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
-    new FeedInManualCommand(sub_feedSubsystem),
-    new AutoShootCommand(sub_shooterSubsystem, AutoConstants.BOTTOM_PATH_RPM),
-    new AutoShootCommand(sub_shooterSubsystem, AutoConstants.BOTTOM_PATH_RPM),
+    
+    new ParallelDeadlineGroup( 
+      new AutoShootCommand(sub_shooterSubsystem, AutoConstants.BOTTOM_PATH_RPM),
+      new AutoFeedInManualCommand(sub_feedSubsystem),
+      new AutoFeedInManualCommand(sub_feedSubsystem)
+      ),
+
     new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.BOTTOM_PATH_THIRD_TURN, AutoConstants.TURN_LEFT),
-    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_BOTTOM_PATH));
+    
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_BOTTOM_PATH)
+    ));*/
     
     /*
     super(
-    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.MIDDLE_TOP_PATH_FIRST_TURN, AutoConstants.TURN_LEFT),
+    //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_MIDDLE_PATH_FIRST_TURN, AutoConstants.TURN_LEFT),
+    new SequentialCommandGroup(
     new ParallelDeadlineGroup( 
-      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_TOP_PATH),
-      new IntakeCommand(sub_intakeSubsystem)
+      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.TOP_MIDDLE_PATH),
+      new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
     ),
-    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.MIDDLE_TOP_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
-    new FeedInManualCommand(sub_feedSubsystem),
-    new AutoShootCommand(sub_shooterSubsystem, AutoConstants.MIDDLE_TOP_PATH_RPM),
-    new AutoShootCommand(sub_shooterSubsystem, AutoConstants.MIDDLE_TOP_PATH_RPM),
+    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_MIDDLE_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
+    new ParallelDeadlineGroup(
+      new AutoShootCommand(sub_shooterSubsystem, AutoConstants.MIDDLE_TOP_PATH_RPM),
+      new AutoFeedInManualCommand(sub_feedSubsystem),
+      new AutoFeedInManualCommand(sub_feedSubsystem)
+    ),
     new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.MIDDLE_PATH_THIRD_TURN, AutoConstants.TURN_LEFT),
     new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_MIDDLE_PATH)  
-    );
-    super(
-    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_FIRST_TURN, AutoConstants.TURN_RIGHT),
+    ));
+    */
+    
+    /*super(
+    //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.BOTTOM_MIDDLE_PATH_FIRST_TURN, AutoConstants.TURN_RIGHT),
+    new SequentialCommandGroup(
     new ParallelDeadlineGroup(  
-      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH),
-      new IntakeCommand(sub_intakeSubsystem)
+      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_MIDDLE_PATH),
+      new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
     ),
-    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_SECOND_TURN, AutoConstants.TURN_RIGHT), 
-    new FeedInManualCommand(sub_feedSubsystem),
-    new AutoShootCommand(sub_shooterSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_RPM),
-    new AutoShootCommand(sub_shooterSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_RPM),
+    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.BOTTOM_MIDDLE_PATH_SECOND_TURN, AutoConstants.TURN_RIGHT), 
+    new ParallelDeadlineGroup(  
+      new AutoShootCommand(sub_shooterSubsystem, AutoConstants.MIDDLE_BOTTOM_PATH_RPM),
+      new AutoFeedInManualCommand(sub_feedSubsystem),
+      new AutoFeedInManualCommand(sub_feedSubsystem)
+    ),
     new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.MIDDLE_PATH_THIRD_TURN, AutoConstants.TURN_LEFT),
     new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_MIDDLE_PATH)  
-    );
-     * 
-     * 
-     * 
-     * 
-     * 
-     */
+    ));*/
+    
     /* Top Path
     addCommands(
       Turn x degrees,
@@ -117,7 +134,6 @@ public class AutoCommandGroup extends SequentialCommandGroup {
       Move forward approximately 11.7 feet
     );
     */
-
     /* Bottom-Middle Path
     addCommands(
       Turn x degrees,

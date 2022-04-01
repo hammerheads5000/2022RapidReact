@@ -51,6 +51,11 @@ public class AutoFeedInManualCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    //This may not be necessary depending on how parallel command groups work
+    if(timer.get() >= AutoConstants.EASY_AUTO_TIME_LIMIT){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
