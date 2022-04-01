@@ -60,7 +60,7 @@ public class AutoDriveCommand extends CommandBase {
     */
     
     
-    if(Math.abs(AutoDriveSubsystem.m_getBackLeftPosition()) >= Math.abs(setpoint) - AutoConstants.AUTO_ERROR /*&& AutoDriveSubsystem.m_getBackLeftPosition() <=  || Math.abs(AutoDriveSubsystem.m_getFrontRightPosition()) >= Math.abs(setpoint)*/){
+    if(Math.abs(AutoDriveSubsystem.m_getBackLeftPosition()) >= Math.abs(setpoint) - AutoConstants.AUTO_ERROR){
       return true;
 
     }else{

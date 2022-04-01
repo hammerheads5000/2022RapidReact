@@ -73,7 +73,7 @@ public class AutoIntakeCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(timer.get() >= AutoConstants.AUTO_INTAKE_TIME){
+    if(timer.get() >= AutoConstants.EASY_AUTO_TIME_LIMIT){
       return true;
     }else{
       return false;
