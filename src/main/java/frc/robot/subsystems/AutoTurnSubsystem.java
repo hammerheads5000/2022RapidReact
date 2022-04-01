@@ -11,22 +11,21 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+//import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+//import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.SpeedControllerGroup;
+//import edu.wpi.first.wpilibj.drive.MecanumDrive;
+//import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.AutoConstants;
 
-import javax.management.openmbean.OpenMBeanConstructorInfoSupport;
+//import javax.management.openmbean.OpenMBeanConstructorInfoSupport;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
+//import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+//import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -168,19 +167,17 @@ double rpm = 6380;//dont know we'll find that later
 
   @Override
   public void periodic() {
-    /*
-    currentAngle = gyro.getAngle();
+    /*currentAngle = gyro.getAngle();
     previousError = error;
-    error = (setpoint - currentAngle) / 360;
+    error = (setpoint - currentAngle) * AutoConstants.ONE_DEGREE;
     changeInError = error - previousError;
     totalError += error;
 
-    output = AutoConstants.tGains.kPTurn * error + AutoConstants.tGains.kITurn * totalError + AutoConstants.tGains.kDTurn * changeInError;
+    output = AutoConstants.tGains.kPAuto * error + AutoConstants.tGains.kITurn * totalError + AutoConstants.tGains.kDTurn * changeInError;
     leftFrontDriveMotor.set(TalonFXControlMode.Position, output);
     rightFrontDriveMotor.set(TalonFXControlMode.Position, output);
     leftBackDriveMotor.set(TalonFXControlMode.Position, output);
-    rightBackDriveMotor.set(TalonFXControlMode.Position, output);
-    */
+    rightBackDriveMotor.set(TalonFXControlMode.Position, output);*/
   }
 }
 

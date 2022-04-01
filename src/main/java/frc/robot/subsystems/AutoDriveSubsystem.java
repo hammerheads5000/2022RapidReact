@@ -160,19 +160,22 @@ double rpm = 6380;//dont know we'll find that later
 
   @Override
   public void periodic() {
-    /*
-    double xAccel = accelerometer.getX();
+    
+    /*double xAccel = accelerometer.getX();
     double yAccel = accelerometer.getY();
 
     // Calculates the jerk in the X and Y directions
     // Divides by .02 because default loop timing is 20ms
     double xJerk = (xAccel - prevXAccel)/.02;
     double yJerk = (yAccel - prevYAccel)/.02;    
+    SmartDashboard.putNumber("X Jerk", xJerk);
+    SmartDashboard.putNumber("Y Jerk", yJerk);
+
     prevXAccel = xAccel;
     prevYAccel = yAccel;
-    if (xJerk > AutoConstants.MAXIMUM_JERK || yJerk > AutoConstants.MAXIMUM_JERK){
+    if (xJerk > AutoConstants.MAXIMUM_JERK_AUTO || yJerk > AutoConstants.MAXIMUM_JERK_AUTO){
       hasCollided = true;
-    }
-    */
+    }*/
+    
   }
 }
