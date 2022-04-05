@@ -118,9 +118,8 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Angle to Goal", angleToGoal);
     //This is an equation calculated from graphed points taken by setting RPM at specific distances
    double x = angleToGoal;
-    rpm = -0.6017*Math.pow(x, 3) + 29.8757 * Math.pow(x, 2) - 501.7749*x + 6466.6850;
-    SmartDashboard.putNumber("Requested RPM", rpm);
-
+    rpm = 0.0001*Math.pow(x,6) + -0.0001*Math.pow(x,5) + -0.1171*Math.pow(x,4) + 3.2426 * Math.pow(x,3) + -27.2282 * Math.pow(x,2) + -14.2543 * x + 4205.9011;
+    rpm -= 50;
     if(angleToGoal == 0){
       rpm = 0;
     }
@@ -165,8 +164,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void m_shoot()
   { 
-    SmartDashboard.putNumber("Set RPM", averageRPM);//testRPM.getDouble(6000));
-    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;//testRPM.getDouble(6000);
+    SmartDashboard.putNumber("Set RPM", averageRPM);//averageRPM);testRPM.getDouble(6000)
+    double motorSpeed = (Constants.K_SENSOR_UNITS_PER_ROTATION / 600.0) * averageRPM;//averageRPM;
     //600 is a modifer to get min to 100 ms and 2048 gets rotations to units 
 
     shooterMotor.set(TalonFXControlMode.Velocity, -motorSpeed);

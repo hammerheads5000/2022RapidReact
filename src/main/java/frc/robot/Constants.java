@@ -86,6 +86,7 @@ public final class Constants {
         public static double FEED_MOTOR_SPEED = 0.7;
         public static double WHILE_INTAKE_FEED_MOTOR_SPEED = 0.2;
         public static double FEED_MOTOR_SPEED_WHILE_SHOOT = 0.5;
+        public static double FEED_IN_SLOWLY = 0.15;
     //IR Sensors
         public static int IR_SENSOR_1_PORT = 0;
         public static int IR_SENSOR_2_PORT = 2;
