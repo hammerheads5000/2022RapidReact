@@ -29,7 +29,7 @@ public class BumperShotCommand extends CommandBase {
   public void execute() {
     sub_shooterSubsystem.m_bumperShot();
     
-    if(sub_shooterSubsystem.m_getActualRPM() <= Constants.BUMPER_RPM + 40 && sub_shooterSubsystem.m_getActualRPM() >= Constants.BUMPER_RPM - 40 ){
+    if(sub_shooterSubsystem.m_getActualRPM() <= Constants.BUMPER_RPM + 40 && sub_shooterSubsystem.m_getActualRPM() >= Constants.BUMPER_RPM - 40){
       sub_feedSubsystem.m_feedInManual();
       //uhoh = true;
     }else{
@@ -42,6 +42,7 @@ public class BumperShotCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     sub_shooterSubsystem.m_stopSpinning();
+    sub_feedSubsystem.m_stopFeed();
   }
 
   // Returns true when the command should end.

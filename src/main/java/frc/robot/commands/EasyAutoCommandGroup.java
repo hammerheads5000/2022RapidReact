@@ -35,23 +35,36 @@ public class EasyAutoCommandGroup extends SequentialCommandGroup {
     super(
     //new AutoTurnCommand(sub_autoDriveSubsystem, AutoConstants.BOTTOM_PATH_FIRST_TURN, AutoConstants.TURN_RIGHT),
     new SequentialCommandGroup(
-      new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem),
-      new AutoRaiseCommand(sub_intakeSubsystem, sub_feedSubsystem)
-      //new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.EASY_PATH_DISTANCE),
+      /*new ParallelDeadlineGroup(
+      new AutoDelayDriveCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH),
+      new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
+    ),//,
+    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
+    new ParallelDeadlineGroup(
+      new AutoShootCommand(sub_shooterSubsystem, AutoConstants.TOP_PATH_RPM),
+      new AutoFeedInManualCommand(sub_feedSubsystem)
+    )//,*/
+    //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_THIRD_TURN, AutoConstants.TURN_RIGHT),
+    //new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_TOP_PATH)  
+      //new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem),
+      //new AutoRaiseCommand(sub_intakeSubsystem, sub_feedSubsystem)
+      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.EASY_PATH_DISTANCE),
       
-      //new AutoShootCommand(sub_shooterSubsystem, AutoConstants.EASY_PATH_RPM),
+      
      
-     /* new ParallelDeadlineGroup( 
+      new ParallelDeadlineGroup( 
 
       new AutoShootCommand(sub_shooterSubsystem, AutoConstants.EASY_PATH_RPM),
       
       new AutoFeedInManualCommand(sub_feedSubsystem)
       
-      )//,*/
+      ),
 
-    // new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_LEFT)
 
-     ) );
+    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_RIGHT),
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.OTHER_EASY_PATH_DISTANCE)
+
+      ));
 
       
       //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_LEFT),

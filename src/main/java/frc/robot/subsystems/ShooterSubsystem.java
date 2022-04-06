@@ -118,8 +118,8 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Angle to Goal", angleToGoal);
     //This is an equation calculated from graphed points taken by setting RPM at specific distances
    double x = angleToGoal;
-    rpm = 0.0001*Math.pow(x,6) + -0.0001*Math.pow(x,5) + -0.1171*Math.pow(x,4) + 3.2426 * Math.pow(x,3) + -27.2282 * Math.pow(x,2) + -14.2543 * x + 4205.9011;
-    rpm -= 50;
+    rpm =  0.0025*Math.pow(x,5)  -0.1680 * Math.pow(x,4)    + 3.7441 * Math.pow(x,3)    + -29.7266*  Math.pow(x,2)    + -8.8768*x + 4203.0731;
+    //rpm -= 50;
     if(angleToGoal == 0){
       rpm = 0;
     }

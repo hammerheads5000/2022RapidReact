@@ -41,6 +41,7 @@ public class SafeZoneShotCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     sub_shooterSubsystem.m_stopSpinning();
+    sub_feedSubsystem.m_stopFeed();
   }
 
   // Returns true when the command should end.

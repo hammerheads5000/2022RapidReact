@@ -17,13 +17,13 @@ public class AutoConstants {
     public static double AUTO_FEED_WAIT_TIME = 1;
 
 
-    public static double TOP_PATH = 20 * (43.35 / (2 * Math.PI * 6));
-    public static double MAIN_TOP_PATH = 20 * (226.4335532 / (2 * Math.PI * 6));
-    public static double TOP_MIDDLE_PATH = 20 * (71.892 / (2 * Math.PI * 6));
-    public static double BOTTOM_MIDDLE_PATH = 20 * (46.8 / (2 * Math.PI * 6));
-    public static double MAIN_MIDDLE_PATH = 20 * (140.5396742 / (2 * Math.PI * 6));
-    public static double BOTTOM_PATH = 20 * (30 / (2 * Math.PI * 6)); //6 is radius of wheel
-    public static double MAIN_BOTTOM_PATH = 20 * (217.3292433 / (2 * Math.PI * 6));
+    public static double TOP_PATH = (43.35 / 12.0)*ENCODER_TICKS_PER_FOOT;
+    public static double MAIN_TOP_PATH = (120.4335532 / 12.0)*ENCODER_TICKS_PER_FOOT;
+    public static double TOP_MIDDLE_PATH = (71.892 / 12.0)*ENCODER_TICKS_PER_FOOT;
+    public static double BOTTOM_MIDDLE_PATH = (46.8 / 12.0)*ENCODER_TICKS_PER_FOOT;
+    public static double MAIN_MIDDLE_PATH =( 140.5396742 / 12.0)*ENCODER_TICKS_PER_FOOT;
+    public static double BOTTOM_PATH = (30 / 12.0)*ENCODER_TICKS_PER_FOOT;
+    public static double MAIN_BOTTOM_PATH = (217.3292433 / 12.0)*ENCODER_TICKS_PER_FOOT;
     public static double ONE_DEGREE = 25616 / 90;
 
     public static double TOP_PATH_FIRST_TURN = 1.397 * ONE_DEGREE;
@@ -49,9 +49,11 @@ public class AutoConstants {
     public static boolean TURN_RIGHT = true;
     public static boolean TURN_LEFT = false;
     public static int GYRO_PORT = 0;
-    public static double EASY_PATH_DISTANCE = -3 * ENCODER_TICKS_PER_FOOT;
+    public static double EASY_PATH_DISTANCE = 5 * ENCODER_TICKS_PER_FOOT;
+    public static double OTHER_EASY_PATH_DISTANCE = 2 * ENCODER_TICKS_PER_FOOT;
 
     //If you're as discriminating as I am, it can be tough to figure out what to put for the RPM.
+    //FENDER TO BALL IS 10 FEET
     public static int EASY_PATH_RPM = 0;
     public static int MAXIMUM_JERK_AUTO = 1000;
     public static double NINETY_DEGREES = 90 * ONE_DEGREE;
