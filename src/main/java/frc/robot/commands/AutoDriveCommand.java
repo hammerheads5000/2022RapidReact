@@ -38,9 +38,12 @@ public class AutoDriveCommand extends CommandBase {
   public void execute() {
     SmartDashboard.putString("AutoDone", "In progress");
 
-    SmartDashboard.putNumber("Encoder", AutoDriveSubsystem.m_getBackLeftPosition());
+    SmartDashboard.putNumber("Back left encoder", AutoDriveSubsystem.m_getBackLeftPosition());
+    SmartDashboard.putNumber("Back right encoder", AutoDriveSubsystem.m_getBackRightPosition());
+    SmartDashboard.putNumber("Front left encoder (jeff)", AutoDriveSubsystem.m_getFrontLeftPosition());
+    SmartDashboard.putNumber("Front right encoder", AutoDriveSubsystem.m_getFrontRightPosition());
     
-      sub_autoDriveSubsystem.m_drive(setpoint);
+    sub_autoDriveSubsystem.m_drive(setpoint);
     
     
 
