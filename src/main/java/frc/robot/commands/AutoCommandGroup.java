@@ -27,21 +27,23 @@ public class AutoCommandGroup extends SequentialCommandGroup {
   
   public AutoCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, FeedSubsystem sub_feedSubsystem, IntakeSubsystem sub_intakeSubsystem, ShooterSubsystem sub_shooterSubsystem, AutoTurnSubsystem sub_autoTurnSubsystem) {
     
-    /*super(
+    super(
     new SequentialCommandGroup(
     //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_FIRST_TURN, AutoConstants.TURN_LEFT), 
     new ParallelDeadlineGroup(
-      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH),
+      new AutoDelayDriveCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH),
       new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
     ),
+      new AutoRaiseCommand(sub_intakeSubsystem, sub_feedSubsystem),
     new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
+    new AutoAimCommand(sub_shooterSubsystem),
     new ParallelDeadlineGroup(
       new AutoShootCommand(sub_shooterSubsystem, AutoConstants.TOP_PATH_RPM),
       new AutoFeedInManualCommand(sub_feedSubsystem)
      
-    ),
-    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_THIRD_TURN, AutoConstants.TURN_RIGHT),
-    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_TOP_PATH)  
+    )
+  //  new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_THIRD_TURN, AutoConstants.TURN_RIGHT),
+    //new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_TOP_PATH)  
     )
     );
     

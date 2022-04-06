@@ -10,14 +10,14 @@ public class AutoConstants {
 
     public static int AUTO_PID_LOOP_IDX = 0;
     public static int AUTO_TIMEOUT_MS = 5;
-    public static AutoGains aGains = new AutoGains(0.05, 0.0, 0.4, 0.0,  0,  0.3);
-    public static AutoTurnGains tGains = new AutoTurnGains(0.05, 0.0, 0.6, 0.0,  0,  0.3);
+    public static AutoGains aGains = new AutoGains(0.05, 0.0, 0.4, 0.0,  0,  0.2);
+    public static AutoTurnGains tGains = new AutoTurnGains(0.05, 0.0, 0.6, 0.0,  0,  0.2);
     public static int AUTO_ERROR = 1000;//temporary
     public static double EASY_AUTO_TIME_LIMIT = 5;
     public static double AUTO_FEED_WAIT_TIME = 1;
 
 
-    public static double TOP_PATH = (43.35 / 12.0)*ENCODER_TICKS_PER_FOOT;
+    public static double TOP_PATH = (49.35 / 12.0)*ENCODER_TICKS_PER_FOOT;
     public static double MAIN_TOP_PATH = (120.4335532 / 12.0)*ENCODER_TICKS_PER_FOOT;
     public static double TOP_MIDDLE_PATH = (71.892 / 12.0)*ENCODER_TICKS_PER_FOOT;
     public static double BOTTOM_MIDDLE_PATH = (46.8 / 12.0)*ENCODER_TICKS_PER_FOOT;
@@ -27,7 +27,7 @@ public class AutoConstants {
     public static double ONE_DEGREE = 25616 / 90;
 
     public static double TOP_PATH_FIRST_TURN = 1.397 * ONE_DEGREE;
-    public static double TOP_PATH_SECOND_TURN = 168.531 * ONE_DEGREE;
+    public static double TOP_PATH_SECOND_TURN = 180 * ONE_DEGREE;
     public static double TOP_PATH_THIRD_TURN = 101.861 * ONE_DEGREE;
 
     public static double TOP_MIDDLE_PATH_FIRST_TURN = 1.684 * ONE_DEGREE;
@@ -49,8 +49,8 @@ public class AutoConstants {
     public static boolean TURN_RIGHT = true;
     public static boolean TURN_LEFT = false;
     public static int GYRO_PORT = 0;
-    public static double EASY_PATH_DISTANCE = 5 * ENCODER_TICKS_PER_FOOT;
-    public static double OTHER_EASY_PATH_DISTANCE = 2 * ENCODER_TICKS_PER_FOOT;
+    public static double EASY_PATH_DISTANCE = -3 * ENCODER_TICKS_PER_FOOT;
+    public static double OTHER_EASY_PATH_DISTANCE = 3 * ENCODER_TICKS_PER_FOOT;
 
     //If you're as discriminating as I am, it can be tough to figure out what to put for the RPM.
     //FENDER TO BALL IS 10 FEET

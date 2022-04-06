@@ -46,6 +46,7 @@ public class AutoDelayDriveCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     SmartDashboard.putString("AutoDone", "Ended");
+    sub_autoDriveSubsystem.m_zeroEncoder();
   }
 
   // Returns true when the command should end.

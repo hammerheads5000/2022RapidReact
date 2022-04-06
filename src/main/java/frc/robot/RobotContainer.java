@@ -164,6 +164,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return cmd_easyAutoCommand;
+    return cmd_autoCommand;
   }
 }
