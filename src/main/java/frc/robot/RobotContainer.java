@@ -72,13 +72,22 @@ public class RobotContainer {
 
 
   //Auto commands
-  private final AutoCommandGroup cmd_autoCommand = new AutoCommandGroup(
+  private final TwoBallAutoCmdGroup cmd_twoBallAutoCommand = new TwoBallAutoCmdGroup(
     sub_autoDriveSubsystem,
     sub_feedSubsystem,
     sub_intakeSubsystem,
     sub_shooterSubsystem,
     sub_autoTurnSubsystem
     );
+
+    private final ThreeBallAutoCloseCommandGroup cmd_threeBallAutoCloseCommand = new ThreeBallAutoCloseCommandGroup(
+      sub_autoDriveSubsystem,
+      sub_feedSubsystem,
+      sub_intakeSubsystem,
+      sub_shooterSubsystem,
+      sub_autoTurnSubsystem
+      );
+
     private final EasyAutoCommandGroup cmd_easyAutoCommand = new EasyAutoCommandGroup(
     sub_autoDriveSubsystem,
     sub_shooterSubsystem,
@@ -164,6 +173,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return cmd_autoCommand;
+    return cmd_twoBallAutoCommand;
   }
 }

@@ -31,7 +31,7 @@ public final class Constants {
         public static double LIMELIGHT_MOUNT_ANGLE = 25.0; // in degrees
         public static double GRAVITY = -32.174;
 
-        public static double CYCLE_TIME = 1;
+        public static double CYCLE_TIME = 0.5;
     //Motor Ports
         public static int SHOOTER_MOTOR_PORT = 1;
 
@@ -149,7 +149,7 @@ public final class Constants {
 */
 
     public static int PID_LOOP_IDX = 0;
-    public static int TIMEOUT_MS = 5;
+    public static int TIMEOUT_MS = 2;
 
     public static boolean PHASE_SENSOR = false;
     public static boolean INVERTED = true;

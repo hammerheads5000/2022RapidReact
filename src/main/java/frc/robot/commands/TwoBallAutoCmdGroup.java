@@ -16,7 +16,7 @@ import frc.robot.AutoConstants;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoCommandGroup extends SequentialCommandGroup {
+public class TwoBallAutoCmdGroup extends SequentialCommandGroup {
   /** Creates a new AutoCommandGroup. */
 
   /*private final AutoDriveSubsystem sub_autoDriveSubsystem;
@@ -25,7 +25,7 @@ public class AutoCommandGroup extends SequentialCommandGroup {
   private final ShooterSubsystem sub_shooterSubsystem;*/
 
   
-  public AutoCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, FeedSubsystem sub_feedSubsystem, IntakeSubsystem sub_intakeSubsystem, ShooterSubsystem sub_shooterSubsystem, AutoTurnSubsystem sub_autoTurnSubsystem) {
+  public TwoBallAutoCmdGroup(AutoDriveSubsystem sub_autoDriveSubsystem, FeedSubsystem sub_feedSubsystem, IntakeSubsystem sub_intakeSubsystem, ShooterSubsystem sub_shooterSubsystem, AutoTurnSubsystem sub_autoTurnSubsystem) {
     
     super(
     new SequentialCommandGroup(
@@ -33,13 +33,15 @@ public class AutoCommandGroup extends SequentialCommandGroup {
     new ParallelDeadlineGroup(
       new AutoDelayDriveCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH),
       new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
+
     ),
       new AutoRaiseCommand(sub_intakeSubsystem, sub_feedSubsystem),
     new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
+    new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MOVE_CLOSER),
     new AutoAimCommand(sub_shooterSubsystem),
     new ParallelDeadlineGroup(
-      new AutoShootCommand(sub_shooterSubsystem, AutoConstants.TOP_PATH_RPM),
-      new AutoFeedInManualCommand(sub_feedSubsystem)
+      new AutoFeedInManualCommand(sub_feedSubsystem),
+      new AutoShootCommand(sub_shooterSubsystem, AutoConstants.TOP_PATH_RPM)
      
     )
   //  new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_THIRD_TURN, AutoConstants.TURN_RIGHT),

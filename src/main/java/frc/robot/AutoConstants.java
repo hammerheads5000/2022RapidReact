@@ -9,7 +9,7 @@ public class AutoConstants {
     public static double ENCODER_TICKS_PER_FOOT = 8732;
 
     public static int AUTO_PID_LOOP_IDX = 0;
-    public static int AUTO_TIMEOUT_MS = 5;
+    public static int AUTO_TIMEOUT_MS = 2;
     public static AutoGains aGains = new AutoGains(0.05, 0.0, 0.4, 0.0,  0,  0.2);
     public static AutoTurnGains tGains = new AutoTurnGains(0.05, 0.0, 0.6, 0.0,  0,  0.2);
     public static int AUTO_ERROR = 1000;//temporary
@@ -17,7 +17,7 @@ public class AutoConstants {
     public static double AUTO_FEED_WAIT_TIME = 1;
 
 
-    public static double TOP_PATH = (49.35 / 12.0)*ENCODER_TICKS_PER_FOOT;
+    public static double TOP_PATH = (54 / 12.0)*ENCODER_TICKS_PER_FOOT;
     public static double MAIN_TOP_PATH = (120.4335532 / 12.0)*ENCODER_TICKS_PER_FOOT;
     public static double TOP_MIDDLE_PATH = (71.892 / 12.0)*ENCODER_TICKS_PER_FOOT;
     public static double BOTTOM_MIDDLE_PATH = (46.8 / 12.0)*ENCODER_TICKS_PER_FOOT;
@@ -51,6 +51,7 @@ public class AutoConstants {
     public static int GYRO_PORT = 0;
     public static double EASY_PATH_DISTANCE = -3 * ENCODER_TICKS_PER_FOOT;
     public static double OTHER_EASY_PATH_DISTANCE = 3 * ENCODER_TICKS_PER_FOOT;
+    public static double MOVE_CLOSER = 2 * ENCODER_TICKS_PER_FOOT;
 
     //If you're as discriminating as I am, it can be tough to figure out what to put for the RPM.
     //FENDER TO BALL IS 10 FEET
@@ -59,4 +60,11 @@ public class AutoConstants {
     public static double NINETY_DEGREES = 90 * ONE_DEGREE;
     public static double FORTY_FIVE_DEGREES = 45 * ONE_DEGREE;
     public static double ZERO_DEGREES = 0 * ONE_DEGREE;
+
+
+
+    public static double CLOSE_TO_TERMINAL = (140.0 / 12.0) * ENCODER_TICKS_PER_FOOT;
+    public static double FAR_TO_TERMINAL = (250.0 / 12.0) * ENCODER_TICKS_PER_FOOT;
+    public static double CLOSE_ANGLE_TO_TERMINAL = 166.0 * ONE_DEGREE;
+    public static double FAR_ANGLE_TO_TERMINAL = 94.5 * ONE_DEGREE;
 }

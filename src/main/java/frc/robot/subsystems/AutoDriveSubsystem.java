@@ -22,6 +22,8 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.AutoConstants;
+
+import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -135,10 +137,12 @@ double rpm = 6380;//dont know we'll find that later
   }
 
   public void m_zeroEncoder(){
-    leftFrontDriveMotor.setSelectedSensorPosition(0);
-    rightFrontDriveMotor.setSelectedSensorPosition(0);
-    leftBackDriveMotor.setSelectedSensorPosition(0);
-    rightBackDriveMotor.setSelectedSensorPosition(0);
+    ErrorCode error =
+    leftFrontDriveMotor.setSelectedSensorPosition(0, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.setSelectedSensorPosition(0, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.setSelectedSensorPosition(0, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.setSelectedSensorPosition(0, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
+    SmartDashboard.putString("Error code", " " + error);
   }
 
   public static boolean getCollided(){

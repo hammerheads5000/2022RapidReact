@@ -40,12 +40,10 @@ public class AutoIntakeCommand extends CommandBase {
   public void execute() {
     shooterSideIRSensor = sub_feedSubsystem.m_getShooterSideIRSensor();
 
-    if(shooterSideIRSensor){
-      sub_feedSubsystem.m_spinInSlowly();
-    }else{
-      sub_feedSubsystem.m_stopFeed();
-    }
-
+    sub_feedSubsystem.m_intakeSideFeedMotor();
+    sub_feedSubsystem.m_shooterSideFeedOut();
+    
+    
     if(!sub_intakeSubsystem.m_getUpIR()){
       sub_intakeSubsystem.m_lower();
     }else if(!sub_intakeSubsystem.m_getDownIR()){
@@ -70,10 +68,6 @@ public class AutoIntakeCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(!shooterSideIRSensor){
-      return true;
-    }else{
-      return false;
-    }
+    return false;
   }
 }

@@ -39,6 +39,7 @@ public class AutoShootCommand extends CommandBase {
   public void execute() {
     sub_shooterSubsystem.m_calculateRPM();
     sub_shooterSubsystem.m_shoot();
+    
   }
 
   @Override
@@ -53,10 +54,6 @@ public class AutoShootCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(timer.get() >= AutoConstants.EASY_AUTO_TIME_LIMIT){
-      return true;
-    }else{
-      return false;
-    }
+    return false;
   }
 }

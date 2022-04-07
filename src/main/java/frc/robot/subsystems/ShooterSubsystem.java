@@ -118,21 +118,27 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Angle to Goal", angleToGoal);
     //This is an equation calculated from graphed points taken by setting RPM at specific distances
    double x = angleToGoal;
-    rpm =  0.0025*Math.pow(x,5)  -0.1680 * Math.pow(x,4)    + 3.7441 * Math.pow(x,3)    + -29.7266*  Math.pow(x,2)    + -8.8768*x + 4203.0731;
-    //rpm -= 50;
+    rpm =  0.0025*Math.pow(x,5) - 0.1680 * Math.pow(x,4) + 3.7441 * Math.pow(x,3) - 29.7266 *  Math.pow(x,2) - 8.8768*x + 4203.0731;
+    SmartDashboard.putNumber("Calculated RPM", rpm);
     if(angleToGoal == 0){
       rpm = 0;
     }
-
+    averageRPM = rpm;
+/*
     if(rpm != 0){
       averageRPM *= count;
       count++;
       averageRPM += rpm;
       averageRPM /= count;
+    }else{
+      count++;
     }
-
+*/
   }
 
+  public int m_getCount(){
+    return count;
+  }
   public double m_getActualRPM(){
     return Math.abs((600.0 / Constants.K_SENSOR_UNITS_PER_ROTATION) * shooterMotor.getSelectedSensorVelocity());
   }
@@ -146,7 +152,7 @@ public class ShooterSubsystem extends SubsystemBase {
     double steeringAdjust = headingError / 27.0; //27 is the max angular displacement
     steeringAdjust *= 0.4; //Dampening the speed
 
-    if (headingError > 1 || headingError < -1){
+    if (headingError != 0){
       LEFT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
       LEFT_BACK_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
       RIGHT_FRONT_DRIVE_MOTOR.set(TalonFXControlMode.PercentOutput, steeringAdjust);
