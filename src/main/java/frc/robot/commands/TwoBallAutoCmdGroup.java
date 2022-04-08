@@ -36,7 +36,7 @@ public class TwoBallAutoCmdGroup extends SequentialCommandGroup {
 
     ),
       new AutoRaiseCommand(sub_intakeSubsystem, sub_feedSubsystem),
-    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_SECOND_TURN, AutoConstants.TURN_LEFT), 
+    new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.ONE_EIGHTY_DEGREES, AutoConstants.TURN_LEFT), 
     new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MOVE_CLOSER),
     new AutoAimCommand(sub_shooterSubsystem),
     new ParallelDeadlineGroup(
