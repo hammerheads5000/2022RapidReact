@@ -88,6 +88,30 @@ public class RobotContainer {
       sub_autoTurnSubsystem
       );
 
+      private final ThreeBallAutoFarCommandGroup cmd_threeBallAutoFarCommand = new ThreeBallAutoFarCommandGroup(
+        sub_autoDriveSubsystem,
+        sub_feedSubsystem,
+        sub_intakeSubsystem,
+        sub_shooterSubsystem,
+        sub_autoTurnSubsystem
+        );
+
+    private final TwoBallTerminalAutoCloseCommandGroup cmd_twoBallTerminalCloseAutoCommand = new TwoBallTerminalAutoCloseCommandGroup(
+      sub_autoDriveSubsystem, 
+      sub_feedSubsystem, 
+      sub_intakeSubsystem, 
+      sub_shooterSubsystem, 
+      sub_autoTurnSubsystem
+    );
+
+    private final TwoBallTerminalAutoFarCommandGroup cmd_twoBallTerminalFarAutoCommand = new TwoBallTerminalAutoFarCommandGroup(
+      sub_autoDriveSubsystem, 
+      sub_feedSubsystem, 
+      sub_intakeSubsystem, 
+      sub_shooterSubsystem, 
+      sub_autoTurnSubsystem
+    );
+
     private final EasyAutoCommandGroup cmd_easyAutoCommand = new EasyAutoCommandGroup(
     sub_autoDriveSubsystem,
     sub_shooterSubsystem,

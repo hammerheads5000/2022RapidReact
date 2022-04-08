@@ -31,7 +31,7 @@ public class TwoBallAutoCmdGroup extends SequentialCommandGroup {
     new SequentialCommandGroup(
     //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_FIRST_TURN, AutoConstants.TURN_LEFT), 
     new ParallelDeadlineGroup(
-      new AutoDelayDriveCommand(sub_autoDriveSubsystem, AutoConstants.TOP_PATH),
+      new AutoDelayDriveCommand(sub_autoDriveSubsystem, AutoConstants.DRIVE_TO_SECOND_BALL),
       new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
 
     ),

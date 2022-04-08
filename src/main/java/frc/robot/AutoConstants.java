@@ -15,9 +15,9 @@ public class AutoConstants {
     public static int AUTO_ERROR = 1000;//temporary
     public static double EASY_AUTO_TIME_LIMIT = 5;
     public static double AUTO_FEED_WAIT_TIME = 1;
+    public static double AUTO_DRIVE_DELAY = 1;
 
 
-    public static double TOP_PATH = (54 / 12.0)*ENCODER_TICKS_PER_FOOT;
     public static double MAIN_TOP_PATH = (120.4335532 / 12.0)*ENCODER_TICKS_PER_FOOT;
     public static double TOP_MIDDLE_PATH = (71.892 / 12.0)*ENCODER_TICKS_PER_FOOT;
     public static double BOTTOM_MIDDLE_PATH = (46.8 / 12.0)*ENCODER_TICKS_PER_FOOT;
@@ -52,6 +52,7 @@ public class AutoConstants {
     public static double EASY_PATH_DISTANCE = -3 * ENCODER_TICKS_PER_FOOT;
     public static double OTHER_EASY_PATH_DISTANCE = 3 * ENCODER_TICKS_PER_FOOT;
     public static double MOVE_CLOSER = 2 * ENCODER_TICKS_PER_FOOT;
+    public static double THIRD_BALL_DISTANCE = -8 * ENCODER_TICKS_PER_FOOT;
 
     //If you're as discriminating as I am, it can be tough to figure out what to put for the RPM.
     //FENDER TO BALL IS 10 FEET
@@ -60,11 +61,16 @@ public class AutoConstants {
     public static double NINETY_DEGREES = 90 * ONE_DEGREE;
     public static double FORTY_FIVE_DEGREES = 45 * ONE_DEGREE;
     public static double ZERO_DEGREES = 0 * ONE_DEGREE;
+    public static double ONE_EIGHTY_DEGREES = 180 * ONE_DEGREE;
 
 
+//Both numbers were decreased by 20, then close was raised by 10 
+    public static double CLOSE_TO_TERMINAL = (130.0 / 12.0) * ENCODER_TICKS_PER_FOOT;
+    public static double FAR_TO_TERMINAL = (230.0 / 12.0) * ENCODER_TICKS_PER_FOOT;
+    //was 166 earlier
+    public static double CLOSE_ANGLE_TO_TERMINAL = 154.0 * ONE_DEGREE;
+    //94.5 before
+    public static double FAR_ANGLE_TO_TERMINAL = 98 * ONE_DEGREE;
+    public static double DRIVE_TO_SECOND_BALL = (54 / 12.0)*ENCODER_TICKS_PER_FOOT;
 
-    public static double CLOSE_TO_TERMINAL = (140.0 / 12.0) * ENCODER_TICKS_PER_FOOT;
-    public static double FAR_TO_TERMINAL = (250.0 / 12.0) * ENCODER_TICKS_PER_FOOT;
-    public static double CLOSE_ANGLE_TO_TERMINAL = 166.0 * ONE_DEGREE;
-    public static double FAR_ANGLE_TO_TERMINAL = 94.5 * ONE_DEGREE;
 }

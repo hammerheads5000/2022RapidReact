@@ -16,9 +16,9 @@ import frc.robot.subsystems.ShooterSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ThreeBallAutoCloseCommandGroup extends SequentialCommandGroup {
+public class TwoBallTerminalAutoCloseCommandGroup extends SequentialCommandGroup {
   /** Creates a new ThreeBallAutoCloseCommandGroup. */
-  public ThreeBallAutoCloseCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, FeedSubsystem sub_feedSubsystem, IntakeSubsystem sub_intakeSubsystem, ShooterSubsystem sub_shooterSubsystem, AutoTurnSubsystem sub_autoTurnSubsystem) {
+  public TwoBallTerminalAutoCloseCommandGroup(AutoDriveSubsystem sub_autoDriveSubsystem, FeedSubsystem sub_feedSubsystem, IntakeSubsystem sub_intakeSubsystem, ShooterSubsystem sub_shooterSubsystem, AutoTurnSubsystem sub_autoTurnSubsystem) {
     super(
       new SequentialCommandGroup(
       //new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_FIRST_TURN, AutoConstants.TURN_LEFT), 
@@ -39,20 +39,14 @@ public class ThreeBallAutoCloseCommandGroup extends SequentialCommandGroup {
       new ParallelDeadlineGroup(
         new AutoDelayDriveCommand(sub_autoDriveSubsystem, AutoConstants.CLOSE_TO_TERMINAL),
         new AutoIntakeCommand(sub_intakeSubsystem, sub_feedSubsystem)
-      ),
-      new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.THIRD_BALL_DISTANCE),
-      //90 degrees to left if on far path, to right if on close
-      new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.ONE_EIGHTY_DEGREES, AutoConstants.TURN_RIGHT),
-      new AutoAimCommand(sub_shooterSubsystem),
-      new ParallelDeadlineGroup(
-        new AutoFeedInManualCommand(sub_feedSubsystem),
-        new AutoShootCommand(sub_shooterSubsystem, AutoConstants.TOP_PATH_RPM)
+      )
+      
       )
       
       //shoot
     //  new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.TOP_PATH_THIRD_TURN, AutoConstants.TURN_RIGHT),
       //new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.MAIN_TOP_PATH)  
-      )
+      
       );
   }
 }

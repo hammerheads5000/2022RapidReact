@@ -37,7 +37,7 @@ public class AutoDelayDriveCommand extends CommandBase {
     SmartDashboard.putString("AutoDone", "In progress");
 
     SmartDashboard.putNumber("Encoder", AutoDriveSubsystem.m_getBackLeftPosition());
-    if(timer.get() >= AutoConstants.AUTO_FEED_WAIT_TIME){
+    if(timer.get() >= AutoConstants.AUTO_DRIVE_DELAY){
       sub_autoDriveSubsystem.m_drive(setpoint);
     }
   }
