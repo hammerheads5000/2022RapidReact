@@ -25,10 +25,7 @@ import frc.robot.Constants;
 public class ShooterSubsystem extends SubsystemBase {
  private static TalonFX shooterMotor = new TalonFX(Constants.SHOOTER_MOTOR_PORT);
  
- //Calculation stuff
- private double numerator;
- private double denominator;
- private double frac;
+
  private double circball;
  private double circwheel;
  private double Vi;
