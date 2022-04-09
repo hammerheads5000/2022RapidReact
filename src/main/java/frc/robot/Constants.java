@@ -31,14 +31,14 @@ public final class Constants {
         public static double LIMELIGHT_MOUNT_ANGLE = 25.0; // in degrees
         public static double GRAVITY = -32.174;
 
-        public static double CYCLE_TIME = 0.5;
+        public static double CYCLE_TIME = 0.75;
     //Motor Ports
         public static int SHOOTER_MOTOR_PORT = 1;
 
     //Set RPM Constants
         public static double BUMPER_RPM = 3475; //LowerRPM from tape is 2500
         
-        public static double SAFE_ZONE_RPM = 4750; 
+        public static double SAFE_ZONE_RPM = 4800; 
 
     //PID Constants
         public static int SHOOTER_ERROR = 30;
@@ -60,10 +60,10 @@ public final class Constants {
 
     //Motor Speeds
         public static double INTAKE_LIFT_DOWN_SPEED = 0.52;
-        public static double INTAKE_LIFT_UP_SPEED = 0.65;
+        public static double INTAKE_LIFT_UP_SPEED = 0.8;
         public static double BRAKE_SPEED = 0.02; 
         public static double BRAKE_UP_SPEED = 0.01;
-        public static double INTAKE_SPEED = 0.6;
+        public static double INTAKE_SPEED = 0.9;
         public static double OUTTAKE_SPEED = 0.7;
     
     //Timer

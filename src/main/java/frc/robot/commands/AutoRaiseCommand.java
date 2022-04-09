@@ -35,15 +35,14 @@ public class AutoRaiseCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  
-    if(!sub_intakeSubsystem.m_getEndOfMatch()){
+    
       if(!sub_intakeSubsystem.m_getDownIR() || timer.get() < tempTimer + Constants.RAISE_UP_TIME){
         sub_intakeSubsystem.m_raise();
-      }else{
-        sub_intakeSubsystem.m_brakeWayUp();
+      }else if(!sub_intakeSubsystem.m_getUpIR()){
+        sub_intakeSubsystem.m_turnOffLower();
       }
-    }
     
+
   }
 
   // Called once the command ends or is interrupted.

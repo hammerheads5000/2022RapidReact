@@ -46,6 +46,8 @@ public class AutoFeedInManualCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     sub_feedSubsystem.m_stopFeed();
+    timer.stop();
+    timer.reset();
   }
 
   // Returns true when the command should end.

@@ -77,6 +77,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     if(translationPower > Constants.TRANSLATION_DEADBAND && Math.abs(turningScale) > Constants.TURN_DEADBAND){
 
+      
       if(turningScale < 0){
         leftFrontDriveMotor.set(TalonFXControlMode.PercentOutput, ADPower * (1 + Math.abs(turningScale)));
         leftBackDriveMotor.set(TalonFXControlMode.PercentOutput, BCPower * (1 + Math.abs(turningScale)));

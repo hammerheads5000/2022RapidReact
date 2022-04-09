@@ -36,6 +36,7 @@ public class AutoAimCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     sub_ShooterSubsystem.m_TurnOffLimelight();
+    sub_ShooterSubsystem.m_stopDriveMotors();
     timer.stop();
     timer.reset();
   }
