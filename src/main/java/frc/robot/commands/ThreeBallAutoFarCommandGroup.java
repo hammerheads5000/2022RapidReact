@@ -30,7 +30,6 @@ public class ThreeBallAutoFarCommandGroup extends SequentialCommandGroup {
       ),
         new AutoRaiseCommand(sub_intakeSubsystem, sub_feedSubsystem),
       new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.ONE_EIGHTY_DEGREES, AutoConstants.TURN_LEFT), 
-      new AutoAimCommand(sub_shooterSubsystem),
       new ParallelDeadlineGroup(
         new AutoFeedInManualCommand(sub_feedSubsystem),
         new AutoShootCommand(sub_shooterSubsystem, AutoConstants.TOP_PATH_RPM)
@@ -44,7 +43,6 @@ public class ThreeBallAutoFarCommandGroup extends SequentialCommandGroup {
 
       new AutoDriveCommand(sub_autoDriveSubsystem, AutoConstants.THIRD_BALL_DISTANCE),
       new AutoTurnCommand(sub_autoTurnSubsystem, AutoConstants.NINETY_DEGREES, AutoConstants.TURN_LEFT),
-      new AutoAimCommand(sub_shooterSubsystem),
       new ParallelDeadlineGroup(
         new AutoFeedInManualCommand(sub_feedSubsystem),
         new AutoShootCommand(sub_shooterSubsystem, AutoConstants.TOP_PATH_RPM)
