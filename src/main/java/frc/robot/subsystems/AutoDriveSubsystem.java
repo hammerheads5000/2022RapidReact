@@ -137,12 +137,10 @@ double rpm = 6380;//dont know we'll find that later
   }
 
   public void m_zeroEncoder(){
-    ErrorCode error =
     leftFrontDriveMotor.setSelectedSensorPosition(0, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     rightFrontDriveMotor.setSelectedSensorPosition(0, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     leftBackDriveMotor.setSelectedSensorPosition(0, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
     rightBackDriveMotor.setSelectedSensorPosition(0, AutoConstants.AUTO_PID_LOOP_IDX, AutoConstants.AUTO_TIMEOUT_MS);
-    SmartDashboard.putString("Error code", " " + error);
   }
 
   public static boolean getCollided(){

@@ -101,7 +101,6 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void m_TurnOnLimelight(){
-    SmartDashboard.putString("LL", "ON");
     table.getEntry("ledMode").setNumber(0); 
   }
 
@@ -110,13 +109,13 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void m_calculateRPM(){
-    SmartDashboard.putString("LL", "Calculating");
     angleToGoal = ty.getDouble(11.0207051);//the 0 is a constant
     SmartDashboard.putNumber("Angle to Goal", angleToGoal);
     //This is an equation calculated from graphed points taken by setting RPM at specific distances
    double x = angleToGoal;
-    rpm =  0.0025*Math.pow(x,5) - 0.1680 * Math.pow(x,4) + 3.7441 * Math.pow(x,3) - 29.7266 *  Math.pow(x,2) - 8.8768*x + 4203.0731 + 40;
-    SmartDashboard.putNumber("Calculated RPM", rpm);
+    rpm =  0.0025*Math.pow(x,5) - 0.1680 * Math.pow(x,4) + 3.7441 * Math.pow(x,3) - 29.7266 *  Math.pow(x,2) - 8.8768*x + 4203.0731;
+    rpm += 53;
+
     if(angleToGoal == 0){
       rpm = 0;
     }

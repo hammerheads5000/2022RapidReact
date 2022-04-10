@@ -38,17 +38,11 @@ public class ShooterCommand extends CommandBase {
   public void execute() {
     sub_shooterSubsystem.m_calculateRPM();
     sub_shooterSubsystem.m_shoot();
-    SmartDashboard.putNumber("Actual RPM", sub_shooterSubsystem.m_getActualRPM());
-    SmartDashboard.putNumber("Set RPM", sub_shooterSubsystem.m_getSetRPM());
-    boolean uhoh = false;
     if(timer.get() >= Constants.CYCLE_TIME){
       sub_feedSubsystem.m_feedInManual();
-      uhoh = true;
     }else{
-      uhoh = false;
       sub_feedSubsystem.m_stopFeed();
     }
-    SmartDashboard.putBoolean("uhoh", uhoh);
 
   
   }

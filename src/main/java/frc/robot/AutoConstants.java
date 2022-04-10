@@ -51,7 +51,7 @@ public class AutoConstants {
     public static int GYRO_PORT = 0;
     public static double EASY_PATH_DISTANCE = -3 * ENCODER_TICKS_PER_FOOT;
     public static double OTHER_EASY_PATH_DISTANCE = 3 * ENCODER_TICKS_PER_FOOT;
-    public static double MOVE_CLOSER = 2 * ENCODER_TICKS_PER_FOOT;
+    public static double MOVE_CLOSER = 3 * ENCODER_TICKS_PER_FOOT;
     public static double THIRD_BALL_DISTANCE = -8 * ENCODER_TICKS_PER_FOOT;
 
     //If you're as discriminating as I am, it can be tough to figure out what to put for the RPM.

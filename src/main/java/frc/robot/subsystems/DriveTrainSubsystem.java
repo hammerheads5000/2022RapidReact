@@ -26,14 +26,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private static TalonFX rightBackDriveMotor = new TalonFX(Constants.RIGHT_BACK_DRIVE_MOTOR_PORT);
 
   public void DriveTrainSubsystemInit(){
-    leftFrontDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    leftFrontDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    rightFrontDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    rightFrontDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    leftBackDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    leftBackDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    rightBackDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    rightBackDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.configPeakOutputForward(0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.configPeakOutputReverse(-0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.configPeakOutputForward(0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.configPeakOutputReverse(-0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.configPeakOutputForward(0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.configPeakOutputReverse(-0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.configPeakOutputForward(0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.configPeakOutputReverse(-0.8, AutoConstants.AUTO_TIMEOUT_MS);
     leftFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
     leftBackDriveMotor.setNeutralMode(NeutralMode.Coast);
     rightFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
@@ -41,14 +41,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public DriveTrainSubsystem(){
-    leftFrontDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    leftFrontDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    rightFrontDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    rightFrontDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    leftBackDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    leftBackDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    rightBackDriveMotor.configPeakOutputForward(1.0, AutoConstants.AUTO_TIMEOUT_MS);
-    rightBackDriveMotor.configPeakOutputReverse(-1.0, AutoConstants.AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.configPeakOutputForward(0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    leftFrontDriveMotor.configPeakOutputReverse(-0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.configPeakOutputForward(0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    rightFrontDriveMotor.configPeakOutputReverse(-0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.configPeakOutputForward(0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    leftBackDriveMotor.configPeakOutputReverse(-0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.configPeakOutputForward(0.8, AutoConstants.AUTO_TIMEOUT_MS);
+    rightBackDriveMotor.configPeakOutputReverse(-0.8, AutoConstants.AUTO_TIMEOUT_MS);
     leftFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
     leftBackDriveMotor.setNeutralMode(NeutralMode.Coast);
     rightFrontDriveMotor.setNeutralMode(NeutralMode.Coast);
@@ -59,16 +59,13 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // calculate motor power
     //Math.sqrt(2) * 0.5 comes from sin(45) and cos(45) (trig is necessary to get the power in mecanum)
 
-    SmartDashboard.putNumber("Translation Angle", translationAngle);
-    SmartDashboard.putNumber("Translation Power", translationPower);
-    SmartDashboard.putNumber("turn power", turnPower);
+
     double ADPower;
     double BCPower;
 
     double turningScale = turnPower;
     double power = translationPower;
 
-    SmartDashboard.putNumber("DrivePosition", leftFrontDriveMotor.getSelectedSensorPosition());
 
     power -= Constants.TRANSLATION_DEADBAND;
     power = power / (1 - Constants.TRANSLATION_DEADBAND); //1 is the max speed of the motor
